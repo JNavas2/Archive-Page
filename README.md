@@ -6,7 +6,7 @@ When clicked, it sends the URL of the current tab to archive.today to preserve a
 Also includes Link context menu to Archive or Search, Page context menu to Search. 
 Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
 
-**INSTALL** (sideload) in **Chrome**:
+**INSTALL** (sideload) in **Google Chrome**:
 1. [Download the ZIP](https://github.com/JNavas2/Archive-Page/raw/main/Archive%20Page%20for%20Chrome.zip).
 2. UnZIP the download.
 3. Manage extensions in Chrome.
