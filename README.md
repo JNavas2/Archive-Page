@@ -6,7 +6,7 @@ When clicked, it sends the URL of the current tab to archive.today to preserve a
 Also includes Link context menu to Archive or Search, Page context menu to Search. 
 Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
 
-TO INSTALL IN **CHROME**:
+**INSTALL** (sideload) in **Chrome**:
 1. [Download the ZIP](https://github.com/JNavas2/Archive-Page/raw/main/Archive%20Page%20for%20Chrome.zip).
 2. UnZIP the download.
 3. Manage extensions in Chrome.
@@ -14,7 +14,7 @@ TO INSTALL IN **CHROME**:
 5. Load unpacked.
 6. Pin the extension to the Chrome toolbar for easy access.
 
-NOTES:
+**NOTES**:
 1. Also available for **[Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)** and **[Mozille Firefox](https://addons.mozilla.org/en-US/firefox/addon/archive-page/)**.
 2. Ported to **[Safari](https://archive-page-extension.en.softonic.com/iphone)**.
 3. If you get an error, try again or try later. It's _not_ an extension issue—archive.today sometimes gets overwhelmed.
