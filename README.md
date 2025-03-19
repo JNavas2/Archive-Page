@@ -2,8 +2,9 @@
 Archive Page browser extension to archive webpages in [archive.today](https://archive.today)
 
 Adds a button to the browser toolbar.
-When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page, and opens the result in a new tab.
+When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page.
 Also includes Link context menu to Archive or Search, Page context menu to Search. 
+Options to control tab behavior.
 Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
 
 **INSTALL** (sideload) in **Google Chrome**  
