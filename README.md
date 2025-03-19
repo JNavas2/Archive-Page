@@ -6,7 +6,7 @@ When clicked, it sends the URL of the current tab to archive.today to preserve a
 Also includes Link context menu to Archive or Search, Page context menu to Search. 
 Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
 
-**INSTALL** (sideload) ZIP in **Google Chrome**  
+**INSTALL** (sideload) in **Google Chrome**  
 
 **Method 1 (CRX)**:
 1. [Download the CRX](https://github.com/JNavas2/Archive-Page/raw/main/Archive-Page-Chrome.crx).
