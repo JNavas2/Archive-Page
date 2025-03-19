@@ -19,7 +19,7 @@ Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS
 1. [Download the ZIP](https://github.com/JNavas2/Archive-Page/raw/main/Archive%20Page%20for%20Chrome.zip) and unZIP into a folder.
 2. Manage extensions in Chrome.
 3. Enable Developer Mode.
-4. Load unpacked the folder.
+4. Load unpacked and select the folder.
 5. Pin the extension icon to the Chrome toolbar for easy access.
 
 **NOTES**:
