@@ -7,7 +7,7 @@ Also includes Link context menu to Archive or Search, Page context menu to Searc
 Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
 
 TO INSTALL IN **CHROME**:
-1. Download the ZIP.
+1. [Download the ZIP](https://github.com/JNavas2/Archive-Page/blob/main/Archive%20Page%20for%20Chrome.zip?raw=true).
 2. UnZIP the download.
 3. Manage extensions in Chrome.
 4. Enable Developer Mode.
