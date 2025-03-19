@@ -1,5 +1,5 @@
 # Archive Page
-Archive Page browser extension to archive webpages in archive.today
+Archive Page browser extension to archive webpages in [archive.today](https://archive.today)
 
 Adds a button to the browser toolbar.
 When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page, and opens the result in a new tab.
