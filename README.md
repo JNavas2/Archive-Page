@@ -5,7 +5,9 @@ Archive Page button can be pinned to the browser toolbar.
 When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page.  
 Also includes Link context menu to Archive or Search, Page context menu to Search.  
 Options to control tab behavior.  
-Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.
+Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.  
+  
+**VIDEO**: [How To archive with Archive Page extension - YouTube](https://www.youtube.com/watch?v=YiKkt3IonZU)
 
 **INSTALL** (sideload) in **Google Chrome**  
 
