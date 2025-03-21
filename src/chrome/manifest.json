@@ -1,0 +1,36 @@
+{
+  "name": "Archive Page",
+  "author": "John Navas",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "optional_permissions": [ "notifications" ],
+  "version": "0.9.0",
+  "description": "Archive webpage with archive.today",
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "16": "images/Share2Archive-16.png",
+    "24": "images/Share2Archive-24.png",
+    "32": "images/Share2Archive-32.png",
+    "48": "images/Share2Archive-48.png",
+    "128": "images/Share2Archive-128.png"
+  },
+  "manifest_version": 3,
+  "action": {
+    "default_icon": {
+      "16": "images/Share2Archive-16.png",
+      "24": "images/Share2Archive-24.png",
+      "32": "images/Share2Archive-32.png"
+    },
+    "default_title": "Archive Page"
+  },
+  "content_security_policy": {}
+}
