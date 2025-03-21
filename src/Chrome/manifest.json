@@ -17,11 +17,11 @@
     "open_in_tab": false
   },
   "icons": {
-    "16": "images/Share2Archive-16.png",
-    "24": "images/Share2Archive-24.png",
-    "32": "images/Share2Archive-32.png",
-    "48": "images/Share2Archive-48.png",
-    "128": "images/Share2Archive-128.png"
+    "16": "images/ArchivePage-16.png",
+    "24": "images/ArchivePage-24.png",
+    "32": "images/ArchivePage-32.png",
+    "48": "images/ArchivePage-48.png",
+    "128": "images/ArchivePage-128.png"
   },
   "manifest_version": 3,
   "action": {
