@@ -18,9 +18,9 @@
     },
     "browser_action": {
         "default_icon": {
-            "16": "images/Share2Archive-16.png",
-            "24": "images/Share2Archive-24.png",
-            "32": "images/Share2Archive-32.png"
+            "16": "images/ArchivePage-16.png",
+            "24": "images/ArchivePage-24.png",
+            "32": "images/ArchivePage-32.png"
         },
         "default_title": "Archive Page"
     },
