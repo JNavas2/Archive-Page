@@ -1,5 +1,6 @@
 # Archive Page
-Archive Page browser extension to archive webpages in [archive.today](https://archive.today)
+Archive Page browser extension to archive webpages in [archive.today](https://archive.today)  
+(For just basic archive.today functionality, see [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/).)
 
 Archive Page button can be pinned to the browser toolbar.  
 When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page.  
