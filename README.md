@@ -10,6 +10,8 @@ Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS
   
 **VIDEO**: [How To archive with Archive Page extension - YouTube](https://www.youtube.com/watch?v=YiKkt3IonZU)
 
+**Support**: Open an Issue to report a **bug** or make a **suggestion**.
+
 **NOTES**:
 1. Available for **[Google Chrome](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)**, **[Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)** and **[Mozille Firefox](https://addons.mozilla.org/en-US/firefox/addon/archive-page/)**.
 2. You may need to click the **Save** button after the archive website has opened to start the archiving process.
