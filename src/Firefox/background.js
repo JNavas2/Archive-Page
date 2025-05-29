@@ -13,11 +13,11 @@ const URLS = 'https://archive.today/search/?q=' // URL to search archive.today
 // Archive page URL
 function doArchivePage(uri, act) {
     console.log('doArchivePage act: ' + act); // DEBUG
-    chrome.storage.local.get({ tabOption: 0 }, function(result) {
+    chrome.storage.local.get({ tabOption: 0 }, function (result) {
         console.log('tabOption: ' + result.tabOption); // DEBUG
         switch (result.tabOption) {
             case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLA + encodeURIComponent(uri),
                         index: 999, // CLAMPED TO END BY BROWSER
@@ -32,7 +32,7 @@ function doArchivePage(uri, act) {
                 });
                 break;
             default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLA + encodeURIComponent(uri),
                         index: tabs[0].index + 1, // ADJACENT
@@ -47,11 +47,11 @@ function doArchivePage(uri, act) {
 // Search page URL
 function doSearchPage(uri, act) {
     console.log('doSearchPage act: ' + act); // DEBUG
-    chrome.storage.local.get({ tabOption: 0 }, function(result) {
+    chrome.storage.local.get({ tabOption: 0 }, function (result) {
         console.log('tabOption: ' + result.tabOption); // DEBUG
         switch (result.tabOption) {
             case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLS + encodeURIComponent(uri),
                         index: 999, // CLAMPED TO END BY BROWSER
@@ -62,7 +62,7 @@ function doSearchPage(uri, act) {
                 break;
             case 2: // ACTIVE TAB (NULL)
             default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLS + encodeURIComponent(uri),
                         index: tabs[0].index + 1,
@@ -75,9 +75,9 @@ function doSearchPage(uri, act) {
 }
 
 // Listen for toolbar button click
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function (tab) {
     // get activate option
-    chrome.storage.local.get({ activateButtonNew: true }, function(result) {
+    chrome.storage.local.get({ activateButtonNew: true }, function (result) {
         console.log('activateButtonNew: ' + result.activateButtonNew); // DEBUG
         doArchivePage(tab.url, result.activateButtonNew);
     });
@@ -90,7 +90,7 @@ chrome.runtime.onInstalled.addListener((details) => {
             chrome.permissions.contains({ permissions: ['notifications'] }, (enabled) => {
                 if (enabled) { // The extension has the permission
                     chrome.notifications.create({
-                        type: 'basic', iconUrl: 'images\\Share2Archive-48.png', title: 'Archive Page extension',
+                        type: 'basic', iconUrl: 'images/Share2Archive-48.png', title: 'Archive Page extension',
                         priority: 0, message: 'Updated.\nSee Options to customize.'
                     });
                     chrome.runtime.openOptionsPage();
@@ -112,10 +112,10 @@ chrome.contextMenus.create({
 
 // Link context menu: Archive or Search link
 var parentId = chrome.contextMenus.create({
-        "title": "Archive",
-        "contexts": ["link"]
-    },
-    function() {
+    "title": "Archive",
+    "contexts": ["link"]
+},
+    function () {
         chrome.contextMenus.create({
             "parentId": parentId,
             "title": "Archive link",
@@ -134,7 +134,7 @@ var parentId = chrome.contextMenus.create({
 // Archive link
 function myArchive(info, tab) {
     // get activate option
-    chrome.storage.local.get({ activateArchiveNew: false }, function(result) {
+    chrome.storage.local.get({ activateArchiveNew: false }, function (result) {
         console.log('activateArchiveNew: ' + result.activateArchiveNew); // DEBUG
         doArchivePage(info.linkUrl, result.activateArchiveNew);
     });
@@ -146,17 +146,29 @@ function mySearch(info, tab) {
     console.log('tab.url: ' + tab.url); // DEBUG
     if (info.linkUrl) {
         // get activate option
-        chrome.storage.local.get({ activateSearchNew: true }, function(result) {
+        chrome.storage.local.get({ activateSearchNew: true }, function (result) {
             console.log('activateSearchNew: ' + result.activateSearchNew); // DEBUG
             doSearchPage(info.linkUrl, result.activateSearchNew);
         });
     } else {
         // get activate option
-        chrome.storage.local.get({ activatePageNew: true }, function(result) {
+        chrome.storage.local.get({ activatePageNew: true }, function (result) {
             console.log('activatePageNew: ' + result.activatePageNew); // DEBUG
             doSearchPage(tab.url, result.activatePageNew);
         });
     }
 }
 
-// END
+// Keyboard shortcuts for Archive and Search
+chrome.commands.onCommand.addListener(function (command) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const tab = tabs[0];
+        if (!tab) return;
+
+        if (command === "myArchive") {
+            myArchive({ linkUrl: tab.url }, tab);
+        } else if (command === "mySearch") {
+            mySearch({ linkUrl: tab.url }, tab);
+        }
+    });
+});

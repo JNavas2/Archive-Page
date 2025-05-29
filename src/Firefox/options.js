@@ -10,7 +10,8 @@ function save_options() {
     // request permission for notifications when the Notify option is checked
     if (bNotify) {
         chrome.permissions.request({
-            permissions: ['notifications'] }, (granted) => {
+            permissions: ['notifications']
+        }, (granted) => {
             // The callback argument will be true if the user granted the permissions.
             if (granted) {
                 // do nothing
@@ -18,7 +19,7 @@ function save_options() {
                 bNotify = false;
                 document.getElementById('cbNotify').checked = false;
             }
-        });                    
+        });
     } else {
         chrome.permissions.remove({ permissions: ['notifications'] })
     }
@@ -30,11 +31,11 @@ function save_options() {
         activateArchiveNew: bArchiveNew,
         activateSearchNew: bSearchNew,
         notifyOption: bNotify
-    }, function() {
+    }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
         status.textContent = 'Options saved.';
-        setTimeout(function() {
+        setTimeout(function () {
             status.textContent = '';
         }, 750);
     });
@@ -49,10 +50,10 @@ function restore_options() {
         tabOption: 0,
         activateButtonNew: true,
         activatePageNew: true,
-        activateArchiveNew: false,
+        activateArchiveNew: true,
         activateSearchNew: true,
         notifyOption: false
-    }, function(items) {
+    }, function (items) {
         switch (items.tabOption) {
             case 1:
                 document.getElementById('tabEnd').checked = true;

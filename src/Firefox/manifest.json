@@ -5,12 +5,16 @@
         "activeTab",
         "contextMenus",
         "storage"
-      ],
-    "optional_permissions": [ "notifications" ],
-    "version": "0.9.0",
+    ],
+    "optional_permissions": [
+        "notifications"
+    ],
+    "version": "0.9.1",
     "description": "Archive webpage with archive.today",
     "background": {
-        "scripts": ["background.js"]
+        "scripts": [
+            "background.js"
+        ]
     },
     "options_ui": {
         "page": "options.html",
@@ -30,6 +34,20 @@
         "32": "images/ArchivePage-32.png",
         "48": "images/ArchivePage-48.png",
         "128": "images/ArchivePage-128.png"
+    },
+    "commands": {
+        "myArchive": {
+            "suggested_key": {
+                "default": "Ctrl+Alt+A"
+            },
+            "description": "Archive the current page with archive.today"
+        },
+        "mySearch": {
+            "suggested_key": {
+                "default": "Ctrl+Alt+F"
+            },
+            "description": "Search (Find) archive.today for the current page"
+        }
     },
     "manifest_version": 2
 }

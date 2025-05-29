@@ -1,5 +1,5 @@
 // Archive Page extension for use with archive.today
-// Written by John Navas
+// © JOHN NAVAS 2025, ALL RIGHTS RESERVED
 // 1. Toolbar icon to send current tab to archive.today in new tab
 // 2. Page context menu to search archive.today for the page URL
 // 3. Link context menu items to Archive or Search with archive.today
@@ -8,16 +8,16 @@
 // Options saved in sync, not local.
 
 const URLA = 'https://archive.today/?run=1&url=';   // URL to invoke archive.today
-const URLS = 'https://archive.today/search/?q='     // URL to search archive.today
+const URLS = 'https://archive.today/search/?q=';    // URL to search archive.today
 
 // Archive page URL
 function doArchivePage(uri, act) {
     console.log('doArchivePage act: ' + act); // DEBUG
-    chrome.storage.sync.get({ tabOption: 0 }, function(result) {
+    chrome.storage.sync.get({ tabOption: 0 }, function (result) {
         console.log('tabOption: ' + result.tabOption); // DEBUG
         switch (result.tabOption) {
             case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLA + encodeURIComponent(uri),
                         index: 999, // CLAMPED TO END BY BROWSER
@@ -32,7 +32,7 @@ function doArchivePage(uri, act) {
                 });
                 break;
             default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLA + encodeURIComponent(uri),
                         index: tabs[0].index + 1, // ADJACENT
@@ -47,11 +47,11 @@ function doArchivePage(uri, act) {
 // Search page URL
 function doSearchPage(uri, act) {
     console.log('doSearchPage act: ' + act); // DEBUG
-    chrome.storage.sync.get({ tabOption: 0 }, function(result) {
+    chrome.storage.sync.get({ tabOption: 0 }, function (result) {
         console.log('tabOption: ' + result.tabOption); // DEBUG
         switch (result.tabOption) {
             case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLS + encodeURIComponent(uri),
                         index: 999, // CLAMPED TO END BY BROWSER
@@ -62,7 +62,7 @@ function doSearchPage(uri, act) {
                 break;
             case 2: // ACTIVE TAB (NULL)
             default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     chrome.tabs.create({
                         url: URLS + encodeURIComponent(uri),
                         index: tabs[0].index + 1,
@@ -75,9 +75,9 @@ function doSearchPage(uri, act) {
 }
 
 // Listen for toolbar button click
-chrome.action.onClicked.addListener(function(tab) {
+chrome.action.onClicked.addListener(function (tab) {
     // get activate option
-    chrome.storage.sync.get({ activateButtonNew: true }, function(result) {
+    chrome.storage.sync.get({ activateButtonNew: true }, function (result) {
         console.log('activateButtonNew: ' + result.activateButtonNew); // DEBUG
         console.log('ArchivePage: ' + tab.url);   // DEBUG
         doArchivePage(tab.url, result.activateButtonNew);
@@ -98,8 +98,8 @@ chrome.runtime.onInstalled.addListener(async () => {
         id: "my_link_menu_id",
         "title": "Archive",
         "contexts": ["link"]
-        },
-        function() {
+    },
+        function () {
             chrome.contextMenus.create({
                 id: "my_link_menu_archive_id",
                 "parentId": parentId,
@@ -115,7 +115,7 @@ chrome.runtime.onInstalled.addListener(async () => {
                 // "onclick": mySearch
             });
         }
-    );        
+    );
 });
 
 // Add a listener for ONBOARDING
@@ -125,8 +125,11 @@ chrome.runtime.onInstalled.addListener((details) => {
             chrome.permissions.contains({ permissions: ['notifications'] }, (enabled) => {
                 if (enabled) { // The extension has the permission
                     chrome.notifications.create({
-                        type: 'basic', iconUrl: 'images\\Share2Archive-48.png', title: 'Archive Page extension',
-                        priority: 0, message: 'Updated.\nSee Options to customize.'
+                        type: 'basic',
+                        iconUrl: 'images/Share2Archive-48.png', // <-- Revised: forward slash
+                        title: 'Archive Page extension',
+                        priority: 0,
+                        message: 'Updated.\nSee Options to customize.'
                     });
                     chrome.runtime.openOptionsPage();
                 }
@@ -158,7 +161,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // Archive link
 function myArchive(info, tab) {
     // get activate option
-    chrome.storage.sync.get({ activateArchiveNew: false }, function(result) {
+    chrome.storage.sync.get({ activateArchiveNew: false }, function (result) {
         console.log('activateArchiveNew: ' + result.activateArchiveNew); // DEBUG
         doArchivePage(info.linkUrl, result.activateArchiveNew);
     });
@@ -169,17 +172,28 @@ function mySearch(info, tab) {
     console.log('tab.url: ' + tab.url); // DEBUG
     if (info.linkUrl) {
         // get activate option
-        chrome.storage.sync.get({ activateSearchNew: true }, function(result) {
+        chrome.storage.sync.get({ activateSearchNew: true }, function (result) {
             console.log('activateSearchNew: ' + result.activateSearchNew); // DEBUG
             doSearchPage(info.linkUrl, result.activateSearchNew);
         });
     } else {
         // get activate option
-        chrome.storage.sync.get({ activatePageNew: true }, function(result) {
+        chrome.storage.sync.get({ activatePageNew: true }, function (result) {
             console.log('activatePageNew: ' + result.activatePageNew); // DEBUG
             doSearchPage(tab.url, result.activatePageNew);
         });
     }
 }
+
+// === Keyboard Shortcuts Support ===
+chrome.commands.onCommand.addListener((command, tab) => {
+    console.log('Command triggered: ' + command); // DEBUG
+    if (command === "search-page") {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            console.log('Shortcut Search: ' + tabs[0].url); // DEBUG
+            mySearch({ linkUrl: tabs[0].url }, tabs[0]);
+        });
+    }
+});
 
 // END

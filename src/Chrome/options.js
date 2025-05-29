@@ -49,7 +49,7 @@ function restore_options() {
         tabOption: 0,
         activateButtonNew: true,
         activatePageNew: true,
-        activateArchiveNew: false,
+        activateArchiveNew: true,
         activateSearchNew: true,
         notifyOption: false
     }, function(items) {

@@ -1,14 +1,16 @@
 {
   "name": "Archive Page",
-  "author": "John Navas",
+  "version": "0.9.1",
+  "description": "Archive webpage with archive.today",
+  "manifest_version": 3,
   "permissions": [
     "activeTab",
     "contextMenus",
     "storage"
   ],
-  "optional_permissions": [ "notifications" ],
-  "version": "0.9.0",
-  "description": "Archive webpage with archive.today",
+  "optional_permissions": [
+    "notifications"
+  ],
   "background": {
     "service_worker": "service_worker.js"
   },
@@ -23,7 +25,6 @@
     "48": "images/ArchivePage-48.png",
     "128": "images/ArchivePage-128.png"
   },
-  "manifest_version": 3,
   "action": {
     "default_icon": {
       "16": "images/ArchivePage-16.png",
@@ -32,5 +33,9 @@
     },
     "default_title": "Archive Page"
   },
-  "content_security_policy": {}
+  "commands": {
+    "search-page": {
+      "description": "Search archive.today for the current page"
+    }
+  }
 }

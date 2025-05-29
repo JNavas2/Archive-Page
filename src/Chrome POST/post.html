@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Archiving...</title>
+    <style>
+        #timeoutMsg {
+            display: none;
+            color: red;
+            font-weight: bold;
+            margin-top: 2em;
+        }
+
+        #submittingMsg {
+            display: none;
+            font-weight: bold;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="archiveForm" method="POST" action="https://archive.today/">
+        <input type="hidden" name="url" id="urlInput" />
+        <input type="hidden" name="run" value="1" />
+    </form>
+
+    <div id="submittingMsg" aria-live="polite" role="status">
+        Submitting your page to archive.today, please wait...
+    </div>
+
+    <div id="timeoutMsg" aria-live="assertive" role="alert">
+        Archive.today is not responding.<br />
+        Please try again later or check your network connection.
+    </div>
+
+    <!-- External script reference -->
+    <script src="post.js"></script>
+</body>
+
+</html>
