@@ -7,168 +7,200 @@
 // Options to control activation of new archive.today tabs (archive & search)
 // For Firefox, options saved in local, not sync!
 
-const URLA = 'https://archive.today/?run=1&url='; // URL to invoke archive.today
-const URLS = 'https://archive.today/search/?q=' // URL to search archive.today
+const URLA = 'https://archive.today/?run=1&url=';
+const URLS = 'https://archive.today/search/?q=';
 
-// Archive page URL
+const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
+
 function doArchivePage(uri, act) {
-    console.log('doArchivePage act: ' + act); // DEBUG
-    chrome.storage.local.get({ tabOption: 0 }, function (result) {
-        console.log('tabOption: ' + result.tabOption); // DEBUG
-        switch (result.tabOption) {
-            case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.create({
-                        url: URLA + encodeURIComponent(uri),
-                        index: 999, // CLAMPED TO END BY BROWSER
-                        openerTabId: tabs[0].id,
-                        active: act
-                    });
-                });
-                break;
-            case 2: // ACTIVE TAB
-                chrome.tabs.update({
-                    url: URLA + encodeURIComponent(uri)
-                });
-                break;
-            default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.create({
-                        url: URLA + encodeURIComponent(uri),
-                        index: tabs[0].index + 1, // ADJACENT
-                        openerTabId: tabs[0].id,
-                        active: act
-                    });
-                });
-        }
-    });
+  console.log('doArchivePage act: ' + act);
+  browserAPI.storage.local.get({ tabOption: 0 }, function (result) {
+    console.log('tabOption: ' + result.tabOption);
+    switch (result.tabOption) {
+      case 1:
+        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          browserAPI.tabs.create({
+            url: URLA + encodeURIComponent(uri),
+            index: 999,
+            // openerTabId removed for Firefox compatibility
+            active: act
+          });
+        });
+        break;
+      case 2:
+        browserAPI.tabs.update({
+          url: URLA + encodeURIComponent(uri)
+        });
+        break;
+      default:
+        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          browserAPI.tabs.create({
+            url: URLA + encodeURIComponent(uri),
+            index: tabs[0].index + 1,
+            // openerTabId removed for Firefox compatibility
+            active: act
+          });
+        });
+    }
+  });
 }
 
-// Search page URL
 function doSearchPage(uri, act) {
-    console.log('doSearchPage act: ' + act); // DEBUG
-    chrome.storage.local.get({ tabOption: 0 }, function (result) {
-        console.log('tabOption: ' + result.tabOption); // DEBUG
-        switch (result.tabOption) {
-            case 1: // NEW TAB AT END
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.create({
-                        url: URLS + encodeURIComponent(uri),
-                        index: 999, // CLAMPED TO END BY BROWSER
-                        openerTabId: tabs[0].id,
-                        active: act
-                    });
-                });
-                break;
-            case 2: // ACTIVE TAB (NULL)
-            default: // NEW TAB ADJACENT
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.create({
-                        url: URLS + encodeURIComponent(uri),
-                        index: tabs[0].index + 1,
-                        openerTabId: tabs[0].id,
-                        active: act
-                    });
-                });
-        }
-    });
+  console.log('doSearchPage act: ' + act);
+  browserAPI.storage.local.get({ tabOption: 0 }, function (result) {
+    console.log('tabOption: ' + result.tabOption);
+    switch (result.tabOption) {
+      case 1:
+        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          browserAPI.tabs.create({
+            url: URLS + encodeURIComponent(uri),
+            index: 999,
+            // openerTabId removed for Firefox compatibility
+            active: act
+          });
+        });
+        break;
+      case 2:
+      default:
+        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          browserAPI.tabs.create({
+            url: URLS + encodeURIComponent(uri),
+            index: tabs[0].index + 1,
+            // openerTabId removed for Firefox compatibility
+            active: act
+          });
+        });
+    }
+  });
 }
 
-// Listen for toolbar button click
-chrome.browserAction.onClicked.addListener(function (tab) {
-    // get activate option
-    chrome.storage.local.get({ activateButtonNew: true }, function (result) {
-        console.log('activateButtonNew: ' + result.activateButtonNew); // DEBUG
-        doArchivePage(tab.url, result.activateButtonNew);
-    });
-});
-
-// Add a listener for ONBOARDING
-chrome.runtime.onInstalled.addListener((details) => {
-    switch (details.reason) {
-        case chrome.runtime.OnInstalledReason.UPDATE:
-            chrome.permissions.contains({ permissions: ['notifications'] }, (enabled) => {
-                if (enabled) { // The extension has the permission
-                    chrome.notifications.create({
-                        type: 'basic', iconUrl: 'images/Share2Archive-48.png', title: 'Archive Page extension',
-                        priority: 0, message: 'Updated.\nSee Options to customize.'
-                    });
-                    chrome.runtime.openOptionsPage();
-                }
-            });
-            break;
-        case chrome.runtime.OnInstalledReason.INSTALL:
-            chrome.runtime.openOptionsPage();
-            break;
-    }
-});
-
-// Page context menu: Search for page URL
-chrome.contextMenus.create({
-    "title": "Search archive.today for page",
-    "contexts": ["page"],
-    "onclick": mySearch
-});
-
-// Link context menu: Archive or Search link
-var parentId = chrome.contextMenus.create({
-    "title": "Archive",
-    "contexts": ["link"]
-},
-    function () {
-        chrome.contextMenus.create({
-            "parentId": parentId,
-            "title": "Archive link",
-            "contexts": ["link"],
-            "onclick": myArchive
-        });
-        chrome.contextMenus.create({
-            "parentId": parentId,
-            "title": "Search link",
-            "contexts": ["link"],
-            "onclick": mySearch
-        });
-    }
-);
-
-// Archive link
 function myArchive(info, tab) {
-    // get activate option
-    chrome.storage.local.get({ activateArchiveNew: false }, function (result) {
-        console.log('activateArchiveNew: ' + result.activateArchiveNew); // DEBUG
-        doArchivePage(info.linkUrl, result.activateArchiveNew);
-    });
+  browserAPI.storage.local.get({ activateArchiveNew: false }, function (result) {
+    console.log('activateArchiveNew: ' + result.activateArchiveNew);
+    doArchivePage(info.linkUrl, result.activateArchiveNew);
+  });
 }
 
-// Search link
 function mySearch(info, tab) {
-    console.log('info.linkUrl: ' + info.linkUrl); // DEBUG
-    console.log('tab.url: ' + tab.url); // DEBUG
-    if (info.linkUrl) {
-        // get activate option
-        chrome.storage.local.get({ activateSearchNew: true }, function (result) {
-            console.log('activateSearchNew: ' + result.activateSearchNew); // DEBUG
-            doSearchPage(info.linkUrl, result.activateSearchNew);
-        });
-    } else {
-        // get activate option
-        chrome.storage.local.get({ activatePageNew: true }, function (result) {
-            console.log('activatePageNew: ' + result.activatePageNew); // DEBUG
-            doSearchPage(tab.url, result.activatePageNew);
-        });
-    }
+  console.log('info.linkUrl: ' + info.linkUrl);
+  console.log('tab.url: ' + tab.url);
+  if (info.linkUrl) {
+    browserAPI.storage.local.get({ activateSearchNew: true }, function (result) {
+      console.log('activateSearchNew: ' + result.activateSearchNew);
+      doSearchPage(info.linkUrl, result.activateSearchNew);
+    });
+  } else {
+    browserAPI.storage.local.get({ activatePageNew: true }, function (result) {
+      console.log('activatePageNew: ' + result.activatePageNew);
+      doSearchPage(tab.url, result.activatePageNew);
+    });
+  }
 }
 
-// Keyboard shortcuts for Archive and Search
-chrome.commands.onCommand.addListener(function (command) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const tab = tabs[0];
-        if (!tab) return;
+browserAPI.runtime.getPlatformInfo().then(info => {
+  const isAndroid = info.os === "android";
 
-        if (command === "myArchive") {
-            myArchive({ linkUrl: tab.url }, tab);
-        } else if (command === "mySearch") {
-            mySearch({ linkUrl: tab.url }, tab);
-        }
+  if (!isAndroid) {
+    // Desktop: create context menus
+    browserAPI.contextMenus.create({
+      "title": "Search archive.today for page",
+      "contexts": ["page"],
+      "onclick": mySearch
     });
+
+    const parentId = browserAPI.contextMenus.create({
+      "title": "Archive",
+      "contexts": ["link"]
+    }, () => {
+      browserAPI.contextMenus.create({
+        "parentId": parentId,
+        "title": "Archive link",
+        "contexts": ["link"],
+        "onclick": myArchive
+      });
+      browserAPI.contextMenus.create({
+        "parentId": parentId,
+        "title": "Search link",
+        "contexts": ["link"],
+        "onclick": mySearch
+      });
+    });
+
+    if (browserAPI.commands && browserAPI.commands.onCommand) {
+      browserAPI.commands.onCommand.addListener(command => {
+        browserAPI.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+          const tab = tabs[0];
+          if (!tab) return;
+
+          if (command === "myArchive") {
+            myArchive({ linkUrl: tab.url }, tab);
+          } else if (command === "mySearch") {
+            mySearch({ linkUrl: tab.url }, tab);
+          }
+        });
+      });
+    }
+  } else {
+    // Android: handle extension icon click by injecting selection detection
+    browserAPI.browserAction.onClicked.addListener((tab) => {
+      browserAPI.tabs.executeScript(tab.id, {
+        code: `(${function() {
+          function findSelectedLink() {
+            const selection = window.getSelection();
+            if (!selection || selection.isCollapsed) return null;
+            const range = selection.getRangeAt(0);
+            let node = range.startContainer;
+            while (node) {
+              if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A' && node.href) {
+                return node.href;
+              }
+              node = node.parentNode;
+            }
+            return null;
+          }
+          const url = findSelectedLink() || location.href;
+          browser.runtime.sendMessage({ type: 'archiveUrl', url });
+        }} )();`
+      });
+    });
+
+    // Listen for message from injected script on Android
+    browserAPI.runtime.onMessage.addListener((message, sender) => {
+      if (message && message.type === 'archiveUrl' && message.url) {
+        doArchivePage(message.url, true);
+      }
+    });
+  }
+
+  // browserAction.onClicked listener for desktop and Android handled above
+  if (!isAndroid) {
+    browserAPI.browserAction.onClicked.addListener(tab => {
+      browserAPI.storage.local.get({ activateButtonNew: true }, result => {
+        console.log('activateButtonNew: ' + result.activateButtonNew);
+        doArchivePage(tab.url, result.activateButtonNew);
+      });
+    });
+  }
+});
+
+browserAPI.runtime.onInstalled.addListener(details => {
+  switch (details.reason) {
+    case browserAPI.runtime.OnInstalledReason.UPDATE:
+      browserAPI.permissions.contains({ permissions: ['notifications'] }, enabled => {
+        if (enabled) {
+          browserAPI.notifications.create({
+            type: 'basic',
+            iconUrl: 'images/Share2Archive-48.png',
+            title: 'Archive Page extension',
+            priority: 0,
+            message: 'Updated.\nSee Options to customize.'
+          });
+          browserAPI.runtime.openOptionsPage();
+        }
+      });
+      break;
+    case browserAPI.runtime.OnInstalledReason.INSTALL:
+      browserAPI.runtime.openOptionsPage();
+      break;
+  }
 });

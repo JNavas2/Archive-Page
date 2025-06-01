@@ -1,6 +1,7 @@
 {
     "name": "Archive Page",
     "author": "John Navas",
+    "manifest_version": 2,
     "permissions": [
         "activeTab",
         "contextMenus",
@@ -9,7 +10,7 @@
     "optional_permissions": [
         "notifications"
     ],
-    "version": "0.9.1",
+    "version": "0.9.2",
     "description": "Archive webpage with archive.today",
     "background": {
         "scripts": [
@@ -49,5 +50,9 @@
             "description": "Search (Find) archive.today for the current page"
         }
     },
-    "manifest_version": 2
+    "browser_specific_settings": {
+        "gecko": {
+            "strict_min_version": "113.0"
+        }
+    }
 }
