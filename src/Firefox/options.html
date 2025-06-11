@@ -1,76 +1,144 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
-	<title>Options for Archive Page</title>
-	<base target="_blank">
-	<style>
-		h1 {
-			font-size: 1.17em;
-			font-weight: bold;
-		}
-
-		h2 {
-			font-size: 1.00em;
-			font-weight: bold;
-			margin-bottom: 0;
-		}
-
-		p {
-			margin-top: 0;
-		}
-	</style>
+    <title>Options for Archive Page</title>
+    <base target="_blank">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        h1 {
+            font-size: 1.17em;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1.00em;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        p {
+            margin-top: 0;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 1em;
+                padding: 4px;
+            }
+            h1 {
+                font-size: 1.05em;
+            }
+            fieldset {
+                padding: 0.3em 0.5em !important;
+                margin: 6px 0 !important;
+            }
+            legend {
+                font-size: 1em;
+                padding: 0 0.4em !important;
+            }
+            .responsive-flex {
+                flex-wrap: wrap !important;
+                gap: 8px;
+            }
+            .responsive-flex button {
+                width: auto !important;
+                min-width: 80px;
+                font-size: 1em !important;
+                margin: 0 !important;
+            }
+            .responsive-flex #status {
+                width: 100px !important;
+                min-width: 60px;
+                font-size: 1em !important;
+                margin: 0 !important;
+                flex: 1 1 100px;
+                text-align: center;
+            }
+            .responsive-flex span[style*="width: 40px"] {
+                display: none !important;
+            }
+            div[style*="margin-left: 1.7em;"] {
+                margin-left: 0.7em !important;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-	<h1>Options for Archive Page</h1>
-	<h2>Open archive.today in</h2>
-	<p style="margin-bottom: 0; margin-top: 0.1em">
-		<input type="radio" id="tabAdj" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
-		<label for="adj">new tab adjacent</label><br>
-		<input type="radio" id="tabEnd" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
-		<label for="end">new tab at end</label><br>
-		<input type="radio" id="tabAct" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
-		<label for="act">active for archive, adjacent for search</label><br>
-	</p>
-	<h2>Activate new archive.today tab from</h2>
-	<p style="margin-left: 2.2em; margin-top: 0.1em">
-		<label><input id="cbButtonNew" type="checkbox" style="vertical-align: text-bottom"> Toolbar Button</label><br>
-		<label><input id="cbPageNew" type="checkbox" style="vertical-align: text-bottom"> Page Search</label><br>
-		<label><input id="cbArchiveNew" type="checkbox" style="vertical-align: text-bottom"> Archive link</label><br>
-		<label><input id="cbSearchNew" type="checkbox" style="vertical-align: text-bottom"> Search link</label>
-	</p>
-	<p><strong><label><input id="cbNotify" type="checkbox" style="vertical-align: text-bottom"> Notify when extension is
-				updated.</label></strong>
-	</p>
-	<table>
-		<tr>
-			<td>
-				<button id="bSave" type="button" style="font-size: large">Save</button>
-				<script src="options.js"></script>
-			</td>
-			<td></td>
-			<td id="status" style="font-size: large; width: 210px;">&nbsp;</td>
-			<td></td>
-			<td>
-				<button id="bRemove" type="button" style="font-size: large">Remove</button>
-				<script src="remove.js"></script>
-			</td>
-		</tr>
-	</table>
+    <h1 style="font-size: medium; margin-bottom: 4px;">Options for Archive Page</h1>
 
-	<h2>Privacy</h2>
-	<p>When and only when initiated by you, your Archive or Search URL is sent to <a href="https://archive.today/">archive.today</a>,
-		which has a current Privacy Policy <a href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F">here</a>.
-		It does <i>not</i> otherwise collect or send any data to any other site or service.
-	</p>
-	<h2>Note</h2>
-	<p>
-		<a href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">CloudFlare DNS</a> may not resolve
-		archive.today. If you experience DNS errors, try a different DNS server.
-		(Free <a href="https://www.techradar.com/news/best-dns-server">public DNS servers</a> are readily available.)
-	</p>
+    <fieldset style="background-color: #FFFFE0; border-radius: 6px; padding: 0.3em 1em; border: 2px solid #e6d96a;">
+        <legend style="background: #fff; padding: 0 0.6em; border-radius: 4px;">
+            <b>Open archive.today in</b>
+        </legend>
+        <input type="radio" id="tabAdj" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px" checked>
+        <label for="tabAdj">new tab adjacent</label><br>
+        <input type="radio" id="tabEnd" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
+        <label for="tabEnd">new tab at end</label><br>
+        <input type="radio" id="tabAct" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
+        <label for="tabAct">active for archive, adjacent for search</label><br>
+    </fieldset>
+
+    <fieldset style="margin-top: 3px; background-color: #e3f2fd; border-radius: 6px; padding: 0.3em 1em; border: 2px solid #e6d96a;">
+        <legend style="background: #fff; padding: 0 0.6em; border-radius: 4px;">
+            <b>Activate new archive.today tab from</b>
+        </legend>
+        <div style="margin-left: 1.7em;">
+            <label for="cbButtonNew">
+                <input id="cbButtonNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                Toolbar Button
+            </label><br>
+            <label for="cbPageNew">
+                <input id="cbPageNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                Page Search
+            </label><br>
+            <label for="cbArchiveNew">
+                <input id="cbArchiveNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                Archive link
+            </label><br>
+            <label for="cbSearchNew">
+                <input id="cbSearchNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                Search link
+            </label>
+        </div>
+    </fieldset>
+
+    <p style="margin-top: 0.4em; margin-bottom: 0.6em;">
+        <strong>
+            <label for="cbNotify">
+                <input id="cbNotify" type="checkbox" style="vertical-align: text-bottom">
+                Notify when extension is updated.
+            </label>
+        </strong>
+    </p>
+
+    <div class="responsive-flex" style="display: flex; align-items: center;">
+        <button id="bSave" type="button"
+            style="font-size: medium; background-color: #D1FFBD; border: 2px solid #000; color: #000;">
+            Save
+        </button>
+        <script src="options.js"></script>
+        <span style="display: inline-block; width: 40px;"></span>
+        <span id="status" style="font-size: large; width: 160px; display: inline-block;">&nbsp;</span>
+        <span style="display: inline-block; width: 40px;"></span>
+        <button id="bRemove" type="button"
+            style="font-size: medium; background-color: #FFD6D6; border: 2px solid #000; color: #000;">
+            Remove
+        </button>
+        <script src="remove.js"></script>
+    </div>
+
+    <p style="margin-top: 8px; margin-bottom: 8px;"><strong>PRIVACY: By using this extension you consent to sharing
+            your Archive or Search URL
+            with <a href="https://archive.today/">archive.today</a></strong> (which has a current Privacy Policy <a
+            href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F">here</a>)
+        <i>when and only when initiated by you</i>.
+        <strong>If you do not consent, <i>Remove and do not use this extension</i></strong>,
+        which does <i>not</i> otherwise collect or share any user data.
+    </p>
+
+    <p>
+        <b>NOTE</b>: <a href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">CloudFlare DNS</a> may not
+        resolve
+        archive.today. If you experience DNS errors, try a different DNS server.
+        (Free <a href="https://www.techradar.com/news/best-dns-server">public DNS servers</a> are readily available.)
+    </p>
 </body>
-
 </html>
