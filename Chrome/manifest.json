@@ -1,0 +1,41 @@
+{
+  "name": "Archive Page",
+  "version": "1.0.0",
+  "description": "Archive webpage with archive.today",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "24": "images/icon-24.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png"
+    },
+    "default_title": "Archive Page"
+  },
+  "commands": {
+    "search-page": {
+      "description": "Search archive.today for the current page"
+    }
+  }
+}
