@@ -10,8 +10,8 @@
     "optional_permissions": [
         "notifications"
     ],
-    "version": "0.9.5",
-    "description": "Archive webpage with archive.today",
+    "version": "1.0.0",
+    "description": "Archive web page with archive.today",
     "background": {
         "scripts": [
             "background.js"
@@ -41,13 +41,13 @@
             "suggested_key": {
                 "default": "Ctrl+Alt+A"
             },
-            "description": "Archive the current page with archive.today"
+            "description": "Archive current page"
         },
         "mySearch": {
             "suggested_key": {
                 "default": "Ctrl+Alt+F"
             },
-            "description": "Search (Find) archive.today for the current page"
+            "description": "Search (Find) Archive for current page"
         }
     },
     "browser_specific_settings": {

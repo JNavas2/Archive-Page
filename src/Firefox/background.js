@@ -1,43 +1,49 @@
 // Archive Page extension for Mozilla Firefox for use with archive.today
-// Written by John Navas
-// 1. Toolbar icon to send current tab to archive.today in new tab
-// 2. Page context menu to search archive.today for the page URL
-// 3. Link context menu items to Archive or Search with archive.today
+// © 2025 John Navas, All Rights Reserved
+// 1. Toolbar icon to send current tab to Archive in new tab
+// 2. Page context menu to search Archive for the page URL
+// 3. Link context menu items to Archive or Search with Archive
 // Option to open in adjacent tab, tab at end, or current tab (archive only)
-// Options to control activation of new archive.today tabs (archive & search)
+// Options to control activation of new Archive tabs (Archive & Search)
+// Option to select the domain, .today or an alias
 // For Firefox, options saved in local, not sync!
-
-const URLA = 'https://archive.today/?run=1&url=';
-const URLS = 'https://archive.today/search/?q=';
 
 const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
 
+// Generate the archive/search URL using the selected TLD
+function getArchiveUrls(tld) {
+  // Fallback to 'today' if tld is not set
+  tld = tld || 'today';
+  const base = `https://archive.${tld}`;
+  return {
+    archive: `${base}/?run=1&url=`,
+    search: `${base}/search/?q=`
+  };
+}
+
 function doArchivePage(uri, act) {
-  console.log('doArchivePage act: ' + act);
-  browserAPI.storage.local.get({ tabOption: 0 }, function (result) {
-    console.log('tabOption: ' + result.tabOption);
+  browserAPI.storage.local.get({ tabOption: 0, archiveTld: 'today' }, function (result) {
+    const urls = getArchiveUrls(result.archiveTld);
     switch (result.tabOption) {
       case 1:
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
-            url: URLA + encodeURIComponent(uri),
+            url: urls.archive + encodeURIComponent(uri),
             index: 999,
-            // openerTabId removed for Firefox compatibility
             active: act
           });
         });
         break;
       case 2:
         browserAPI.tabs.update({
-          url: URLA + encodeURIComponent(uri)
+          url: urls.archive + encodeURIComponent(uri)
         });
         break;
       default:
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
-            url: URLA + encodeURIComponent(uri),
+            url: urls.archive + encodeURIComponent(uri),
             index: tabs[0].index + 1,
-            // openerTabId removed for Firefox compatibility
             active: act
           });
         });
@@ -46,16 +52,14 @@ function doArchivePage(uri, act) {
 }
 
 function doSearchPage(uri, act) {
-  console.log('doSearchPage act: ' + act);
-  browserAPI.storage.local.get({ tabOption: 0 }, function (result) {
-    console.log('tabOption: ' + result.tabOption);
+  browserAPI.storage.local.get({ tabOption: 0, archiveTld: 'today' }, function (result) {
+    const urls = getArchiveUrls(result.archiveTld);
     switch (result.tabOption) {
       case 1:
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
-            url: URLS + encodeURIComponent(uri),
+            url: urls.search + encodeURIComponent(uri),
             index: 999,
-            // openerTabId removed for Firefox compatibility
             active: act
           });
         });
@@ -64,9 +68,8 @@ function doSearchPage(uri, act) {
       default:
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
-            url: URLS + encodeURIComponent(uri),
+            url: urls.search + encodeURIComponent(uri),
             index: tabs[0].index + 1,
-            // openerTabId removed for Firefox compatibility
             active: act
           });
         });
@@ -76,22 +79,17 @@ function doSearchPage(uri, act) {
 
 function myArchive(info, tab) {
   browserAPI.storage.local.get({ activateArchiveNew: false }, function (result) {
-    console.log('activateArchiveNew: ' + result.activateArchiveNew);
     doArchivePage(info.linkUrl, result.activateArchiveNew);
   });
 }
 
 function mySearch(info, tab) {
-  console.log('info.linkUrl: ' + info.linkUrl);
-  console.log('tab.url: ' + tab.url);
   if (info.linkUrl) {
     browserAPI.storage.local.get({ activateSearchNew: true }, function (result) {
-      console.log('activateSearchNew: ' + result.activateSearchNew);
       doSearchPage(info.linkUrl, result.activateSearchNew);
     });
   } else {
     browserAPI.storage.local.get({ activatePageNew: true }, function (result) {
-      console.log('activatePageNew: ' + result.activatePageNew);
       doSearchPage(tab.url, result.activatePageNew);
     });
   }
@@ -103,7 +101,7 @@ browserAPI.runtime.getPlatformInfo().then(info => {
   if (!isAndroid) {
     // Desktop: create context menus
     browserAPI.contextMenus.create({
-      "title": "Search archive.today for page",
+      "title": "Search archive for page",
       "contexts": ["page"],
       "onclick": mySearch
     });
@@ -176,7 +174,6 @@ browserAPI.runtime.getPlatformInfo().then(info => {
   if (!isAndroid) {
     browserAPI.browserAction.onClicked.addListener(tab => {
       browserAPI.storage.local.get({ activateButtonNew: true }, result => {
-        console.log('activateButtonNew: ' + result.activateButtonNew);
         doArchivePage(tab.url, result.activateButtonNew);
       });
     });

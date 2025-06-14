@@ -1,6 +1,6 @@
 {
   "name": "Archive Page",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "Archive webpage with archive.today",
   "manifest_version": 3,
   "permissions": [
@@ -16,7 +16,7 @@
   },
   "options_ui": {
     "page": "options.html",
-    "open_in_tab": false
+    "open_in_tab": true
   },
   "icons": {
     "16": "images/ArchivePage-16.png",

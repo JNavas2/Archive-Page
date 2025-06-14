@@ -1,131 +1,238 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!--
+    options.html - Archive Page Extension Options UI
+    Provides the user interface for configuring extension options.
+    © 2025 John Navas, All Rights Reserved
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <title>Options for Archive Page</title>
-    <base target="_blank">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_blank">
     <style>
+        body {
+            font-family: inherit;
+            max-width: 400px;
+        }
+
         h1 {
+            margin: 0;
             font-size: 1.17em;
             font-weight: bold;
         }
-        h2 {
-            font-size: 1.00em;
+
+        fieldset {
+            border-radius: 6px;
+            padding: 0.3em 1em;
+            border: 2px solid #e6d96a;
+            margin-top: 6px;
+        }
+
+        legend {
+            background: #fff;
+            padding: 0 0.6em;
+            border-radius: 4px;
             font-weight: bold;
-            margin-bottom: 0;
         }
-        p {
-            margin-top: 0;
+
+        .responsive-flex {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
         }
+
+        .responsive-flex button {
+            min-width: 80px;
+            font-size: 1em;
+        }
+
+        #bHelp {
+            background-color: #e3f2fd;
+            border: 2px solid #000;
+            color: #000;
+            font-size: medium;
+        }
+
+        #bRemove {
+            background-color: #FFD6D6;
+            border: 2px solid #000;
+            color: #000;
+            font-size: medium;
+        }
+
+        #bSave {
+            background-color: #D1FFBD;
+            border: 2px solid #000;
+            color: #000;
+            font-size: medium;
+        }
+
+        #status {
+            font-size: large;
+            width: 87px;
+            min-width: 60px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .archive-domain-today-full {
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+            width: 100%;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .archive-domain-columns {
+            display: flex;
+            gap: 2.4em;
+        }
+
+        .archive-domain-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .archive-domain-col label {
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+            margin-bottom: 0.1em;
+            font-weight: normal;
+        }
+
         @media (max-width: 600px) {
             body {
                 font-size: 1em;
                 padding: 4px;
             }
+
             h1 {
                 font-size: 1.05em;
             }
+
             fieldset {
                 padding: 0.3em 0.5em !important;
                 margin: 6px 0 !important;
             }
-            legend {
-                font-size: 1em;
-                padding: 0 0.4em !important;
-            }
+
             .responsive-flex {
-                flex-wrap: wrap !important;
+                flex-wrap: wrap;
                 gap: 8px;
             }
-            .responsive-flex button {
-                width: auto !important;
-                min-width: 80px;
-                font-size: 1em !important;
-                margin: 0 !important;
-            }
-            .responsive-flex #status {
-                width: 100px !important;
+
+            #status {
+                width: 70px !important;
                 min-width: 60px;
                 font-size: 1em !important;
-                margin: 0 !important;
-                flex: 1 1 100px;
+                margin: 0 4px !important;
+                flex: 1 1 70px;
                 text-align: center;
             }
-            .responsive-flex span[style*="width: 40px"] {
-                display: none !important;
-            }
-            div[style*="margin-left: 1.7em;"] {
-                margin-left: 0.7em !important;
-            }
+
+            /* Do NOT override .archive-domain-columns here */
         }
     </style>
 </head>
+
 <body>
 
-    <h1 style="font-size: medium; margin-bottom: 4px;">Options for Archive Page</h1>
+    <h1>Options for Archive Page</h1>
 
-    <fieldset style="background-color: #FFFFE0; border-radius: 6px; padding: 0.3em 1em; border: 2px solid #e6d96a;">
-        <legend style="background: #fff; padding: 0 0.6em; border-radius: 4px;">
-            <b>Open archive.today in</b>
-        </legend>
-        <input type="radio" id="tabAdj" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px" checked>
+    <fieldset style="background-color: #FFFFE0;">
+        <legend>Open Archive in</legend>
+        <input type="radio" id="tabAdj" name="tabCtl" checked>
         <label for="tabAdj">new tab adjacent</label><br>
-        <input type="radio" id="tabEnd" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
+        <input type="radio" id="tabEnd" name="tabCtl">
         <label for="tabEnd">new tab at end</label><br>
-        <input type="radio" id="tabAct" name="tabCtl" style="vertical-align: text-bottom; margin-left: 30px">
-        <label for="tabAct">active for archive, adjacent for search</label><br>
+        <input type="radio" id="tabAct" name="tabCtl">
+        <label for="tabAct">active for archive, adjacent for search</label>
     </fieldset>
 
-    <fieldset style="margin-top: 3px; background-color: #e3f2fd; border-radius: 6px; padding: 0.3em 1em; border: 2px solid #e6d96a;">
-        <legend style="background: #fff; padding: 0 0.6em; border-radius: 4px;">
-            <b>Activate new archive.today tab from</b>
-        </legend>
+    <fieldset style="background-color: #e3f2fd;">
+        <legend>Activate new Archive tab from</legend>
         <div style="margin-left: 1.7em;">
             <label for="cbButtonNew">
-                <input id="cbButtonNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                <input id="cbButtonNew" type="checkbox" checked>
                 Toolbar Button
             </label><br>
             <label for="cbPageNew">
-                <input id="cbPageNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                <input id="cbPageNew" type="checkbox" checked>
                 Page Search
             </label><br>
             <label for="cbArchiveNew">
-                <input id="cbArchiveNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                <input id="cbArchiveNew" type="checkbox" checked>
                 Archive link
             </label><br>
             <label for="cbSearchNew">
-                <input id="cbSearchNew" type="checkbox" style="vertical-align: text-bottom" checked>
+                <input id="cbSearchNew" type="checkbox" checked>
                 Search link
             </label>
+        </div>
+    </fieldset>
+
+    <fieldset style="background-color: #E6E6FA;">
+        <legend>Archive domain</legend>
+        <div class="archive-domain-today-row">
+            <label class="archive-domain-today-full">
+                <input type="radio" name="archiveTld" value="today" id="tldToday" checked>
+                archive.today (recommended)
+            </label>
+        </div>
+        <div class="archive-domain-columns">
+            <div class="archive-domain-col">
+                <label>
+                    <input type="radio" name="archiveTld" value="is" id="tldIs">
+                    archive.is
+                </label>
+                <label>
+                    <input type="radio" name="archiveTld" value="ph" id="tldPh">
+                    archive.ph
+                </label>
+                <label>
+                    <input type="radio" name="archiveTld" value="md" id="tldMd">
+                    archive.md
+                </label>
+            </div>
+            <div class="archive-domain-col">
+                <label>
+                    <input type="radio" name="archiveTld" value="vn" id="tldVn">
+                    archive.vn
+                </label>
+                <label>
+                    <input type="radio" name="archiveTld" value="li" id="tldLi">
+                    archive.li
+                </label>
+                <label>
+                    <input type="radio" name="archiveTld" value="fo" id="tldFo">
+                    archive.fo
+                </label>
+            </div>
         </div>
     </fieldset>
 
     <p style="margin-top: 0.4em; margin-bottom: 0.6em;">
         <strong>
             <label for="cbNotify">
-                <input id="cbNotify" type="checkbox" style="vertical-align: text-bottom">
+                <input id="cbNotify" type="checkbox">
                 Notify when extension is updated.
             </label>
         </strong>
     </p>
 
-    <div class="responsive-flex" style="display: flex; align-items: center;">
-        <button id="bSave" type="button"
-            style="font-size: medium; background-color: #D1FFBD; border: 2px solid #000; color: #000;">
-            Consent & Save
-        </button>
-        <script src="options.js"></script>
-        <span style="display: inline-block; width: 40px;"></span>
-        <span id="status" style="font-size: large; width: 160px; display: inline-block;">&nbsp;</span>
-        <span style="display: inline-block; width: 40px;"></span>
-        <button id="bRemove" type="button"
-            style="font-size: medium; background-color: #FFD6D6; border: 2px solid #000; color: #000;">
-            Remove
-        </button>
-        <script src="remove.js"></script>
+    <div class="responsive-flex">
+        <button id="bSave" type="button">Consent & Save</button>
+        <span id="status">&nbsp;</span>
+        <button id="bRemove" type="button">Remove</button>
+        <span style="display: inline-block; width: 12px;"></span>
+        <button id="bHelp" type="button">Help</button>
     </div>
 
-    <p style="margin-top: 8px; margin-bottom: 8px;"><strong>PRIVACY: By using this extension you Consent to sharing
+    <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>PRIVACY: By using this extension you Consent to sharing
             your Archive or Search URL
             with <a href="https://archive.today/">archive.today</a></strong> (which has a current Privacy Policy <a
             href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F">here</a>)
@@ -134,11 +241,7 @@
         which does <i>not</i> otherwise collect or share any user data.
     </p>
 
-    <p>
-        <b>NOTE</b>: <a href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">CloudFlare DNS</a> may not
-        resolve
-        archive.today. If you experience DNS errors, try a different DNS server.
-        (Free <a href="https://www.techradar.com/news/best-dns-server">public DNS servers</a> are readily available.)
-    </p>
+    <script src="options.js"></script>
 </body>
+
 </html>
