@@ -23,18 +23,18 @@
     },
     "browser_action": {
         "default_icon": {
-            "16": "images/ArchivePage-16.png",
-            "24": "images/ArchivePage-24.png",
-            "32": "images/ArchivePage-32.png"
+            "16": "images/icon-16.png",
+            "24": "images/icon-24.png",
+            "32": "images/icon-32.png"
         },
         "default_title": "Archive Page"
     },
     "icons": {
-        "16": "images/ArchivePage-16.png",
-        "24": "images/ArchivePage-24.png",
-        "32": "images/ArchivePage-32.png",
-        "48": "images/ArchivePage-48.png",
-        "128": "images/ArchivePage-128.png"
+        "16": "images/icon-16.png",
+        "24": "images/icon-24.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
     },
     "commands": {
         "myArchive": {
