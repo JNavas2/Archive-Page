@@ -2,7 +2,7 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Archive webpage with archive[dot]today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
     "privacy_policy": "https://jnavas2.github.io/Archive-Page/privacy.html",
@@ -54,6 +54,7 @@
     },
     "browser_specific_settings": {
         "gecko": {
+            "id": "{f35a790b-1607-46e6-a40d-1c3db940c99d}",
             "strict_min_version": "113.0"
         }
     }
