@@ -2,6 +2,10 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
+    "version": "1.2.0",
+    "description": "Archive webpage with archive[dot]today",
+    "homepage_url": "https://github.com/JNavas2/Archive-Page",
+    "privacy_policy": "https://jnavas2.github.io/Archive-Page/privacy.html",
     "permissions": [
         "activeTab",
         "contextMenus",
@@ -10,8 +14,6 @@
     "optional_permissions": [
         "notifications"
     ],
-    "version": "1.0.0",
-    "description": "Archive web page with archive.today",
     "background": {
         "scripts": [
             "background.js"

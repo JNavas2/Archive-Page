@@ -22,10 +22,10 @@ function getArchiveUrls(tld) {
 }
 
 function doArchivePage(uri, act) {
-  browserAPI.storage.local.get({ tabOption: 0, archiveTld: 'today' }, function (result) {
+  browserAPI.storage.local.get({ tabOption: "tabAdj", archiveTld: 'today' }, function (result) {
     const urls = getArchiveUrls(result.archiveTld);
     switch (result.tabOption) {
-      case 1:
+      case "tabEnd":
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
             url: urls.archive + encodeURIComponent(uri),
@@ -34,12 +34,12 @@ function doArchivePage(uri, act) {
           });
         });
         break;
-      case 2:
+      case "tabAct":
         browserAPI.tabs.update({
           url: urls.archive + encodeURIComponent(uri)
         });
         break;
-      default:
+      default: // "tabAdj"
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
             url: urls.archive + encodeURIComponent(uri),
@@ -52,10 +52,10 @@ function doArchivePage(uri, act) {
 }
 
 function doSearchPage(uri, act) {
-  browserAPI.storage.local.get({ tabOption: 0, archiveTld: 'today' }, function (result) {
+  browserAPI.storage.local.get({ tabOption: "tabAdj", archiveTld: 'today' }, function (result) {
     const urls = getArchiveUrls(result.archiveTld);
     switch (result.tabOption) {
-      case 1:
+      case "tabEnd":
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
             url: urls.search + encodeURIComponent(uri),
@@ -64,8 +64,10 @@ function doSearchPage(uri, act) {
           });
         });
         break;
-      case 2:
-      default:
+      case "tabAct":
+      // For search, treat "tabAct" as "tabAdj" (since updating current tab for search may not be desired)
+      // Fallthrough
+      default: // "tabAdj"
         browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           browserAPI.tabs.create({
             url: urls.search + encodeURIComponent(uri),
@@ -99,28 +101,30 @@ browserAPI.runtime.getPlatformInfo().then(info => {
   const isAndroid = info.os === "android";
 
   if (!isAndroid) {
-    // Desktop: create context menus
-    browserAPI.contextMenus.create({
-      "title": "Search archive for page",
-      "contexts": ["page"],
-      "onclick": mySearch
-    });
-
-    const parentId = browserAPI.contextMenus.create({
-      "title": "Archive",
-      "contexts": ["link"]
-    }, () => {
+    // Desktop: remove all and then create context menus
+    browserAPI.contextMenus.removeAll(() => {
       browserAPI.contextMenus.create({
-        "parentId": parentId,
-        "title": "Archive link",
-        "contexts": ["link"],
-        "onclick": myArchive
-      });
-      browserAPI.contextMenus.create({
-        "parentId": parentId,
-        "title": "Search link",
-        "contexts": ["link"],
+        "title": "Search archive for page",
+        "contexts": ["page"],
         "onclick": mySearch
+      });
+
+      const parentId = browserAPI.contextMenus.create({
+        "title": "Archive",
+        "contexts": ["link"]
+      }, () => {
+        browserAPI.contextMenus.create({
+          "parentId": parentId,
+          "title": "Archive link",
+          "contexts": ["link"],
+          "onclick": myArchive
+        });
+        browserAPI.contextMenus.create({
+          "parentId": parentId,
+          "title": "Search link",
+          "contexts": ["link"],
+          "onclick": mySearch
+        });
       });
     });
 
@@ -142,7 +146,7 @@ browserAPI.runtime.getPlatformInfo().then(info => {
     // Android: handle extension icon click by injecting selection detection
     browserAPI.browserAction.onClicked.addListener((tab) => {
       browserAPI.tabs.executeScript(tab.id, {
-        code: `(${function() {
+        code: `(${function () {
           function findSelectedLink() {
             const selection = window.getSelection();
             if (!selection || selection.isCollapsed) return null;
@@ -187,7 +191,7 @@ browserAPI.runtime.onInstalled.addListener(details => {
         if (enabled) {
           browserAPI.notifications.create({
             type: 'basic',
-            iconUrl: 'images/Share2Archive-48.png',
+            iconUrl: 'images/icon-48.png',
             title: 'Archive Page extension',
             priority: 0,
             message: 'Updated.\nSee Options to customize.'

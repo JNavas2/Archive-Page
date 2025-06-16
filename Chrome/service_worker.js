@@ -87,37 +87,37 @@ chrome.action.onClicked.addListener(function (tab) {
     });
 });
 
-// V3: Add a listener to create the initial context menu items
-chrome.runtime.onInstalled.addListener(async () => {
-    chrome.contextMenus.create({
-        id: "my_page_menu_id",
-        "title": "Search archive for this page",
-        "contexts": ["page"],
-        "documentUrlPatterns": ["https://*/*", "http://*/*"],
-    });
-    var parentId = chrome.contextMenus.create({
-        id: "my_link_menu_id",
-        "title": "Archive",
-        "contexts": ["link"]
-    },
-        function () {
+// --- Context Menu Setup: Fix A ---
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.contextMenus.removeAll(() => {
+        chrome.contextMenus.create({
+            id: "my_page_menu_id",
+            title: "Search archive for this page",
+            contexts: ["page"],
+            documentUrlPatterns: ["https://*/*", "http://*/*"],
+        });
+        const parentId = chrome.contextMenus.create({
+            id: "my_link_menu_id",
+            title: "Archive",
+            contexts: ["link"]
+        }, () => {
             chrome.contextMenus.create({
                 id: "my_link_menu_archive_id",
-                "parentId": parentId,
-                "title": "Archive link",
-                "contexts": ["link"],
+                parentId: parentId,
+                title: "Archive link",
+                contexts: ["link"],
             });
             chrome.contextMenus.create({
                 id: "my_link_menu_search_id",
-                "parentId": parentId,
-                "title": "Search link",
-                "contexts": ["link"],
+                parentId: parentId,
+                title: "Search link",
+                contexts: ["link"],
             });
-        }
-    );
+        });
+    });
 });
 
-// Add a listener for ONBOARDING
+// --- Notification Icon Path: Fix D ---
 chrome.runtime.onInstalled.addListener((details) => {
     switch (details.reason) {
         case chrome.runtime.OnInstalledReason.UPDATE:
@@ -125,7 +125,7 @@ chrome.runtime.onInstalled.addListener((details) => {
                 if (enabled) {
                     chrome.notifications.create({
                         type: 'basic',
-                        iconUrl: 'images/Share2Archive-48.png',
+                        iconUrl: 'images/icon-48.png', // Fixed path here
                         title: 'Archive Page extension',
                         priority: 0,
                         message: 'Updated.\nSee Options to customize.'
