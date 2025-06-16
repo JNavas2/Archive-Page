@@ -1,20 +1,74 @@
 # Archive Page
-Archive Page browser extension to archive webpages in [archive.today](https://archive.today)  
-(For just basic archive.today functionality, see [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/).)
 
-Archive Page button can be pinned to the browser toolbar.  
-When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page.  
-Also includes Link context menu to Archive or Search, Page context menu to Search.  
-Options to control tab behavior.  
-Archive URL can be bookmarked for future reference, shared, whatever. Uses HTTPS for security.  
-  
-**VIDEO**: [How To archive with Archive Page extension - YouTube](https://www.youtube.com/watch?v=YiKkt3IonZU)
+**Archive Page** is a browser extension that makes it easy to preserve snapshots of web pages using [archive.today](https://archive.today)—a renowned time capsule for the internet. With a single click, you can ensure that important pages remain accessible, even if the originals are altered or removed.
 
-**Support**: Open an Issue to report a **bug** or make a **suggestion**.
+---
 
-**NOTES**:
-1. Available for **[Google Chrome](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)**, **[Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)** and **[Mozille Firefox](https://addons.mozilla.org/en-US/firefox/addon/archive-page/)**.
-2. You may need to click the **Save** button after the archive website has opened to start the archiving process.
-3. If you get an error, try again or try later. It's _not_ an extension issue—archive.today sometimes gets overwhelmed.
-4. CloudFlare DNS may not resolve archive.today, so if you experience DNS errors, try a different [DNS service](https://www.techradar.com/news/best-dns-server).
-5. For similar functionality on **Android**, check out **[Share2Archive](https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US)**.
+## Features
+
+- **One-Click Archiving:**  
+  Adds a button to your browser toolbar. Clicking it sends the current tab’s URL to archive.today, opening the archive in a new tab for you to review, bookmark, or share.
+
+- **Context Menu Integration:**  
+  - Right-click any link to instantly archive or search it on archive.today.
+  - Right-click any page to search its URL on archive.today.
+
+- **Customizable Behavior:**  
+  Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
+
+- **Keyboard Shortcuts:**  
+  Create a shortcut to archive the current page even faster.
+
+- **Secure by Design:**  
+  All communication uses HTTPS for your security and privacy.
+
+- **Cross-Platform Availability:**  
+  - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)
+  - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)
+  - [Mozilla Firefox®](https://addons.mozilla.org/en-US/firefox/addon/archive-page/) (desktop and Android™)
+  - For Android™, see [Share2Archive](https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US)
+
+---
+
+## How It Works
+
+1. **Pin the Archive Page button** to your browser toolbar for easy access.
+2. **Click the button** to send the current page to archive.today. The result opens in a new tab.
+3. **Use right-click context menus** to archive or search links and pages directly.
+4. **Bookmark or share** the archive URL as needed.
+
+---
+
+## Notes & Troubleshooting
+
+- **Archiving Process:**  
+  You may need to click the **Save** button on archive.today after the page loads to begin archiving.
+
+- **Error Handling:**  
+  If you encounter an error, simply try again later. Archive.today may be temporarily overwhelmed; this is not an extension issue.
+
+- **DNS Issues:**  
+  Some DNS providers (such as CloudFlare®) may not resolve archive.today. If you experience DNS errors, try switching to a different DNS service.
+
+- **Permissions:**  
+  The extension does not require access to your browsing history unless you explicitly grant it. If you remove and reinstall the extension, this permission is not requested by default.
+
+---
+
+## About archive.today
+
+[archive.today](https://archive.today) is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
+
+---
+
+## Support & Feedback
+
+- For bugs or feature requests, please open an [Issue]().
+- Watch a **[video tutorial](https://www.youtube.com/watch?v=YiKkt3IonZU)** for a quick overview.
+
+---
+
+**Disclaimers:**  
+* Use at your own risk.
+* This extension is *not* affiliated with archive.today.
+* Trademarks are the properties of their respective owners.
