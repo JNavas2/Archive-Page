@@ -40,6 +40,20 @@
 
 ---
 
+## Privacy
+
+- **[Privacy Policy](https://JNavas2.github.io/Archive-Page/privacy.html)**
+- **Cookies** are *not* used.
+- **Permissions:**
+  - Only the *minimum necessary* permissions are specified (activeTab, contextMenus, storage).
+  - Browsing History permission is *not* needed. If you remove and reinstall the extension, this permission is not granted.
+- **Tracking** can be removed from URLs with the **[ClearURLs extension](https://github.com/ClearURLs)** (good but not perfect) and is **strongly recommended**:
+  - [Chrome](https://chromewebstore.google.com/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
+  - [Edge](https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei)
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/)
+
+---
+
 ## Notes & Troubleshooting
 
 - **Archiving Process:**  
@@ -50,9 +64,6 @@
 
 - **DNS Issues:**  
   If you experience DNS errors, try a different DNS service (e.g., [Quad9](https://www.quad9.net)) or VPN.
-
-- **Permissions:**  
-  The extension does not require access to your browsing history unless you explicitly grant it. If you remove and reinstall the extension, this permission is not requested by default.
 
 ---
 
