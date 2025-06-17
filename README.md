@@ -51,6 +51,9 @@
   - [Chrome](https://chromewebstore.google.com/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
   - [Edge](https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei)
   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/)
+- **No data collection:** The extension does *not* collect, store, or transmit any personal or browsing data, except for sending the current tab’s URL to Archive Today when you request it.
+- **User control:** You can remove or disable the extension at any time. No data is retained after removal.
+- **Open Source:** The extension is open source—[review the code here](https://github.com/JNavas2/Archive-Page) for full transparency.
 
 ---
 
