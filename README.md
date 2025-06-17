@@ -73,7 +73,7 @@
 
 ## About Archive Today
 
-[Archive Today](https://archive.today) is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
+**[Archive Today](https://archive.today)** is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
 
 ---
 
