@@ -1,17 +1,17 @@
 # Archive Page
 
-**Archive Page** is a browser extension that makes it easy to preserve snapshots of web pages using **[archive.today](https://archive.today)**—a time capsule for the internet. With a single click, you can ensure that important pages remain accessible, even if the originals are altered or removed.
+**Archive Page** is a browser extension that makes it easy to preserve snapshots of web pages using **[Archive Today](https://archive.today)**—a time capsule for the internet. With a single click, you can ensure that important pages remain accessible, even if the originals are altered or removed.
 
 ---
 
 ## Features
 
 - **One-Click Archiving:**  
-  Adds a button to your browser toolbar. Clicking it sends the current tab’s URL to archive.today, opening the archive in a new tab for you to review, bookmark, or share.
+  Adds a button to your browser toolbar. Clicking it sends the current tab’s URL to Archive Today, opening the archive in a new tab for you to review, bookmark, or share.
 
 - **Context Menu Integration:**  
-  - Right-click any link to instantly archive or search it on archive.today.  
-  - Right-click any page to search its URL on archive.today.
+  - Right-click any link to instantly archive or search it on Archive Today.  
+  - Right-click any page to search its URL on Archive Today.
 
 - **Customizable Behavior:**  
   Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
@@ -33,7 +33,7 @@
 ## How It Works
 
 1. **Pin the Archive Page button** to your browser toolbar for easy access.  
-2. **Click the button** to send the current page to archive.today. The result opens in a new tab.  
+2. **Click the button** to send the current page to Archive Today. The result opens in a new tab.  
 3. **Use right-click context menus** to archive or search links and pages directly.  
 4. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to archive the current page even faster.  
 5. **Bookmark or share** the archive URL as needed.
@@ -60,19 +60,19 @@
 ## Notes & Troubleshooting
 
 - **Archiving Process:**  
-  You may need to click the **Save** button on archive.today after the page loads to begin archiving.
+  You may need to click the **Save** button on Archive Today after the page loads to begin archiving.
 
 - **Error Handling:**  
-  If you encounter an error, simply try again later. Archive.today may be temporarily overwhelmed; this is *not* an extension issue.
+  If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is *not* an extension issue.
 
 - **DNS Issues:**  
   If you experience DNS errors, try a different DNS service (e.g., [Quad9](https://www.quad9.net)) or VPN.
 
 ---
 
-## About archive.today
+## About Archive Today
 
-[archive.today](https://archive.today) is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
+[Archive Today](https://archive.today) is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
 
 ---
 
@@ -85,5 +85,5 @@
 
 **Disclaimers:**  
 * Use at your own risk. No liability is accepted for any loss or damage.
-* This extension is *not* affiliated with archive.today.  
+* This extension is *not* affiliated with Archive Today.  
 * Trademarks are the properties of their respective owners.
