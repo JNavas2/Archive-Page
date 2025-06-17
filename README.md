@@ -42,6 +42,7 @@
 
 ## Privacy
 
+- **Summary**: Your privacy is fully respected.
 - **[Privacy Policy](https://JNavas2.github.io/Archive-Page/privacy.html)**
 - **No Cookies**: Cookies are *not* used.
 - **Minimum Permissions:**
