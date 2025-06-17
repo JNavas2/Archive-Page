@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+<!--
+  Privacy Policy for Archive Page browser extension
+  © John Navas 2025, All Rights Reserved
+-->
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,39 +27,56 @@
       max-width: 480px;
       width: 90vw;
       margin: 2rem 0;
-      text-align: center;
+      text-align: left;
+      color: #222;
     }
     .privacy-box h1 {
-      margin: 0 0 0.7em;
+      margin: 0 0 1em;
       font-size: 2rem;
+      text-align: center;
+      color: #1976d2;
+    }
+    .privacy-box p.summary {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 1.5em;
+      text-align: center;
+      color: #333;
     }
     .privacy-box ul {
-      text-align: left;
       padding-left: 1.2em;
       margin: 0 0 1.5em;
+      list-style-type: disc;
     }
     .privacy-box li {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin-bottom: 1em;
       line-height: 1.5;
+    }
+    .privacy-box strong {
+      color: #1976d2;
     }
     .privacy-box a {
       color: #1976d2;
       text-decoration: underline;
       word-break: break-word;
     }
-    .privacy-box p {
-      font-size: 0.95rem;
-      color: #888;
-      margin: 0;
+    .privacy-box p.updated {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 2rem;
+      text-align: center;
     }
     @media (max-width: 500px) {
       .privacy-box {
-        padding: 1rem 0.7rem;
+        padding: 1rem 1rem;
         max-width: 98vw;
       }
       .privacy-box h1 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+      }
+      .privacy-box li {
+        font-size: 1rem;
       }
     }
   </style>
@@ -62,18 +84,45 @@
 <body>
   <div class="privacy-box">
     <h1>Privacy Policy</h1>
+    <p class="summary">Your privacy is fully respected.</p>
     <ul>
       <li>
         <strong>When and only when initiated by you</strong>, your Archive or Search URL is sent to
-        <a href="https://archive.today/">archive.today</a>, which has a current Privacy Policy
-        <a href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F">here</a>.
-        <strong>It does not otherwise collect or send any data to any other site or service.</strong>
+        <a href="https://archive.today/" target="_blank" rel="noopener noreferrer">archive.today</a>, which has its own Privacy Policy
+        <a href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F" target="_blank" rel="noopener noreferrer">here</a>.
+        <br><strong>The extension does not otherwise collect or send any data to any other site or service.</strong>
       </li>
       <li>
-        <strong>Cookies are not used.</strong>
+        <strong>No Cookies:</strong> Cookies are <em>not</em> used by this extension.
+      </li>
+      <li>
+        <strong>Minimum Permissions:</strong> Only the <em>minimum necessary</em> permissions are requested:
+        <ul>
+          <li><code>activeTab</code></li>
+          <li><code>contextMenus</code></li>
+          <li><code>storage</code></li>
+        </ul>
+        Browsing History permission is <strong>not</strong> needed or requested. If you remove and reinstall the extension, this permission is not granted.
+      </li>
+      <li>
+        <strong>URL Tracking:</strong> Tracking parameters can be removed from URLs using the <a href="https://github.com/ClearURLs" target="_blank" rel="noopener noreferrer">ClearURLs extension</a> (effective but not perfect) and its use is <strong>strongly recommended</strong>:
+        <ul>
+          <li><a href="https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk" target="_blank" rel="noopener noreferrer">Chrome</a></li>
+          <li><a href="https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei" target="_blank" rel="noopener noreferrer">Edge</a></li>
+          <li><a href="https://addons.mozilla.org/en-US/firefox/addon/clearurls/" target="_blank" rel="noopener noreferrer">Firefox</a></li>
+        </ul>
+      </li>
+      <li>
+        <strong>No Data Collection:</strong> The extension does <em>not</em> collect, store, or transmit any personal or browsing data, except for sending the current tab’s URL to archive.today when you explicitly request it.
+      </li>
+      <li>
+        <strong>User Control:</strong> You can remove or disable the extension at any time. No data is retained by the extension after removal.
+      </li>
+      <li>
+        <strong>Open Source:</strong> The extension is fully open source—<a href="https://github.com/JNavas2/Archive-Page" target="_blank" rel="noopener noreferrer">review the code here</a> for full transparency.
       </li>
     </ul>
-    <p>Updated: June 6, 2025</p>
+    <p class="updated">Updated: June 17, 2025</p>
   </div>
 </body>
 </html>
