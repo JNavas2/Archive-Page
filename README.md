@@ -43,16 +43,16 @@
 ## Privacy
 
 - **[Privacy Policy](https://JNavas2.github.io/Archive-Page/privacy.html)**
-- **Cookies** are *not* used.
-- **Permissions:**
+- **No Cookies**: Cookies are *not* used.
+- **Minimum Permissions:**
   - Only the *minimum necessary* permissions are specified (activeTab, contextMenus, storage).
   - Browsing History permission is *not* needed. If you remove and reinstall the extension, this permission is not granted.
-- **Tracking** can be removed from URLs with the **[ClearURLs extension](https://github.com/ClearURLs)** (good but not perfect) and is **strongly recommended**:
+- **URL Tracking**: Tracking can be removed from URLs with the **[ClearURLs extension](https://github.com/ClearURLs)** (good but not perfect) and is **strongly recommended**:
   - [Chrome](https://chromewebstore.google.com/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
   - [Edge](https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei)
   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/)
 - **No data collection:** The extension does *not* collect, store, or transmit any personal or browsing data, except for sending the current tab’s URL to Archive Today when you request it.
-- **User control:** You can remove or disable the extension at any time. No data is retained after removal.
+- **User control:** You can remove or disable the extension at any time. No data is retained by the extension after removal.
 - **Open Source:** The extension is open source—[review the code here](https://github.com/JNavas2/Archive-Page) for full transparency.
 
 ---
