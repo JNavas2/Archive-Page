@@ -25,7 +25,9 @@
 - **Cross-Platform Availability:**  
   - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
   - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)  
-  - [Mozilla Firefox®](https://addons.mozilla.org/en-US/firefox/addon/archive-page/) (desktop and Android™)  
+  - [Other Chromium-based browsers](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US), e.g., Opera, Vivaldi, Brave, Yandex Browser, Ungoogled Chromium. 
+  - Mozilla Firefox® is no longer supported (due to Mozilla policies). Use [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/) instead.
+  - Safari® (Apple) is not supported (due to developer cost).
   - For Android™, see [Share2Archive](https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US)
 
 ---
