@@ -4,6 +4,13 @@
 
 ---
 
+## What's New
+
+- **[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/)** is no longer supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
+- **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
+
+---
+
 ## Features
 
 - **One-Click Archiving:**  
@@ -26,7 +33,7 @@
   - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
   - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)  
   - [Other Chromium-based browsers](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US), e.g., Opera, Vivaldi, Brave, Yandex Browser, Ungoogled Chromium. 
-  - Mozilla Firefox® is no longer supported (due to Mozilla policies). Use [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/) instead.
+  - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/) is no longer supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
   - Safari® (Apple) is not supported (due to developer cost). Try [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/) instead.
   - For Android™, see [Share2Archive](https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US)
 
