@@ -13,8 +13,8 @@ Archive Page extension now supports selecting an alias (e.g., archive.is) in its
 * (Mozilla kept rejecting major updates with cryptic allegations of policy violations that made no sense.)
 
 Work-arounds:
-1. **Switch browsers**, e.g., [Edge](https://www.microsoft.com/en-us/edge). (Firefox is headed for oblivion anyway.)
-2. **Sideload** the Archive Page extension. See **[FIREFOX-HOW-TO](https://github.com/JNavas2/Archive-Page/blob/main/FIREFOX-HOW-TO.md)**.
-3. **[Bookmarklet](https://jnavas2.github.io/Archive-Page/)**   
+1. **Sideload** the Archive Page extension. See **[FIREFOX-HOW-TO](https://github.com/JNavas2/Archive-Page/blob/main/FIREFOX-HOW-TO.md)**.
+2. **[Bookmarklet](https://jnavas2.github.io/Archive-Page/)**   
 • Toolbar icon only, no context menu   
 • Can be edited to the alias of your choice
+3. **Switch browsers**, e.g., [Edge](https://www.microsoft.com/en-us/edge). (Firefox is headed for oblivion anyway.)
