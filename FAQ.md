@@ -1,3 +1,4 @@
+# FAQ
 **CONNECTION PROBLEMS**   
 When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
 Possible work-arounds:
