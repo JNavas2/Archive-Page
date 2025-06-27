@@ -68,8 +68,8 @@
 - **Error Handling:**  
   If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is *not* an extension issue.
 
-- **DNS Issues:**  
-  If you experience DNS errors, try a different DNS service (e.g., [Quad9](https://www.quad9.net)) or VPN.
+- **Other Issues:**  
+  See the **[FAQ](FAQ.md)**.
 
 ---
 
