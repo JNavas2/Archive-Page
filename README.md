@@ -93,7 +93,7 @@
 
 ---
 
-**Disclaimers:**  
+## Disclaimers  
 * Use at your own risk. No liability is accepted for any loss or damage.
 * This extension is *not* affiliated with Archive Today.  
 * Trademarks are the properties of their respective owners.
