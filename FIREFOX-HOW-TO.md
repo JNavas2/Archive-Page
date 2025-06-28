@@ -6,7 +6,7 @@
 3. Click the _Tools gearwheel_ at top right, then `Install Add-on From File`.
 4. Select your saved XPI file, then click `Add` and complete the installation.
 
-See the **[README](README.md)** for information on **features**, **how to** use the extension, **troubleshooting**, etc.
+See **[README](README.md)** for information on **features**, **how to** use the extension, **troubleshooting**, etc.
 
 **[Archive Page home](.)** with **full source code** for **complete transparency**.
  
