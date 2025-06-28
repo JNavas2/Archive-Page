@@ -7,6 +7,8 @@
 4. Select your saved XPI file, then click `Add` and complete the installation.
 
 See the **[README](README.md)** for information on **features**, **how to** use the extension, **troubleshooting**, etc.
+
+**[Archive Page home](.)** with **full source code** for **complete transparency**.
  
 Context: Mozilla removed Archive Page from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/) due to alleged policy violations (that make no sense),
 rejecting several major attempts to resolve the issue, so Archive Page no longer supports Firefox Add-ons, but (at least for now) it can be _sideloaded_ instead.
