@@ -1,0 +1,5 @@
+email: john.navas@gmail.com
+JWT issuer: user:15797511:829
+JWT secret: c6d022608baf729c3bef2bcf5a1c9284568a9b01e042c7731e2ca47b7a2e8e5c
+My developer unlisted signed version:
+"browser_specific_settings": {"gecko": {"id": "{f35a790b-1607-46e6-a40d-1c3db940c99d}"}}
