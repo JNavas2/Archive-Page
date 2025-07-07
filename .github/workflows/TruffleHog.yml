@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run TruffleHog
-        uses: nasa-gibs/trufflehog-actions-scan@v3
+        uses: nasa-gibs/trufflehog-actions-scan@master
