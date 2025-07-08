@@ -6,7 +6,7 @@
 
 ## What's New
 
-- **[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/)** is no longer supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
+- **[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/)** is no longer directly supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
 
 ---
