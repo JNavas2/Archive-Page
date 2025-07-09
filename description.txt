@@ -1,0 +1,53 @@
+Archive Page makes it easy to preserve snapshots of web pages using Archive Today, a time capsule for the internet. With a single click, you can ensure that important pages remain accessible, even if the originals are altered or removed.
+
+Key Features
+
+• One-click archiving: Add a button to your browser toolbar. Clicking it sends the current tab’s URL to Archive Today, opening the archive in a new tab for you to review, bookmark, or share.
+• Context menu integration: Right-click any link to instantly archive or search it on Archive Today. Right-click any page to search its URL on Archive Today.
+• Customizable behavior: Choose how and where new archive tabs open—adjacent, at the end, or as the active tab. Tab activation can be customized per function.
+• Keyboard shortcuts: Create a shortcut to archive the current page even faster.
+• Secure by design: All communication uses HTTPS for your security and privacy.
+• Cross-platform:
+- Works with Google Chrome, Microsoft Edge, and other Chromium-based browsers like Opera, Vivaldi, Brave, Yandex Browser, and Ungoogled Chromium.
+- Firefox is no longer directly supported; see the FAQ for work-arounds.
+- Safari is not supported, but a bookmarklet is available: https://jnavas2.github.io/Archive-Page/
+- For Android, see Archive Today app for Android: https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US
+
+How It Works
+
+• Pin the Archive Page button to your browser toolbar for easy access.
+• Click the button to send the current page to Archive Today. The result opens in a new tab.
+• Use right-click context menus to archive or search links and pages directly.
+• Use a customizable keyboard shortcut to archive the current page even faster.
+• Bookmark or share the archive URL as needed.
+
+Privacy
+
+• Your privacy is fully respected.
+• No cookies are used.
+• Only the minimum necessary permissions are required (activeTab, contextMenus, storage). Browsing history permission is not needed.
+• No data collection: The extension does not collect, store, or transmit any personal or browsing data, except for sending the current tab’s URL to Archive Today when you request it.
+• You can remove or disable the extension at any time. No data is retained after removal.
+• Open source: Review the code for full transparency: https://github.com/JNavas2/Archive-Page
+
+Notes & Troubleshooting
+
+• You may need to click the Save button on Archive Today after the page loads to begin archiving.
+• If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is not an extension issue.
+• For other issues, see the FAQ: https://github.com/JNavas2/Archive-Page/blob/main/FAQ.md
+
+About Archive Today
+
+Archive Today is a service that preserves web pages by taking a “snapshot” that remains online even if the original disappears. It saves both text and graphical copies for accuracy and provides a permanent, reliable link to the archived content.
+
+Support & Feedback
+
+• FAQ: https://github.com/JNavas2/Archive-Page/blob/main/FAQ.md
+• For bugs or feature requests, please open an Issue: https://github.com/JNavas2/Archive-Page/issues
+• A video tutorial is available for a quick overview: https://www.youtube.com/watch?v=YiKkt3IonZU
+
+Disclaimers
+
+• Use at your own risk. No liability is accepted for any loss or damage.
+• This extension is not affiliated with Archive Today.
+• Trademarks are the properties of their respective owners.
