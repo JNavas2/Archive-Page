@@ -1,6 +1,6 @@
 {
   "name": "Archive Page",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Archive webpage with archive[dot]today",
   "manifest_version": 3,
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
@@ -25,13 +25,19 @@
     "24": "images/icon-24.png",
     "32": "images/icon-32.png",
     "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "96": "images/icon-96.png",
     "128": "images/icon-128.png"
   },
   "action": {
     "default_icon": {
       "16": "images/icon-16.png",
       "24": "images/icon-24.png",
-      "32": "images/icon-32.png"
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "64": "images/icon-64.png",
+      "96": "images/icon-96.png",
+      "128": "images/icon-128.png"
     },
     "default_title": "Archive Page"
   },

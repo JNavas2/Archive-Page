@@ -2,10 +2,9 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.2.0",
-    "description": "Archive webpage with archive[dot]today",
+    "version": "1.2.1",
+    "description": "Archive webpage with Archive Today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
-    "privacy_policy": "https://jnavas2.github.io/Archive-Page/privacy.html",
     "permissions": [
         "activeTab",
         "contextMenus",
@@ -27,15 +26,21 @@
         "default_icon": {
             "16": "images/icon-16.png",
             "24": "images/icon-24.png",
-            "32": "images/icon-32.png"
+            "32": "images/icon-32.png",
+            "48": "images/icon-48.png",
+            "64": "images/icon-64.png",
+            "96": "images/icon-96.png",
+            "128": "images/icon-128.png"
         },
-        "default_title": "Archive Page"
+        "default_title": "Share URL to Archive Page"
     },
     "icons": {
         "16": "images/icon-16.png",
         "24": "images/icon-24.png",
         "32": "images/icon-32.png",
         "48": "images/icon-48.png",
+        "64": "images/icon-64.png",
+        "96": "images/icon-96.png",
         "128": "images/icon-128.png"
     },
     "commands": {
@@ -43,18 +48,18 @@
             "suggested_key": {
                 "default": "Ctrl+Alt+A"
             },
-            "description": "Archive current page"
+            "description": "Share URL to Archive Page"
         },
         "mySearch": {
             "suggested_key": {
                 "default": "Ctrl+Alt+F"
             },
-            "description": "Search (Find) Archive for current page"
+            "description": "Search (Find) Archive Today for current page URL"
         }
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "{f35a790b-1607-46e6-a40d-1c3db940c99d}",
+            "id": "{5b22cb75-8e43-4f2a-bb9b-1da0655ae564}",
             "strict_min_version": "113.0"
         }
     }
