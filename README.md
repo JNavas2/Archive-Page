@@ -6,7 +6,7 @@
 
 ## What's New
 
-- **[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/)** is no longer directly supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
+- **[Firefox](https://addons.mozilla.org/en-US/firefox/addon/archive-page/)** is again directly supported, both desktop and Android.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
 
 ---
@@ -32,8 +32,8 @@
 - **Cross-Platform Availability:**  
   - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
   - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)  
+  - [Mozilla Firefox™](https://addons.mozilla.org/en-US/firefox/addon/archive-page/) (both desktop and Android)
   - [Other Chromium-based browsers](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US), e.g., Opera, Vivaldi, Brave, Yandex Browser, Ungoogled Chromium. 
-  - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/) is no longer supported. See Firefox in [FAQ](FAQ.md) for work-arounds.
   - Safari® (Apple) is not supported (due to developer cost). Try [Archive bookmarklet](https://jnavas2.github.io/Archive-Page/) instead.
   - For Android™, see [Archive Page app for Android](https://play.google.com/store/apps/details?id=com.navasgroup.share2archive&hl=en_US).
 
@@ -68,9 +68,6 @@
 ---
 
 ## Notes & Troubleshooting
-
-- **Archiving Process:**  
-  You may need to click the **Save** button on Archive Today after the page loads to begin archiving.
 
 - **Error Handling:**  
   If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is *not* an extension issue.
