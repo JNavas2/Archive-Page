@@ -2,7 +2,7 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Archive webpage with Archive Today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
     "permissions": [
@@ -32,7 +32,7 @@
             "96": "images/icon-96.png",
             "128": "images/icon-128.png"
         },
-        "default_title": "Share URL to Archive Page"
+        "default_title": "Archive Page (share URL)"
     },
     "icons": {
         "16": "images/icon-16.png",
@@ -48,7 +48,7 @@
             "suggested_key": {
                 "default": "Ctrl+Alt+A"
             },
-            "description": "Share URL to Archive Page"
+            "description": "Archive Page (share URL)"
         },
         "mySearch": {
             "suggested_key": {
