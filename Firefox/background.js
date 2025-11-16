@@ -10,10 +10,7 @@
 
 const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
 
-// Generate the archive/search URL using the selected TLD
-function getArchiveUrls(tld) {
-  // Fallback to 'today' if tld is not set
-  tld = tld || 'today';
+function getArchiveUrls(tld = 'today') {
   const base = `https://archive.${tld}`;
   return {
     archive: `${base}/?run=1&url=`,
@@ -21,166 +18,152 @@ function getArchiveUrls(tld) {
   };
 }
 
-function doArchivePage(uri, act) {
-  browserAPI.storage.local.get({ tabOption: "tabAdj", archiveTld: 'today' }, function (result) {
-    const urls = getArchiveUrls(result.archiveTld);
-    switch (result.tabOption) {
+async function getSettings(defaults) {
+  return new Promise(resolve => {
+    browserAPI.storage.local.get(defaults, resolve);
+  });
+}
+
+async function doArchivePage(uri, activate) {
+  try {
+    const settings = await getSettings({ tabOption: "tabAdj", archiveTld: "today" });
+    const urls = getArchiveUrls(settings.archiveTld);
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+
+    switch (settings.tabOption) {
       case "tabEnd":
-        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-          browserAPI.tabs.create({
-            url: urls.archive + encodeURIComponent(uri),
-            index: 999,
-            active: act
-          });
-        });
+        await browserAPI.tabs.create({ url: urls.archive + encodeURIComponent(uri), index: 999, active: activate });
         break;
       case "tabAct":
-        browserAPI.tabs.update({
-          url: urls.archive + encodeURIComponent(uri)
-        });
+        await browserAPI.tabs.update(tabs[0].id, { url: urls.archive + encodeURIComponent(uri) });
         break;
-      default: // "tabAdj"
-        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-          browserAPI.tabs.create({
-            url: urls.archive + encodeURIComponent(uri),
-            index: tabs[0].index + 1,
-            active: act
-          });
-        });
+      default: // tabAdj
+        await browserAPI.tabs.create({ url: urls.archive + encodeURIComponent(uri), index: tabs[0].index + 1, active: activate });
     }
-  });
-}
-
-function doSearchPage(uri, act) {
-  browserAPI.storage.local.get({ tabOption: "tabAdj", archiveTld: 'today' }, function (result) {
-    const urls = getArchiveUrls(result.archiveTld);
-    switch (result.tabOption) {
-      case "tabEnd":
-        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-          browserAPI.tabs.create({
-            url: urls.search + encodeURIComponent(uri),
-            index: 999,
-            active: act
-          });
-        });
-        break;
-      case "tabAct":
-      // For search, treat "tabAct" as "tabAdj" (since updating current tab for search may not be desired)
-      // Fallthrough
-      default: // "tabAdj"
-        browserAPI.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-          browserAPI.tabs.create({
-            url: urls.search + encodeURIComponent(uri),
-            index: tabs[0].index + 1,
-            active: act
-          });
-        });
-    }
-  });
-}
-
-function myArchive(info, tab) {
-  browserAPI.storage.local.get({ activateArchiveNew: false }, function (result) {
-    doArchivePage(info.linkUrl, result.activateArchiveNew);
-  });
-}
-
-function mySearch(info, tab) {
-  if (info.linkUrl) {
-    browserAPI.storage.local.get({ activateSearchNew: true }, function (result) {
-      doSearchPage(info.linkUrl, result.activateSearchNew);
-    });
-  } else {
-    browserAPI.storage.local.get({ activatePageNew: true }, function (result) {
-      doSearchPage(tab.url, result.activatePageNew);
-    });
+  } catch (e) {
+    console.error("Failed to archive page:", e);
   }
 }
 
-browserAPI.runtime.getPlatformInfo().then(info => {
+async function doSearchPage(uri, activate) {
+  try {
+    const settings = await getSettings({ tabOption: "tabAdj", archiveTld: "today" });
+    const urls = getArchiveUrls(settings.archiveTld);
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+
+    switch (settings.tabOption) {
+      case "tabEnd":
+        await browserAPI.tabs.create({ url: urls.search + encodeURIComponent(uri), index: 999, active: activate });
+        break;
+      case "tabAct":
+      default: // tabAdj
+        await browserAPI.tabs.create({ url: urls.search + encodeURIComponent(uri), index: tabs[0].index + 1, active: activate });
+    }
+  } catch (e) {
+    console.error("Failed to search archive:", e);
+  }
+}
+
+async function myArchive(info, tab) {
+  const settings = await getSettings({ activateArchiveNew: false });
+  await doArchivePage(info.linkUrl, settings.activateArchiveNew);
+}
+
+async function mySearch(info, tab) {
+  if (info.linkUrl) {
+    const settings = await getSettings({ activateSearchNew: true });
+    await doSearchPage(info.linkUrl, settings.activateSearchNew);
+  } else {
+    const settings = await getSettings({ activatePageNew: true });
+    await doSearchPage(tab.url, settings.activatePageNew);
+  }
+}
+
+async function saveActiveTabUrl() {
+  try {
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+    if (tabs.length > 0) {
+      let url = tabs[0].url;
+      if (url.startsWith('moz-extension://') || url.startsWith('about:')) {
+        const allTabs = await browserAPI.tabs.query({ currentWindow: true });
+        const candidate = allTabs.find(t => t.url && /^https?:\/\//i.test(t.url));
+        if (candidate) url = candidate.url;
+      }
+      await browserAPI.storage.local.set({ savedActiveUrl: url });
+    }
+  } catch (e) {
+    console.error("Failed to save active tab URL:", e);
+  }
+}
+
+browserAPI.runtime.getPlatformInfo().then(async info => {
   const isAndroid = info.os === "android";
 
   if (!isAndroid) {
-    // Desktop: remove all and then create context menus
-    browserAPI.contextMenus.removeAll(() => {
-      browserAPI.contextMenus.create({
-        "title": "Search archive for page",
-        "contexts": ["page"],
-        "onclick": mySearch
-      });
+    await browserAPI.contextMenus.removeAll();
 
-      const parentId = browserAPI.contextMenus.create({
-        "title": "Archive",
-        "contexts": ["link"]
-      }, () => {
-        browserAPI.contextMenus.create({
-          "parentId": parentId,
-          "title": "Archive link",
-          "contexts": ["link"],
-          "onclick": myArchive
-        });
-        browserAPI.contextMenus.create({
-          "parentId": parentId,
-          "title": "Search link",
-          "contexts": ["link"],
-          "onclick": mySearch
-        });
-      });
+    browserAPI.contextMenus.create({
+      title: "Search archive for page",
+      contexts: ["page"],
+      onclick: mySearch
+    });
+
+    browserAPI.contextMenus.create({
+      title: "Archive link",
+      contexts: ["link"],
+      onclick: myArchive
+    });
+
+    browserAPI.contextMenus.create({
+      title: "Search link",
+      contexts: ["link"],
+      onclick: mySearch
     });
 
     if (browserAPI.commands && browserAPI.commands.onCommand) {
-      browserAPI.commands.onCommand.addListener(command => {
-        browserAPI.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-          const tab = tabs[0];
-          if (!tab) return;
+      browserAPI.commands.onCommand.addListener(async command => {
+        const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+        const tab = tabs[0];
+        if (!tab) return;
 
-          if (command === "myArchive") {
-            myArchive({ linkUrl: tab.url }, tab);
-          } else if (command === "mySearch") {
-            mySearch({ linkUrl: tab.url }, tab);
-          }
-        });
+        if (command === "myArchive") {
+          myArchive({ linkUrl: tab.url }, tab);
+        } else if (command === "mySearch") {
+          mySearch({ linkUrl: tab.url }, tab);
+        }
       });
     }
-  } else {
-    // Android: handle extension icon click by injecting selection detection
-    browserAPI.browserAction.onClicked.addListener((tab) => {
-      browserAPI.tabs.executeScript(tab.id, {
-        code: `(${function () {
-          function findSelectedLink() {
-            const selection = window.getSelection();
-            if (!selection || selection.isCollapsed) return null;
-            const range = selection.getRangeAt(0);
-            let node = range.startContainer;
-            while (node) {
-              if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A' && node.href) {
-                return node.href;
-              }
-              node = node.parentNode;
-            }
-            return null;
-          }
-          const url = findSelectedLink() || location.href;
-          browser.runtime.sendMessage({ type: 'archiveUrl', url });
-        }} )();`
-      });
+
+    browserAPI.browserAction.onClicked.addListener(async tab => {
+      try {
+        const settings = await getSettings({ activateButtonNew: true });
+        doArchivePage(tab.url, settings.activateButtonNew);
+      } catch (e) {
+        console.error("Failed to handle toolbar button click:", e);
+      }
     });
 
-    // Listen for message from injected script on Android
-    browserAPI.runtime.onMessage.addListener((message, sender) => {
-      if (message && message.type === 'archiveUrl' && message.url) {
-        doArchivePage(message.url, true);
+  } else {
+    // Android: save active tab URL before opening popup tab
+    browserAPI.browserAction.onClicked.addListener(async () => {
+      try {
+        await saveActiveTabUrl();
+        const popupUrl = browserAPI.runtime.getURL("popup.html");
+        await browserAPI.tabs.create({ url: popupUrl });
+      } catch (e) {
+        console.error("Failed to open popup tab on Android:", e);
       }
     });
   }
+});
 
-  // browserAction.onClicked listener for desktop and Android handled above
-  if (!isAndroid) {
-    browserAPI.browserAction.onClicked.addListener(tab => {
-      browserAPI.storage.local.get({ activateButtonNew: true }, result => {
-        doArchivePage(tab.url, result.activateButtonNew);
-      });
-    });
+browserAPI.runtime.onMessage.addListener((message, sender) => {
+  if (message && message.action && message.url) {
+    if (message.action === "archive") {
+      doArchivePage(message.url, true);
+    } else if (message.action === "search") {
+      doSearchPage(message.url, true);
+    }
   }
 });
 

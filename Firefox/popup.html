@@ -1,0 +1,67 @@
+﻿<!--
+    popup.html - Archive Page Extension
+    Popup menu for action on Android (only)
+    © 2025 John Navas, All Rights Reserved
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Archive Page Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 1em;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Align near top */
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .popup-container {
+      border: 2px solid #444;
+      border-radius: 12px;
+      padding: 1em 1.3em;
+      max-width: 320px;
+      width: 90vw;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      background: #f9f9f9;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    }
+    button {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.8em 1.4em;
+      border-radius: 8px;
+      border: 2px solid #444;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+      white-space: nowrap;
+      text-align: center;
+      user-select: none;
+    }
+    button:hover,
+    button:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <button id="archiveBtn">Archive (share URL)</button>
+    <button id="searchBtn">Search (share URL)</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
