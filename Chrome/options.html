@@ -5,7 +5,7 @@
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Options for Archive Page</title>
@@ -14,20 +14,20 @@
         body {
             font-family: inherit;
             max-width: 400px;
-            min-width: 280px;
+            padding: 8px;
             margin: 32px auto;
             background: #fff;
         }
 
         h1 {
-            margin: 0;
-            font-size: 1.17em;
+            margin: 0 0 4px 0;
+            font-size: 1.15em;
             font-weight: bold;
         }
 
         fieldset {
             border-radius: 6px;
-            padding: 0.3em 1em;
+            padding: 0.3em 0.8em;
             border: 2px solid #e6d96a;
             margin-top: 6px;
         }
@@ -39,56 +39,34 @@
             font-weight: bold;
         }
 
-        .responsive-flex {
+        .flex-row {
             display: flex;
             align-items: center;
+            justify-content: center;
             margin-top: 8px;
-        }
-
-        .responsive-flex button {
-            min-width: 80px;
-            font-size: 1em;
-        }
-
-        #bHelp {
-            background-color: #e3f2fd;
-            border: 2px solid #000;
-            color: #000;
-            font-size: medium;
-        }
-
-        #bRemove {
-            background-color: #FFD6D6;
-            border: 2px solid #000;
-            color: #000;
-            font-size: medium;
-        }
-
-        #bSave {
-            background-color: #D1FFBD;
-            border: 2px solid #000;
-            color: #000;
-            font-size: medium;
+            gap: 8px;
         }
 
         #status {
-            font-size: large;
-            width: 138px;
+            font-size: medium;
+            width: 75px;
             min-width: 60px;
             display: inline-block;
             text-align: center;
-            margin: 0 4px;
         }
 
-        /* Archive domain layout */
-        .archive-domain-today-full {
-            display: flex;
-            align-items: center;
-            gap: 0.3em;
-            width: 100%;
-            font-weight: bold;
-            box-sizing: border-box;
+        button {
+            border: 2px solid #000;
+            color: #000;
+            font-size: medium;
+            cursor: pointer;
+            padding: 4px 8px;
+            min-width: 80px;
         }
+
+        #bSave { background-color: #D1FFBD; }
+        #bRemove { background-color: #FFD6D6; }
+        #bHelp { background-color: #e3f2fd; }
 
         .archive-domain-columns {
             display: flex;
@@ -99,57 +77,22 @@
             display: flex;
             flex-direction: column;
         }
-
-        .archive-domain-col label {
-            display: flex;
-            align-items: center;
-            gap: 0.3em;
-            margin-bottom: 0.1em;
-            font-weight: normal;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                font-size: 1em;
-                padding: 4px;
-                margin: 0;
-                max-width: 100vw;
-            }
-
-            h1 {
-                font-size: 1.05em;
-            }
-
-            fieldset {
-                padding: 0.3em 0.5em !important;
-                margin: 6px 0 !important;
-            }
-
-            .responsive-flex {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            #status {
-                width: 70px !important;
-                min-width: 60px;
-                font-size: 1em !important;
-                margin: 0 4px !important;
-                flex: 1 1 70px;
-                text-align: center;
-            }
-
-            .archive-domain-columns {
-                flex-direction: column;
-                gap: 0.5em;
-            }
-        }
     </style>
 </head>
 
 <body>
 
     <h1>Options for Archive Page</h1>
+
+    <fieldset style="background-color: #FFE5D9;">
+        <legend>Toolbar icon action</legend>
+        <input type="radio" id="actionMenu" name="toolbarAction" value="menu" checked>
+        <label for="actionMenu">Dropdown menu (Search, Archive, Options)</label><br>
+        <input type="radio" id="actionSearch" name="toolbarAction" value="search">
+        <label for="actionSearch">Search (only)</label><br>
+        <input type="radio" id="actionArchive" name="toolbarAction" value="archive">
+        <label for="actionArchive">Archive (only)</label>
+    </fieldset>
 
     <fieldset style="background-color: #FFFFE0;">
         <legend>Open Archive in</legend>
@@ -163,93 +106,47 @@
 
     <fieldset style="background-color: #e3f2fd;">
         <legend>Activate new Archive tab from</legend>
-        <div style="margin-left: 1.7em;">
-            <label for="cbButtonNew">
-                <input id="cbButtonNew" type="checkbox" checked>
-                Toolbar Button
-            </label><br>
-            <label for="cbPageNew">
-                <input id="cbPageNew" type="checkbox" checked>
-                Page Search
-            </label><br>
-            <label for="cbArchiveNew">
-                <input id="cbArchiveNew" type="checkbox" checked>
-                Archive link
-            </label><br>
-            <label for="cbSearchNew">
-                <input id="cbSearchNew" type="checkbox" checked>
-                Search link
-            </label>
+        <div style="margin-left: 1.5em;">
+            <label for="cbButtonNew"><input id="cbButtonNew" type="checkbox" checked> Toolbar Button</label><br>
+            <label for="cbPageNew"><input id="cbPageNew" type="checkbox" checked> Page Search</label><br>
+            <label for="cbArchiveNew"><input id="cbArchiveNew" type="checkbox" checked> Archive link</label><br>
+            <label for="cbSearchNew"><input id="cbSearchNew" type="checkbox" checked> Search link</label>
         </div>
     </fieldset>
 
-    <!-- Archive Domain Fieldset: today full-width bold, 2 columns of 3 with space between -->
     <fieldset style="background-color: #E6E6FA;">
         <legend>Archive domain</legend>
-        <div>
-            <label class="archive-domain-today-full">
-                <input type="radio" name="archiveTld" value="today" id="tldToday" checked>
-                archive.today (recommended)
-            </label>
-        </div>
+        <label><input type="radio" name="archiveTld" value="today" id="tldToday" checked> <strong>archive.today (recommended)</strong></label>
         <div class="archive-domain-columns">
             <div class="archive-domain-col">
-                <label>
-                    <input type="radio" name="archiveTld" value="is" id="tldIs">
-                    archive.is
-                </label>
-                <label>
-                    <input type="radio" name="archiveTld" value="ph" id="tldPh">
-                    archive.ph
-                </label>
-                <label>
-                    <input type="radio" name="archiveTld" value="md" id="tldMd">
-                    archive.md
-                </label>
+                <label><input type="radio" name="archiveTld" value="is" id="tldIs"> archive.is</label>
+                <label><input type="radio" name="archiveTld" value="ph" id="tldPh"> archive.ph</label>
+                <label><input type="radio" name="archiveTld" value="md" id="tldMd"> archive.md</label>
             </div>
             <div class="archive-domain-col">
-                <label>
-                    <input type="radio" name="archiveTld" value="vn" id="tldVn">
-                    archive.vn
-                </label>
-                <label>
-                    <input type="radio" name="archiveTld" value="li" id="tldLi">
-                    archive.li
-                </label>
-                <label>
-                    <input type="radio" name="archiveTld" value="fo" id="tldFo">
-                    archive.fo
-                </label>
+                <label><input type="radio" name="archiveTld" value="vn" id="tldVn"> archive.vn</label>
+                <label><input type="radio" name="archiveTld" value="li" id="tldLi"> archive.li</label>
+                <label><input type="radio" name="archiveTld" value="fo" id="tldFo"> archive.fo</label>
             </div>
         </div>
     </fieldset>
 
-    <p style="margin-top: 0.4em; margin-bottom: 0.6em;">
-        <strong>
-            <label for="cbNotify">
-                <input id="cbNotify" type="checkbox">
-                Notify when extension is updated.
-            </label>
-        </strong>
+    <p style="margin: 8px 0;">
+        <label for="cbNotify"><strong><input id="cbNotify" type="checkbox"> Notify when extension is updated</strong></label>
     </p>
 
-    <div class="responsive-flex">
+    <div class="flex-row">
         <button id="bSave" type="button">Save</button>
         <span id="status">&nbsp;</span>
         <button id="bRemove" type="button">Remove</button>
-        <span style="display: inline-block; width: 12px;"></span>
         <button id="bHelp" type="button">Help</button>
     </div>
 
-    <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>Privacy</strong>:
-        By using this extension you consent to sharing your Archive or Search URL with
-        <a href="https://archive.today/">Archive Today</a>
-        (Privacy Policy <a href="https://archive.today/faq#:~:text=Do%20you%20preserve%20archivers%27%20privacy%3F">here</a>)
-        <i>when and only when initiated by you</i>.
-        This extension does <i>not</i> otherwise collect or share any user data.
+    <p style="margin-top: 12px; font-size: 0.9em; text-align: justify;"><strong>Privacy</strong>: By using this
+        extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive Today</a> 
+        <i>when and only when initiated by you</i>. This extension does not otherwise collect or share any user data.
     </p>
 
     <script src="options.js"></script>
 </body>
-
 </html>

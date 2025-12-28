@@ -1,10 +1,9 @@
 {
   "name": "Archive Page",
-  "version": "1.2.1",
-  "description": "Archive webpage with archive[dot]today",
+  "version": "1.4.0",
   "manifest_version": 3,
+  "description": "Archive webpage with archive[dot]today",
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
-  "privacy_policy": "https://jnavas2.github.io/Archive-Page/privacy.html",
   "permissions": [
     "activeTab",
     "contextMenus",

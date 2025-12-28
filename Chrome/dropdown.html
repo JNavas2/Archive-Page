@@ -1,0 +1,43 @@
+﻿<!--
+    dropdown.html - Archive Page Extension Dropdown Menu
+    Provides the dropdown menu for toolbar icon option.
+    © 2025 John Navas, All Rights Reserved
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 85px;
+            margin: 0;
+            padding: 2px 0;
+            font-family: Arial, sans-serif;
+            cursor: default;
+            background-color: #fff;
+        }
+        .item {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #000;
+            transition: background-color 0.1s;
+        }
+        .item:hover {
+            background-color: #eeeeee;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #cccccc;
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="mSearch" class="item">Search</div>
+    <div id="mArchive" class="item">Archive</div>
+    <hr>
+    <div id="mOptions" class="item">Options</div>
+    <script src="dropdown.js"></script>
+</body>
+</html>

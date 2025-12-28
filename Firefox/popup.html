@@ -6,6 +6,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -18,10 +19,12 @@
       background: #fff;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Align near top */
+      align-items: flex-start;
+      /* Align near top */
       height: 100vh;
       box-sizing: border-box;
     }
+
     .popup-container {
       border: 2px solid #444;
       border-radius: 12px;
@@ -33,8 +36,9 @@
       flex-direction: column;
       gap: 1em;
       background: #f9f9f9;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
     }
+
     button {
       display: inline-block;
       font-size: 1rem;
@@ -49,6 +53,7 @@
       text-align: center;
       user-select: none;
     }
+
     button:hover,
     button:focus {
       background-color: #ddd;
@@ -56,6 +61,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="popup-container">
     <button id="archiveBtn">Archive (share URL)</button>
@@ -64,4 +70,5 @@
 
   <script src="popup.js"></script>
 </body>
+
 </html>

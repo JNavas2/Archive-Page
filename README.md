@@ -6,31 +6,29 @@
 
 ## What's New
 
-- **[Firefox](https://addons.mozilla.org/en-US/firefox/addon/archive-page/)** is again directly supported, both desktop and Android.
+- **Customizable Toolbar Icon (NEW):** Choose between a Dropdown menu, Direct Search, or Direct Archive for the toolbar button (Desktop).
+- **Firefox** is again directly supported, both desktop and Android.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
 
 ---
 
 ## Features
 
-- **One-Click Archiving:**  
-  Adds a button to your browser toolbar. Clicking it sends the current tab’s URL to Archive Today, opening the archive in a new tab for you to review, bookmark, or share.
+- **Customizable Toolbar Button:** Choose your preferred action for the toolbar icon on Desktop:
+  - **Dropdown Menu:** Quick access to Search, Archive, and Options.
+  - **Direct Search:** Instantly search the current page URL.
+  - **Direct Archive:** Instantly archive the current page.
 
-- **Context Menu Integration:**  
-  - Right-click any link to instantly archive or search it on Archive Today.  
+- **Context Menu Integration:** - Right-click any link to instantly archive or search it on Archive Today.
   - Right-click any page to search its URL on Archive Today.
 
-- **Customizable Behavior:**  
-  Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
+- **Customizable Behavior:** Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
 
-- **Keyboard Shortcuts:**  
-  Create a shortcut to archive the current page even faster.
+- **Keyboard Shortcuts:** Create a shortcut to archive the current page even faster.
 
-- **Secure by Design:**  
-  All communication uses HTTPS for your security and privacy.
+- **Secure by Design:** All communication uses HTTPS for your security and privacy.
 
-- **Cross-Platform Availability:**  
-  - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
+- **Cross-Platform Availability:** - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
   - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)  
   - [Mozilla Firefox™](https://addons.mozilla.org/en-US/firefox/addon/archive-page/) (both desktop and Android)
   - [Other Chromium-based browsers](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US), e.g., Opera, Vivaldi, Brave, Yandex Browser, Ungoogled Chromium. 
@@ -42,10 +40,11 @@
 ## How It Works
 
 1. **Pin the Archive Page button** to your browser toolbar for easy access.  
-2. **Click the button** to send the current page to Archive Today. The result opens in a new tab.  
-3. **Use right-click context menus** to archive or search links and pages directly.  
-4. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to archive the current page even faster.  
-5. **Bookmark or share** the archive URL as needed.
+2. **Configure your Toolbar Action** in Options (Dropdown, Search, or Archive).  
+3. **Click the button** to execute your chosen action. The result opens in a new tab.  
+4. **Use right-click context menus** to archive or search links and pages directly.  
+5. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to archive the current page even faster.  
+6. **Bookmark or share** the archive URL as needed.
 
 ---
 
@@ -69,11 +68,9 @@
 
 ## Notes & Troubleshooting
 
-- **Error Handling:**  
-  If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is *not* an extension issue.
+- **Error Handling:** If you encounter an error, simply try again later. Archive Today may be temporarily overwhelmed; this is *not* an extension issue.
 
-- **Other Issues:**  
-  See the **[FAQ](FAQ.md)**.
+- **Other Issues:** See the **[FAQ](FAQ.md)**.
 
 ---
 
