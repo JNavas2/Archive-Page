@@ -57,7 +57,8 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 chrome.contextMenus.onClicked.addListener(async (i, t) => {
     if (i.menuItemId === "archiveLink") {
-        const s = await getSet({ activateArchiveNew: false });
+        // Updated to true to match options default
+        const s = await getSet({ activateArchiveNew: true });
         doAction(i.linkUrl, s.activateArchiveNew, 'archive');
     } else {
         const k = i.menuItemId === "searchLink" ? "activateSearchNew" : "activatePageNew";

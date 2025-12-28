@@ -23,23 +23,36 @@ async function updateUI() {
   const s = await getSet({ toolbarAction: "menu" });
   browserAPI.browserAction.setPopup({ popup: s.toolbarAction === "menu" ? "dropdown.html" : "" });
   await browserAPI.contextMenus.removeAll();
-  if (s.toolbarAction === "archive") browserAPI.contextMenus.create({ id: "searchPage", title: "Search archive for page", contexts: ["page"], onclick: mySearch });
-  browserAPI.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"], onclick: myArchive });
-  browserAPI.contextMenus.create({ id: "searchLink", title: "Search link", contexts: ["link"], onclick: mySearch });
+  if (s.toolbarAction === "archive") browserAPI.contextMenus.create({ id: "searchPage", title: "Search archive for page", contexts: ["page"] });
+  browserAPI.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"] });
+  browserAPI.contextMenus.create({ id: "searchLink", title: "Search link", contexts: ["link"] });
 }
 
 async function doAction(uri, act, type) {
   try {
-    const s = await getSet({ tabCtl: "tabAdj", archiveTld: "today" });
-    const u = getUrls(s.archiveTld)[type], tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+    // Default tabCtl corrected to 'adjacent' to match options.js
+    const s = await getSet({ tabCtl: "adjacent", archiveTld: "today" });
+    const u = getUrls(s.archiveTld)[type];
     const url = u + encodeURIComponent(uri);
-    if (type === 'archive' && s.tabCtl === 'tabAct') return browserAPI.tabs.update(tabs[0].id, { url });
-    const idx = s.tabCtl === 'tabEnd' ? 999 : tabs[0].index + 1;
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+
+    // Handle 'active' for archive
+    if (type === 'archive' && s.tabCtl === 'active') return browserAPI.tabs.update(tabs[0].id, { url });
+
+    // Handle 'end' vs 'adjacent' positioning
+    const idx = s.tabCtl === 'end' ? 999 : tabs[0].index + 1; // 999 correctly clamps to the end in Firefox
+
     await browserAPI.tabs.create({ url, index: idx, active: act });
   } catch (e) { console.error(`Archive Page ${type} failed:`, e); }
 }
 
-const myArchive = async (i) => doAction(i.linkUrl, (await getSet({ cbArchiveNew: false })).cbArchiveNew, 'archive');
+browserAPI.contextMenus.onClicked.addListener((i, t) => {
+  if (i.menuItemId === "archiveLink") myArchive(i);
+  else mySearch(i, t);
+});
+
+// Activate options standardized to true (match options.html defaults)
+const myArchive = async (i) => doAction(i.linkUrl, (await getSet({ cbArchiveNew: true })).cbArchiveNew, 'archive');
 const mySearch = async (i, t) => {
   const k = i.linkUrl ? "cbSearchNew" : "cbPageNew";
   doAction(i.linkUrl || t.url, (await getSet({ [k]: true }))[k], 'search');
@@ -82,17 +95,12 @@ browserAPI.runtime.onMessage.addListener(m => {
   });
 });
 
-// Robust Installation/Update Logic
 browserAPI.runtime.onInstalled.addListener((d) => {
   setTimeout(async () => {
     if (d.reason === "update") {
       const e = await new Promise(r => browserAPI.permissions.contains({ permissions: ['notifications'] }, r));
       if (e) browserAPI.notifications.create({ type: 'basic', iconUrl: 'images/icon-48.png', title: 'Archive Page', message: 'Updated.' });
     }
-    try {
-      await browserAPI.runtime.openOptionsPage();
-    } catch (e) {
-      browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") });
-    }
+    try { await browserAPI.runtime.openOptionsPage(); } catch (e) { browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") }); }
   }, 200);
 });

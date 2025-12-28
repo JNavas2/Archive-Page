@@ -26,7 +26,7 @@ Notes:
 4. For similar functionality on Android, check out Share2Archive in the Play Store.
 
 What's New:
-• 1.4.0 Release: New Toolbar Options! Select between a Dropdown menu, Search-only, or Archive-only for the toolbar button. Improved reliability for Options page display during updates.
+• 1.4.1 Release: New Toolbar Options! Select between a Dropdown menu, Search-only, or Archive-only for the toolbar button. Improved reliability for Options page display during updates.
 • 1.2.0 Update: Bug fixes.
 
 Disclaimers:

@@ -22,7 +22,7 @@
 
 **What's New**:
 
-* **1.4.0 Release**: New Toolbar Options: Select between a Dropdown menu, Search-only, or Archive-only for the toolbar button (Desktop).
+* **1.4.1 Release**: New Toolbar Options: Select between a Dropdown menu, Search-only, or Archive-only for the toolbar button (Desktop).
 * 1.2.0 Release: Add **Android**™ support and Option to select alias of Archive Today.
 * 0.9.1 Update: Add keyboard shortcut support.
 * 0.9.0 Update: Remove (uninstall) button now in Options dialog. Update Notification only if enabled by user (optional permission).
