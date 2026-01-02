@@ -6,93 +6,72 @@
 
 const MAP = {
     cb: [
-        { k: 'activateButtonNew', i: 'cbButtonNew' },
-        { k: 'activatePageNew', i: 'cbPageNew' },
-        { k: 'activateArchiveNew', i: 'cbArchiveNew' },
-        { k: 'activateSearchNew', i: 'cbSearchNew' },
-        { k: 'notifyOption', i: 'cbNotify' }
+        { k: 'cbButtonNew', i: 'cbButtonNew' },
+        { k: 'cbPageNew', i: 'cbPageNew' },
+        { k: 'cbArchiveNew', i: 'cbArchiveNew' },
+        { k: 'cbSearchNew', i: 'cbSearchNew' },
+        { k: 'cbNotify', i: 'cbNotify' }
     ],
-    tab: { 'tabAdj': 0, 'tabEnd': 1, 'tabAct': 2 }
+    rd: [{ k: 'archiveTld', n: 'archiveTld' }, { k: 'toolbarAction', n: 'toolbarAction' }],
+    tab: { 'tabAdj': 'adjacent', 'tabEnd': 'end', 'tabAct': 'active' }
 };
 
-// Restores settings from chrome.storage.sync
-async function restore_options() {
-    chrome.storage.sync.get({
-        tabOption: 0,
-        activateButtonNew: true,
-        activatePageNew: true,
-        activateArchiveNew: true,
-        activateSearchNew: true,
-        notifyOption: false,
+async function restoreOptions() {
+    // FIXED: Default initialization for first run
+    const items = await chrome.storage.sync.get({
+        tabCtl: 'adjacent',
+        cbButtonNew: true,
+        cbPageNew: true,
+        cbArchiveNew: true,
+        cbSearchNew: true,
+        cbNotify: false,
         archiveTld: "today",
         toolbarAction: "menu"
-    }, (items) => {
-        // Restore checkboxes
-        MAP.cb.forEach(c => {
-            const el = document.getElementById(c.i);
-            if (el) el.checked = items[c.k];
-        });
-
-        // Restore "Open Archive in" radio buttons
-        const tabId = Object.keys(MAP.tab).find(key => MAP.tab[key] === items.tabOption);
-        if (tabId) document.getElementById(tabId).checked = true;
-
-        // Restore Archive Domain
-        const tldRadio = document.querySelector(`input[name="archiveTld"][value="${items.archiveTld}"]`);
-        if (tldRadio) tldRadio.checked = true;
-
-        // Restore Toolbar Action (New in 1.4.0)
-        const actionRadio = document.querySelector(`input[name="toolbarAction"][value="${items.toolbarAction}"]`);
-        if (actionRadio) actionRadio.checked = true;
     });
-}
 
-// Saves settings to chrome.storage.sync
-async function save_options() {
-    let bNotify = document.getElementById('cbNotify').checked;
+    const info = await chrome.runtime.getPlatformInfo();
+    const isAndroid = info.os === "android";
 
-    // Optional Notification Permission handling
-    if (bNotify) {
-        const granted = await chrome.permissions.request({ permissions: ['notifications'] });
-        if (!granted) {
-            bNotify = false;
-            document.getElementById('cbNotify').checked = false;
-        }
-    } else {
-        chrome.permissions.remove({ permissions: ['notifications'] });
-    }
-
-    const settings = {
-        tabOption: MAP.tab[document.querySelector('input[name="tabCtl"]:checked').id],
-        archiveTld: document.querySelector('input[name="archiveTld"]:checked').value,
-        toolbarAction: document.querySelector('input[name="toolbarAction"]:checked').value,
-        notifyOption: bNotify
-    };
-
-    // Map checkboxes to storage keys
+    // Restore checkboxes
     MAP.cb.forEach(c => {
-        if (c.k !== 'notifyOption') {
-            settings[c.k] = document.getElementById(c.i).checked;
-        }
+        const el = document.getElementById(c.i);
+        if (el) el.checked = items[c.k];
     });
 
-    chrome.storage.sync.set(settings, () => {
-        const status = document.getElementById('status');
-        status.textContent = 'Saved!';
-        setTimeout(() => { status.textContent = ''; }, 750);
+    // Restore radio buttons
+    MAP.rd.forEach(r => {
+        const el = document.querySelector(`input[name="${r.n}"][value="${items[r.k]}"]`);
+        if (el) el.checked = true;
     });
+
+    // Restore Open In radios
+    const tabId = Object.keys(MAP.tab).find(key => MAP.tab[key] === items.tabCtl);
+    if (tabId) document.getElementById(tabId).checked = true;
 }
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('bSave').addEventListener('click', save_options);
+async function saveOptions() {
+    const settings = {};
+    MAP.cb.forEach(c => { settings[c.k] = document.getElementById(c.i).checked; });
+    MAP.rd.forEach(r => { settings[r.k] = document.querySelector(`input[name="${r.n}"]:checked`).value; });
+    settings.tabCtl = MAP.tab[document.querySelector('input[name="tabCtl"]:checked').id];
 
-// Remove button: Clear settings and prompt for manual uninstall
-document.getElementById('bRemove').addEventListener('click', () => {
-    chrome.management.uninstallSelf({ showConfirmDialog: true });
-});
+    await chrome.storage.sync.set(settings);
+    const status = document.getElementById('status');
+    status.textContent = 'Saved';
+    setTimeout(() => { status.textContent = ''; }, 750);
+}
 
-// Help button: Open the GitHub repository
-document.getElementById('bHelp').addEventListener('click', () => {
-    window.open('https://github.com/JNavas2/Archive-Page', '_blank');
+document.addEventListener('DOMContentLoaded', async () => {
+    await restoreOptions();
+    document.querySelectorAll('input').forEach(input => input.addEventListener('change', saveOptions));
+
+    document.getElementById('bClose').addEventListener('click', () => {
+        chrome.tabs.getCurrent(tab => {
+            if (tab) chrome.tabs.remove(tab.id);
+            else window.close();
+        });
+    });
+
+    document.getElementById('bRemove').addEventListener('click', () => chrome.management.uninstallSelf({ showConfirmDialog: true }));
+    document.getElementById('bHelp').addEventListener('click', () => window.open('https://github.com/JNavas2/Archive-Page', '_blank'));
 });

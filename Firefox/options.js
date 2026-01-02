@@ -1,6 +1,6 @@
 /*
     options.js - Archive Page Extension Options Logic
-    Handles saving and restoring extension configuration.
+    Handles auto-saving, default values, and tab management.
     © 2025 John Navas, All Rights Reserved
 */
 
@@ -15,25 +15,46 @@ const MAP = {
 };
 
 async function restoreOptions() {
-  const items = await browserAPI.storage.local.get();
+  // FIXED: Passing defaults directly to get() ensures first-run values
+  const items = await browserAPI.storage.local.get({
+    archiveTld: 'today',
+    toolbarAction: 'menu',
+    tabCtl: 'adjacent',
+    cbButtonNew: true,
+    cbPageNew: true,
+    cbArchiveNew: true,
+    cbSearchNew: true,
+    cbNotify: false
+  });
+
   const info = await browserAPI.runtime.getPlatformInfo();
   const isAndroid = info.os === "android";
 
   if (isAndroid) {
     ['sectionToolbarAction', 'sectionOpenIn', 'sectionActivate'].forEach(id => {
       const s = document.getElementById(id);
-      if (s) { s.classList.add('disabled-section'); s.querySelectorAll('input').forEach(i => i.disabled = true); }
+      if (s) {
+        s.classList.add('disabled-section');
+        s.querySelectorAll('input').forEach(i => i.disabled = true);
+      }
     });
   }
 
-  MAP.cb.forEach(c => { const e = document.getElementById(c.i); if (e) e.checked = items[c.k] !== undefined ? items[c.k] : true; });
+  // Restore Checkboxes
+  MAP.cb.forEach(c => {
+    const e = document.getElementById(c.i);
+    if (e) e.checked = items[c.k];
+  });
+
+  // Restore Radio Buttons (Default logic now handled by storage.get)
   MAP.rd.forEach(r => {
     if (isAndroid && r.k === 'toolbarAction') return;
-    const e = document.querySelector(`input[name="${r.n}"][value="${items[r.k] || 'today'}"]`);
+    const e = document.querySelector(`input[name="${r.n}"][value="${items[r.k]}"]`);
     if (e) e.checked = true;
   });
 
-  const tId = Object.keys(MAP.tab).find(k => MAP.tab[k] === (items.tabCtl || 'adjacent'));
+  // Restore Tab Control
+  const tId = Object.keys(MAP.tab).find(k => MAP.tab[k] === items.tabCtl);
   if (tId) document.getElementById(tId).checked = true;
 }
 
@@ -46,16 +67,32 @@ async function saveOptions() {
 
   await browserAPI.storage.local.set(s);
   const st = document.getElementById('status');
-  st.textContent = 'Saved'; setTimeout(() => st.textContent = '', 750);
+  st.textContent = 'Saved';
+  setTimeout(() => st.textContent = '', 750);
 }
 
 async function removeOptions() {
-  await browserAPI.storage.local.clear();
-  document.getElementById('status').textContent = 'Cleared';
-  setTimeout(() => location.reload(), 750);
+  browserAPI.management.uninstallSelf({ showConfirmDialog: true });
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('bSave').addEventListener('click', saveOptions);
-document.getElementById('bRemove').addEventListener('click', removeOptions);
-document.getElementById('bHelp').addEventListener('click', () => browserAPI.tabs.create({ url: "https://github.com/JNavas2/Archive-Page/blob/main/README.md" }));
+document.addEventListener('DOMContentLoaded', async () => {
+  await restoreOptions();
+
+  // Attach auto-save to all inputs for immediate saving
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', saveOptions);
+  });
+
+  // Close tab logic with Android fallback
+  document.getElementById('bClose').addEventListener('click', () => {
+    browserAPI.tabs.getCurrent(tab => {
+      if (tab) browserAPI.tabs.remove(tab.id);
+      else window.close();
+    });
+  });
+
+  document.getElementById('bRemove').addEventListener('click', removeOptions);
+  document.getElementById('bHelp').addEventListener('click', () =>
+    browserAPI.tabs.create({ url: "https://github.com/JNavas2/Archive-Page/blob/main/README.md" })
+  );
+});

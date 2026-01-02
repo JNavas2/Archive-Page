@@ -1,6 +1,6 @@
 ﻿<!--
-    options.html - Archive Page Extension Options UI
-    Provides the user interface for configuring extension options.
+    options.html - Archive Page Extension
+    Options page for desktop and Android
     © 2025 John Navas, All Rights Reserved
 -->
 
@@ -10,13 +10,25 @@
 <head>
     <title>Options for Archive Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_blank">
     <style>
+        :root {
+            --bg-toolbar: #FFE5D9;
+            --bg-open-in: #FFFFE0;
+            --bg-activate: #e3f2fd;
+            --bg-domain: #E6E6FA;
+            --bg-close: #e0e0e0;
+            /* Updated from save to close */
+            --bg-remove: #FFD6D6;
+            --border-fieldset: #e6d96a;
+            --border-button: #000;
+        }
+
         body {
             font-family: inherit;
             max-width: 400px;
             padding: 8px;
-            margin: 32px auto;
-            background: #fff;
+            margin: 0;
         }
 
         h1 {
@@ -28,8 +40,8 @@
         fieldset {
             border-radius: 6px;
             padding: 0.3em 0.8em;
-            border: 2px solid #e6d96a;
-            margin-top: 6px;
+            border: 2px solid var(--border-fieldset);
+            margin-top: 4px;
         }
 
         legend {
@@ -39,34 +51,28 @@
             font-weight: bold;
         }
 
-        .flex-row {
+        #sectionToolbarAction {
+            background-color: var(--bg-toolbar);
+        }
+
+        #sectionOpenIn {
+            background-color: var(--bg-open-in);
+        }
+
+        #sectionActivate {
+            background-color: var(--bg-activate);
+        }
+
+        .section-domain {
+            background-color: var(--bg-domain);
+        }
+
+        .responsive-flex {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 8px;
-            gap: 8px;
         }
-
-        #status {
-            font-size: medium;
-            width: 75px;
-            min-width: 60px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        button {
-            border: 2px solid #000;
-            color: #000;
-            font-size: medium;
-            cursor: pointer;
-            padding: 4px 8px;
-            min-width: 80px;
-        }
-
-        #bSave { background-color: #D1FFBD; }
-        #bRemove { background-color: #FFD6D6; }
-        #bHelp { background-color: #e3f2fd; }
 
         .archive-domain-columns {
             display: flex;
@@ -77,16 +83,66 @@
             display: flex;
             flex-direction: column;
         }
+
+        button {
+            border: 2px solid var(--border-button);
+            color: #000;
+            font-size: medium;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        #bClose {
+            background-color: var(--bg-close);
+        }
+
+        /* Changed from bSave */
+        #bRemove {
+            background-color: var(--bg-remove);
+        }
+
+        #bHelp {
+            background-color: var(--bg-activate);
+        }
+
+        #status {
+            font-size: medium;
+            width: 75px;
+            min-width: 60px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 4px;
+        }
+
+        .disabled-section {
+            opacity: 0.55;
+            filter: grayscale(1);
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.95em;
+            }
+
+            fieldset {
+                padding: 0.2em 0.6em !important;
+                margin: 3px 0 !important;
+            }
+
+            .archive-domain-columns {
+                gap: 1.2em;
+            }
+        }
     </style>
 </head>
 
 <body>
-
     <h1>Options for Archive Page</h1>
 
-    <fieldset style="background-color: #FFE5D9;">
-        <legend>Toolbar icon action</legend>
-        <input type="radio" id="actionMenu" name="toolbarAction" value="menu" checked>
+    <fieldset id="sectionToolbarAction">
+        <legend>Toolbar icon action (desktop only)</legend>
+        <input type="radio" id="actionMenu" name="toolbarAction" value="menu">
         <label for="actionMenu">Dropdown menu (Search, Archive, Options)</label><br>
         <input type="radio" id="actionSearch" name="toolbarAction" value="search">
         <label for="actionSearch">Search (only)</label><br>
@@ -94,29 +150,32 @@
         <label for="actionArchive">Archive (only)</label>
     </fieldset>
 
-    <fieldset style="background-color: #FFFFE0;">
-        <legend>Open Archive in</legend>
-        <input type="radio" id="tabAdj" name="tabCtl" checked>
+    <fieldset id="sectionOpenIn">
+        <legend>Open Archive in (desktop only)</legend>
+        <input type="radio" id="tabAdj" name="tabCtl" value="adjacent">
         <label for="tabAdj">new tab adjacent</label><br>
-        <input type="radio" id="tabEnd" name="tabCtl">
+        <input type="radio" id="tabEnd" name="tabCtl" value="end">
         <label for="tabEnd">new tab at end</label><br>
-        <input type="radio" id="tabAct" name="tabCtl">
+        <input type="radio" id="tabAct" name="tabCtl" value="active">
         <label for="tabAct">active for archive, adjacent for search</label>
     </fieldset>
 
-    <fieldset style="background-color: #e3f2fd;">
-        <legend>Activate new Archive tab from</legend>
+    <fieldset id="sectionActivate">
+        <legend>Activate new Archive tab from (desktop only)</legend>
         <div style="margin-left: 1.5em;">
-            <label for="cbButtonNew"><input id="cbButtonNew" type="checkbox" checked> Toolbar Button</label><br>
-            <label for="cbPageNew"><input id="cbPageNew" type="checkbox" checked> Page Search</label><br>
-            <label for="cbArchiveNew"><input id="cbArchiveNew" type="checkbox" checked> Archive link</label><br>
-            <label for="cbSearchNew"><input id="cbSearchNew" type="checkbox" checked> Search link</label>
+            <label for="cbButtonNew"><input id="cbButtonNew" type="checkbox"> Toolbar Button</label><br>
+            <label for="cbPageNew"><input id="cbPageNew" type="checkbox"> Page Search</label><br>
+            <label for="cbArchiveNew"><input id="cbArchiveNew" type="checkbox"> Archive link</label><br>
+            <label for="cbSearchNew"><input id="cbSearchNew" type="checkbox"> Search link</label>
         </div>
     </fieldset>
 
-    <fieldset style="background-color: #E6E6FA;">
+    <fieldset class="section-domain">
         <legend>Archive domain</legend>
-        <label><input type="radio" name="archiveTld" value="today" id="tldToday" checked> <strong>archive.today (recommended)</strong></label>
+        <label>
+            <input type="radio" name="archiveTld" value="today" id="tldToday">
+            <strong>archive.today (recommended)</strong>
+        </label>
         <div class="archive-domain-columns">
             <div class="archive-domain-col">
                 <label><input type="radio" name="archiveTld" value="is" id="tldIs"> archive.is</label>
@@ -131,22 +190,24 @@
         </div>
     </fieldset>
 
-    <p style="margin: 8px 0;">
-        <label for="cbNotify"><strong><input id="cbNotify" type="checkbox"> Notify when extension is updated</strong></label>
+    <p style="margin: 4px 0;">
+        <label for="cbNotify"><strong><input id="cbNotify" type="checkbox"> Notify on update</strong></label>
     </p>
 
-    <div class="flex-row">
-        <button id="bSave" type="button">Save</button>
-        <span id="status">&nbsp;</span>
+    <div class="responsive-flex">
+        <button id="bClose" type="button">Close</button> <span id="status">&nbsp;</span>
         <button id="bRemove" type="button">Remove</button>
+        <span style="display: inline-block; width: 8px;"></span>
         <button id="bHelp" type="button">Help</button>
     </div>
 
-    <p style="margin-top: 12px; font-size: 0.9em; text-align: justify;"><strong>Privacy</strong>: By using this
-        extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive Today</a> 
-        <i>when and only when initiated by you</i>. This extension does not otherwise collect or share any user data.
+    <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>Privacy</strong>: By using this
+        extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive
+            Today</a> <i>when and only when initiated by you</i>. If you do not consent, Remove this extension,
+        which does <i>not</i> otherwise collect or share any user data.
     </p>
 
     <script src="options.js"></script>
 </body>
+
 </html>

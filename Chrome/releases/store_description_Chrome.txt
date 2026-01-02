@@ -1,4 +1,4 @@
-Adds a button to the Chrome toolbar. When clicked, it sends the URL of the current tab to archive.today to preserve a snapshot of the page, and opens the result in a new tab.
+Adds a button to the Chrome toolbar. When clicked, it sends the URL of the current tab to Archive Today to preserve a snapshot of the page, and opens the result in a new tab.
 
 NEW: Customizable Toolbar Button
 Choose your preferred action for the toolbar icon:
@@ -7,29 +7,32 @@ Choose your preferred action for the toolbar icon:
 • Direct Archive: Instantly archive the current page.
 
 Features:
-• Archive Today Integration: Sends the current tab URL to archive.today to preserve a snapshot and opens the result in a new tab.
+• Archive Today Integration: Sends the current tab URL to Archive Today to preserve a snapshot and opens the result in a new tab.
 • Context Menus: Includes Link context menu to Archive or Search, and a Page context menu to Search.
 • Customizable Behavior: Options to control if the new tab opens adjacent to the current tab, at the end of the tab strip, or replaces the current tab (archive only).
 • Tab Activation: Control whether new Archive or Search tabs are activated immediately.
 • HTTPS Security: Uses HTTPS for all archival and search transmissions.
 • Keyboard Shortcuts: A custom shortcut can be created to archive the current page instantly.
 
-(archive.today is a time capsule for web pages. It takes a 'snapshot' of a webpage that will always be online even if the original page disappears. It saves a text and a graphical copy of the page for better accuracy and provides a short and reliable link to an unalterable record of the web page.)
+(Archive Today is a time capsule for web pages. It takes a 'snapshot' of a webpage that will always be online even if the original page disappears. It saves a text and a graphical copy of the page for better accuracy and provides a short and reliable link to an unalterable record of the web page.)
 
 Consent:
-By using this extension, you consent to sharing your Archive or Search URL with archive.today when initiated by you. This extension does not otherwise collect or share any user data.
+By using this extension, you consent to sharing your Archive or Search URL with Archive Today when initiated by you. This extension does not otherwise collect or share any user data.
 
 Notes:
-1. "Read your browsing history" permission is eliminated if not granted, or if you remove and reinstall the extension.
-2. If you get an error, try again later. It's NOT an extension issue—archive.today sometimes gets overwhelmed.
-3. CloudFlare DNS may not resolve archive.today; if you experience DNS errors, try a different DNS server (e.g., Quad9).
-4. For similar functionality on Android, check out Share2Archive in the Play Store.
+1. If you get an error, try again later. It's NOT an extension issue—Archive Today sometimes gets overwhelmed.
+2. CloudFlare DNS may not resolve Archive Today; if you experience DNS errors, try a different DNS server (e.g., Quad9).
+3. For similar functionality on Android, check out Share2Archive in the Play Store.
 
-What's New:
-• 1.4.1 Release: New Toolbar Options! Select between a Dropdown menu, Search-only, or Archive-only for the toolbar button. Improved reliability for Options page display during updates.
-• 1.2.0 Update: Bug fixes.
+What's New in 1.4.5:
+* Change in permissions to avoid silent disabling.
+• New Welcome Experience: Dedicated onboarding page for new features and privacy settings.
+• Customizable Toolbar Actions: Toggle between Dropdown menu, Search-only, or Archive-only modes.
+• Streamlined Context Menus: Removed redundant right-click items for a cleaner interface.
+• Auto-Save Options: Settings now save immediately upon change; the "Save" button is now "Close".
+• Fixed Extension Removal: Restored "Remove" button functionality in Options and Welcome pages.
 
 Disclaimers:
 • Use at your own risk. No liability is accepted for any loss or damage.
-• This extension is not affiliated with archive.today.
+• This extension is not affiliated with Archive Today.
 • Trademarks are the properties of their respective owners.

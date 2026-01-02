@@ -30,18 +30,14 @@ async function updateUI() {
 
 async function doAction(uri, act, type) {
   try {
-    // Default tabCtl corrected to 'adjacent' to match options.js
     const s = await getSet({ tabCtl: "adjacent", archiveTld: "today" });
     const u = getUrls(s.archiveTld)[type];
     const url = u + encodeURIComponent(uri);
     const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
 
-    // Handle 'active' for archive
     if (type === 'archive' && s.tabCtl === 'active') return browserAPI.tabs.update(tabs[0].id, { url });
 
-    // Handle 'end' vs 'adjacent' positioning
-    const idx = s.tabCtl === 'end' ? 999 : tabs[0].index + 1; // 999 correctly clamps to the end in Firefox
-
+    const idx = s.tabCtl === 'end' ? 999 : tabs[0].index + 1;
     await browserAPI.tabs.create({ url, index: idx, active: act });
   } catch (e) { console.error(`Archive Page ${type} failed:`, e); }
 }
@@ -51,7 +47,6 @@ browserAPI.contextMenus.onClicked.addListener((i, t) => {
   else mySearch(i, t);
 });
 
-// Activate options standardized to true (match options.html defaults)
 const myArchive = async (i) => doAction(i.linkUrl, (await getSet({ cbArchiveNew: true })).cbArchiveNew, 'archive');
 const mySearch = async (i, t) => {
   const k = i.linkUrl ? "cbSearchNew" : "cbPageNew";
@@ -84,7 +79,7 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
   } else browserAPI.browserAction.onClicked.addListener(async () => { await saveUrl(); browserAPI.tabs.create({ url: browserAPI.runtime.getURL("popup.html") }); });
 });
 
-browserAPI.storage.onChanged.addListener((c, a) => { if (a === "local" && c.toolbarAction) updateUI(); });
+browserAPI.storage.onChanged.addListener((c, a) => { if (a === "local" && (c.toolbarAction || c.archiveTld)) updateUI(); });
 
 browserAPI.runtime.onMessage.addListener(m => {
   if (!m.action) return;
@@ -97,10 +92,16 @@ browserAPI.runtime.onMessage.addListener(m => {
 
 browserAPI.runtime.onInstalled.addListener((d) => {
   setTimeout(async () => {
+    browserAPI.tabs.create({ url: browserAPI.runtime.getURL("welcome.html") });
+
     if (d.reason === "update") {
       const e = await new Promise(r => browserAPI.permissions.contains({ permissions: ['notifications'] }, r));
-      if (e) browserAPI.notifications.create({ type: 'basic', iconUrl: 'images/icon-48.png', title: 'Archive Page', message: 'Updated.' });
+      if (e) browserAPI.notifications.create({
+        type: 'basic',
+        iconUrl: 'images/icon-48.png',
+        title: 'Archive Page',
+        message: 'Updated.' // FIXED: Simplified message for easier maintenance
+      });
     }
-    try { await browserAPI.runtime.openOptionsPage(); } catch (e) { browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") }); }
   }, 200);
 });

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Archive Page</title>
+    <style>
+        :root {
+            --bg-page: #f9f9f9;
+            --bg-box: #ffffff;
+            --border-fieldset: #e6d96a;
+            --btn-options: #d1ffbd;
+            --btn-close: #e0e0e0;
+            --btn-remove: #ffd6d6;
+            --btn-help: #e3f2fd;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        .welcome-container {
+            background-color: var(--bg-box);
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid var(--border-fieldset);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .divider {
+            border-top: 2px solid var(--border-fieldset);
+            margin-top: 12px;
+            padding-top: 4px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.05em;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        p,
+        li {
+            line-height: 1.4;
+            color: #444;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .tight-list li {
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        .privacy-note {
+            font-size: 0.9em;
+            background: #fffde7;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed #cbc26d;
+            text-align: justify;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 6px;
+            /* Slightly tighter gap for 4 buttons */
+        }
+
+        button {
+            width: 95px;
+            /* Narrowed to fit 4 buttons across 500px container */
+            padding: 10px 0;
+            font-weight: bold;
+            border: 2px solid #000;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-align: center;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #bOptions {
+            background-color: var(--btn-options);
+        }
+
+        #bClose {
+            background-color: var(--btn-close);
+        }
+
+        #bRemove {
+            background-color: var(--btn-remove);
+        }
+
+        #bHelp {
+            background-color: var(--btn-help);
+        }
+
+        @media (max-width: 480px) {
+            .welcome-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .button-group {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                /* 2x2 grid for mobile */
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to Archive Page!</h1>
+        <p>
+            <strong>Search</strong> or <strong>Archive</strong> a web page or link in
+            <strong>Archive Today</strong>, a time capsule that preserves pages even if the original disappears.
+        </p>
+        <p><strong>Pin extension icon to your browser toolbar for easy access.</strong></p>
+
+        <div class="divider">
+            <h2>What's New in 1.4.5</h2>
+            <h3>New permission granting to avoid silent disabling.</h3>
+            <h3>Customizable toolbar icon action</h3>
+            <ul class="tight-list">
+                <li><strong>Dropdown menu</strong> (Search, Archive, Options) (<strong>default</strong>)</li>
+                <li><strong>Search</strong> (immediate action)</li>
+                <li><strong>Archive</strong> (immediate action)</li>
+            </ul>
+
+            <h3>Important Notes</h3>
+            <ol class="tight-list">
+                <li><strong>Search context menu</strong> is now only in Archive (only) option.</li>
+                <li>To <strong>restore prior behavior</strong>, select <strong>Archive (only)</strong> in
+                    <strong>Options</strong>.</li>
+            </ol>
+        </div>
+
+        <div class="divider">
+            <h2>Privacy</h2>
+            <div class="privacy-note">
+                By using this extension you consent to sharing your Archive or Search URL with
+                <a href="https://archive.today/">Archive Today</a>
+                <i>when and only when initiated by you</i>. If you do not consent, Remove this extension,
+                which does <i>not</i> otherwise collect or share any user data.
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="bOptions" type="button">Options</button>
+            <button id="bClose" type="button">Close</button>
+            <button id="bRemove" type="button">Remove</button>
+            <button id="bHelp" type="button">Help</button>
+        </div>
+    </div>
+    <script src="welcome.js"></script>
+</body>
+
+</html>

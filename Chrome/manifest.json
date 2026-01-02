@@ -1,16 +1,18 @@
 {
   "name": "Archive Page",
-  "version": "1.4.1",
+  "version": "1.4.5",
   "manifest_version": 3,
-  "description": "Archive webpage with archive[dot]today",
+  "description": "Archive webpage with Archive Today",
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
   "permissions": [
-    "activeTab",
     "contextMenus",
     "storage"
   ],
   "optional_permissions": [
     "notifications"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "service_worker.js"
@@ -42,7 +44,7 @@
   },
   "commands": {
     "search-page": {
-      "description": "Search archive.today for the current page"
+      "description": "Search Archive Today for the current page"
     }
   }
 }

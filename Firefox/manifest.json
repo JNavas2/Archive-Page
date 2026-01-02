@@ -2,7 +2,7 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.4.1",
+    "version": "1.4.4",
     "description": "Archive webpage with Archive Today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
     "permissions": [
