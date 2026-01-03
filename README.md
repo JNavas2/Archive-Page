@@ -9,6 +9,7 @@
 - **Customizable Toolbar Icon (NEW):** Choose between a Dropdown menu, Direct Search, or Direct Archive for the toolbar button (Desktop).
 - **Firefox** is again directly supported, both desktop and Android.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
+- **Permissions** in Chrome have been changed to work-aroound the update "silent kill" issue. 
 
 ---
 
@@ -17,10 +18,9 @@
 - **Customizable Toolbar Button:** Choose your preferred action for the toolbar icon on Desktop:
   - **Dropdown Menu:** Quick access to Search, Archive, and Options.
   - **Direct Search:** Instantly search the current page URL.
-  - **Direct Archive:** Instantly archive the current page.
+  - **Direct Archive:** Instantly archive the current page. (**prior behavior**)
 
 - **Context Menu Integration:** - Right-click any link to instantly archive or search it on Archive Today.
-  - Right-click any page to search its URL on Archive Today.
 
 - **Customizable Behavior:** Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
 
@@ -42,7 +42,7 @@
 1. **Pin the Archive Page button** to your browser toolbar for easy access.  
 2. **Configure your Toolbar Action** in Options (Dropdown, Search, or Archive).  
 3. **Click the button** to execute your chosen action. The result opens in a new tab.  
-4. **Use right-click context menus** to archive or search links and pages directly.  
+4. **Use right-click context menus** to archive or search links directly.  
 5. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to archive the current page even faster.  
 6. **Bookmark or share** the archive URL as needed.
 
@@ -53,9 +53,7 @@
 - **Summary**: Your privacy is fully respected.
 - **[Privacy Policy](https://JNavas2.github.io/Archive-Page/privacy.html)**
 - **No Cookies**: Cookies are *not* used.
-- **Minimum Permissions:**
-  - Only the *minimum necessary* permissions are specified (activeTab, contextMenus, storage).
-  - Browsing History permission is *not* needed. If you remove and reinstall the extension, this permission is not granted.
+- **Minimum Permissions:** Only the *minimum necessary* permissions are specified.
 - **URL Tracking**: Tracking can be removed from URLs with the **[ClearURLs extension](https://github.com/ClearURLs)** (good but not perfect) and is **strongly recommended**:
   - [Chrome](https://chromewebstore.google.com/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
   - [Edge](https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei)
