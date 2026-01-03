@@ -1,4 +1,4 @@
-# FAQ
+# FAQ (Frequently Asked Questions)
 
 ## Chrome "Action Required" / Permissions
 **Why does the extension now ask for permission to access all websites?** Due to a documented regression in Chrome's update logic ([Chromium Issue 472803133](https://issues.chromium.org/issues/472803133)), extensions using the `activeTab` permission are being "silently killed" (automatically disabled) during updates, even when permissions remain static. To prevent this, the extension moved to **Optional Host Permissions**. There is currently no lower-permission option or alternative workaround that prevents this automatic disabling while still allowing the extension to access the page URL when requested by the user. This permission only needs to be granted **once** via the "Action Required" bridge page.
