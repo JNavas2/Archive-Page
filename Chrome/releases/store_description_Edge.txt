@@ -24,7 +24,7 @@ Notes:
 2. CloudFlare DNS may not resolve Archive Today; if you experience DNS errors, try a different DNS server.
 3. For similar functionality on Android, check out app Share2Archive in the Play Store.
 
-What's New in 1.4.5:
+What's New in 1.4.6:
 * Change in permissions to avoid silent disabling.
 What's New in 1.4.4:
 • New Welcome Experience: Dedicated onboarding/upboarding page for new features and privacy settings.
