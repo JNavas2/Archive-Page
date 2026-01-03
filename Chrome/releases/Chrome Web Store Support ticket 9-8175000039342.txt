@@ -1,0 +1,11 @@
+BUG: Silent Kill on Update Despite No Permission Change
+
+A critical Chromium regression was encountered during update of my extension. Despite making no changes to declared permissions—retaining the activeTab permission—the Chrome update process resulted in my extension being "silently killed" (automatically disabled) for existing users. Worse, it breaks my other extensions using activeTab and it also adversely affects initial installs.
+
+activeTab Silent Kill Issue
+
+My extension previously functioned correctly using activeTab to access page URLs only upon user invocation. In the update, the permissions remained identical; however, Chrome's update flagged it as a state change that disabled my extension across the user base. This "silent kill" provides no prompt to users to re-enable, effectively breaking the installation for the entire legacy user base without a declared permission escalation ever occurring. Chromium Issue 472803133 documents how the update process for extensions relying on activeTab is flawed, as it treats version update as a security event even when permissions remain static.
+
+Workaround
+
+To restore service, my latest version implements a "Permission Bridge" to bypass this issue. By moving to optional_host_permissions for all_urls, the extension now updates silently without being disabled. Upon first use, a UI bridge triggers a synchronous chrome.permissions.request via user gesture. This restores necessary URL access while navigating around "silent kill."
