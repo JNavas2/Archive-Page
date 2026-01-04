@@ -1,7 +1,7 @@
 /*
     request.js - Archive Page Extension (Chrome MV3)
     Permission bridge for optional_host_permissions
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 document.getElementById('bGrant').addEventListener('click', () => {

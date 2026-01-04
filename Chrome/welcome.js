@@ -1,7 +1,7 @@
 /*
     welcome.js - Archive Page Extension Onboarding (Chrome MV3)
     Logic for the Welcome page buttons
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 document.addEventListener('DOMContentLoaded', () => {

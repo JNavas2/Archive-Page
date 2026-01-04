@@ -1,15 +1,12 @@
 {
   "name": "Archive Page",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "manifest_version": 3,
   "description": "Archive webpage with Archive Today",
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
   "permissions": [
     "contextMenus",
     "storage"
-  ],
-  "optional_permissions": [
-    "notifications"
   ],
   "optional_host_permissions": [
     "<all_urls>"
@@ -40,7 +37,8 @@
       "96": "images/icon-96.png",
       "128": "images/icon-128.png"
     },
-    "default_title": "Archive Page"
+    "default_title": "Archive Page",
+    "default_popup": "dropdown.html"
   },
   "commands": {
     "search-page": {

@@ -1,7 +1,7 @@
 /*
     options.js - Archive Page Extension Options Logic
     Handles all scripting for options.html
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 const MAP = {
@@ -9,8 +9,7 @@ const MAP = {
         { k: 'cbButtonNew', i: 'cbButtonNew' },
         { k: 'cbPageNew', i: 'cbPageNew' },
         { k: 'cbArchiveNew', i: 'cbArchiveNew' },
-        { k: 'cbSearchNew', i: 'cbSearchNew' },
-        { k: 'cbNotify', i: 'cbNotify' }
+        { k: 'cbSearchNew', i: 'cbSearchNew' }
     ],
     rd: [{ k: 'archiveTld', n: 'archiveTld' }, { k: 'toolbarAction', n: 'toolbarAction' }],
     tab: { 'tabAdj': 'adjacent', 'tabEnd': 'end', 'tabAct': 'active' }
@@ -24,7 +23,6 @@ async function restoreOptions() {
         cbPageNew: true,
         cbArchiveNew: true,
         cbSearchNew: true,
-        cbNotify: false,
         archiveTld: "today",
         toolbarAction: "menu"
     });

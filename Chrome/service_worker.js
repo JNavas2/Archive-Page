@@ -1,5 +1,5 @@
 // Archive Page extension for use with archive.today and aliases
-// © JOHN NAVAS 2025, ALL RIGHTS RESERVED
+// © JOHN NAVAS 2026, ALL RIGHTS RESERVED
 // 1. Toolbar icon to send current tab to archive in new tab
 // 2. Page context menu to search Archive for the page URL
 // 3. Link context menu items to Archive or Search with archive
@@ -18,25 +18,49 @@ const getSet = (k) => new Promise(r => chrome.storage.sync.get(k, r));
 async function updateUI() {
     const s = await getSet({ toolbarAction: "menu" });
     chrome.action.setPopup({ popup: s.toolbarAction === "menu" ? "dropdown.html" : "" });
-    await chrome.contextMenus.removeAll();
-    if (s.toolbarAction === "archive") {
-        chrome.contextMenus.create({ id: "searchPage", title: "Search archive for page", contexts: ["page"] });
-    }
-    chrome.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"] });
-    chrome.contextMenus.create({ id: "searchLink", title: "Search link", contexts: ["link"] });
+
+    // Use callback to ensure removal is complete before creation to avoid duplicate IDs
+    chrome.contextMenus.removeAll(() => {
+        if (s.toolbarAction === "archive") {
+            chrome.contextMenus.create({
+                id: "searchPage",
+                title: "Search archive for page",
+                contexts: ["page"]
+            }, () => { if (chrome.runtime.lastError) { } });
+        }
+        chrome.contextMenus.create({
+            id: "archiveLink",
+            title: "Archive link",
+            contexts: ["link"]
+        }, () => { if (chrome.runtime.lastError) { } });
+        chrome.contextMenus.create({
+            id: "searchLink",
+            title: "Search link",
+            contexts: ["link"]
+        }, () => { if (chrome.runtime.lastError) { } });
+    });
 }
 
 async function doAction(uri, act, type) {
-    // If uri is undefined, permissions haven't been granted yet
-    if (!uri) {
+    // 1. "DO NOTHING" LOGIC: Exit immediately for empty strings or system pages.
+    // Note: Chrome often returns "" for a new tab page when permissions are not yet granted.
+    if (uri === "" || (uri && (uri.startsWith('chrome://') || uri.startsWith('about:')))) {
+        return;
+    }
+
+    // 2. PERMISSION BRIDGE: If uri is strictly undefined, it's a restricted website.
+    if (typeof uri === 'undefined') {
         chrome.tabs.create({ url: chrome.runtime.getURL("request.html") });
         return;
     }
+
     try {
         const s = await getSet({ tabCtl: "adjacent", archiveTld: "today" });
         const u = getUrls(s.archiveTld)[type];
         const url = u + encodeURIComponent(uri);
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+
+        if (!tabs[0]) return;
 
         if (type === 'archive' && s.tabCtl === 'active') {
             return chrome.tabs.update(tabs[0].id, { url });
@@ -57,15 +81,6 @@ chrome.action.onClicked.addListener(async (tab) => {
 chrome.runtime.onInstalled.addListener((d) => {
     setTimeout(async () => {
         chrome.tabs.create({ url: chrome.runtime.getURL("welcome.html") });
-        if (d.reason === "update") {
-            const e = await new Promise(r => chrome.permissions.contains({ permissions: ['notifications'] }, r));
-            if (e) chrome.notifications.create({
-                type: 'basic',
-                iconUrl: 'images/icon-48.png',
-                title: 'Archive Page',
-                message: 'Updated.'
-            });
-        }
     }, 200);
     updateUI();
 });
@@ -89,3 +104,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     else if (info.menuItemId === "searchLink") doAction(info.linkUrl, s.cbSearchNew, "search");
     else if (info.menuItemId === "searchPage") doAction(tab.url, s.cbPageNew, "search");
 });
+
+// Initialize on startup
+updateUI();

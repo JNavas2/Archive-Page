@@ -1,7 +1,7 @@
 ﻿<!--
     options.html - Archive Page Extension
-    Options page for desktop and Android
-    © 2025 John Navas, All Rights Reserved
+    Options page
+    © 2026 John Navas, All Rights Reserved
 -->
 
 <!DOCTYPE html>
@@ -18,7 +18,6 @@
             --bg-activate: #e3f2fd;
             --bg-domain: #E6E6FA;
             --bg-close: #e0e0e0;
-            /* Updated from save to close */
             --bg-remove: #FFD6D6;
             --border-fieldset: #e6d96a;
             --border-button: #000;
@@ -26,15 +25,24 @@
 
         body {
             font-family: inherit;
-            max-width: 400px;
-            padding: 8px;
             margin: 0;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
         }
 
         h1 {
             margin: 0 0 4px 0;
             font-size: 1.15em;
             font-weight: bold;
+
         }
 
         fieldset {
@@ -71,7 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .archive-domain-columns {
@@ -84,19 +92,21 @@
             flex-direction: column;
         }
 
+        /* Updated button style */
         button {
             border: 2px solid var(--border-button);
             color: #000;
             font-size: medium;
             cursor: pointer;
             padding: 4px 8px;
+            border-radius: 4px;
+            /* Added rounded corners */
         }
 
         #bClose {
             background-color: var(--bg-close);
         }
 
-        /* Changed from bSave */
         #bRemove {
             background-color: var(--bg-remove);
         }
@@ -112,12 +122,6 @@
             display: inline-block;
             text-align: center;
             margin: 0 4px;
-        }
-
-        .disabled-section {
-            opacity: 0.55;
-            filter: grayscale(1);
-            pointer-events: none;
         }
 
         @media (max-width: 600px) {
@@ -138,74 +142,72 @@
 </head>
 
 <body>
-    <h1>Options for Archive Page</h1>
+    <div class="container">
+        <h1>Options for Archive Page</h1>
 
-    <fieldset id="sectionToolbarAction">
-        <legend>Toolbar icon action (desktop only)</legend>
-        <input type="radio" id="actionMenu" name="toolbarAction" value="menu">
-        <label for="actionMenu">Dropdown menu (Search, Archive, Options)</label><br>
-        <input type="radio" id="actionSearch" name="toolbarAction" value="search">
-        <label for="actionSearch">Search (only)</label><br>
-        <input type="radio" id="actionArchive" name="toolbarAction" value="archive">
-        <label for="actionArchive">Archive (only)</label>
-    </fieldset>
+        <fieldset id="sectionToolbarAction">
+            <legend>Toolbar icon action (desktop only)</legend>
+            <input type="radio" id="actionMenu" name="toolbarAction" value="menu">
+            <label for="actionMenu">Dropdown menu (Search, Archive, Options)</label><br>
+            <input type="radio" id="actionSearch" name="toolbarAction" value="search">
+            <label for="actionSearch">Search (only)</label><br>
+            <input type="radio" id="actionArchive" name="toolbarAction" value="archive">
+            <label for="actionArchive">Archive (only)</label>
+        </fieldset>
 
-    <fieldset id="sectionOpenIn">
-        <legend>Open Archive in (desktop only)</legend>
-        <input type="radio" id="tabAdj" name="tabCtl" value="adjacent">
-        <label for="tabAdj">new tab adjacent</label><br>
-        <input type="radio" id="tabEnd" name="tabCtl" value="end">
-        <label for="tabEnd">new tab at end</label><br>
-        <input type="radio" id="tabAct" name="tabCtl" value="active">
-        <label for="tabAct">active for archive, adjacent for search</label>
-    </fieldset>
+        <fieldset id="sectionOpenIn">
+            <legend>Open Archive in (desktop only)</legend>
+            <input type="radio" id="tabAdj" name="tabCtl" value="adjacent">
+            <label for="tabAdj">new tab adjacent</label><br>
+            <input type="radio" id="tabEnd" name="tabCtl" value="end">
+            <label for="tabEnd">new tab at end</label><br>
+            <input type="radio" id="tabAct" name="tabCtl" value="active">
+            <label for="tabAct">active for archive, adjacent for search</label>
+        </fieldset>
 
-    <fieldset id="sectionActivate">
-        <legend>Activate new Archive tab from (desktop only)</legend>
-        <div style="margin-left: 1.5em;">
-            <label for="cbButtonNew"><input id="cbButtonNew" type="checkbox"> Toolbar Button</label><br>
-            <label for="cbPageNew"><input id="cbPageNew" type="checkbox"> Page Search</label><br>
-            <label for="cbArchiveNew"><input id="cbArchiveNew" type="checkbox"> Archive link</label><br>
-            <label for="cbSearchNew"><input id="cbSearchNew" type="checkbox"> Search link</label>
-        </div>
-    </fieldset>
-
-    <fieldset class="section-domain">
-        <legend>Archive domain</legend>
-        <label>
-            <input type="radio" name="archiveTld" value="today" id="tldToday">
-            <strong>archive.today (recommended)</strong>
-        </label>
-        <div class="archive-domain-columns">
-            <div class="archive-domain-col">
-                <label><input type="radio" name="archiveTld" value="is" id="tldIs"> archive.is</label>
-                <label><input type="radio" name="archiveTld" value="ph" id="tldPh"> archive.ph</label>
-                <label><input type="radio" name="archiveTld" value="md" id="tldMd"> archive.md</label>
+        <fieldset id="sectionActivate">
+            <legend>Activate new Archive tab from (desktop only)</legend>
+            <div style="margin-left: 1.5em;">
+                <label for="cbButtonNew"><input id="cbButtonNew" type="checkbox"> Toolbar Button</label><br>
+                <label for="cbPageNew"><input id="cbPageNew" type="checkbox"> Page Search</label><br>
+                <label for="cbArchiveNew"><input id="cbArchiveNew" type="checkbox"> Archive link</label><br>
+                <label for="cbSearchNew"><input id="cbSearchNew" type="checkbox"> Search link</label>
             </div>
-            <div class="archive-domain-col">
-                <label><input type="radio" name="archiveTld" value="vn" id="tldVn"> archive.vn</label>
-                <label><input type="radio" name="archiveTld" value="li" id="tldLi"> archive.li</label>
-                <label><input type="radio" name="archiveTld" value="fo" id="tldFo"> archive.fo</label>
+        </fieldset>
+
+        <fieldset class="section-domain">
+            <legend>Archive domain</legend>
+            <label>
+                <input type="radio" name="archiveTld" value="today" id="tldToday">
+                <strong>archive.today (recommended)</strong>
+            </label>
+            <div class="archive-domain-columns">
+                <div class="archive-domain-col">
+                    <label><input type="radio" name="archiveTld" value="is" id="tldIs"> archive.is</label>
+                    <label><input type="radio" name="archiveTld" value="ph" id="tldPh"> archive.ph</label>
+                    <label><input type="radio" name="archiveTld" value="md" id="tldMd"> archive.md</label>
+                </div>
+                <div class="archive-domain-col">
+                    <label><input type="radio" name="archiveTld" value="vn" id="tldVn"> archive.vn</label>
+                    <label><input type="radio" name="archiveTld" value="li" id="tldLi"> archive.li</label>
+                    <label><input type="radio" name="archiveTld" value="fo" id="tldFo"> archive.fo</label>
+                </div>
             </div>
+        </fieldset>
+
+        <div class="responsive-flex">
+            <button id="bClose" type="button">Close</button> <span id="status">&nbsp;</span>
+            <button id="bRemove" type="button">Remove</button>
+            <span style="display: inline-block; width: 8px;"></span>
+            <button id="bHelp" type="button">Help</button>
         </div>
-    </fieldset>
 
-    <p style="margin: 4px 0;">
-        <label for="cbNotify"><strong><input id="cbNotify" type="checkbox"> Notify on update</strong></label>
-    </p>
-
-    <div class="responsive-flex">
-        <button id="bClose" type="button">Close</button> <span id="status">&nbsp;</span>
-        <button id="bRemove" type="button">Remove</button>
-        <span style="display: inline-block; width: 8px;"></span>
-        <button id="bHelp" type="button">Help</button>
+        <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>Privacy</strong>: By using this
+            extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive
+                Today</a> <i>when and only when initiated by you</i>. If you do not consent, Remove this extension,
+            which does <i>not</i> otherwise collect or share any user data.
+        </p>
     </div>
-
-    <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>Privacy</strong>: By using this
-        extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive
-            Today</a> <i>when and only when initiated by you</i>. If you do not consent, Remove this extension,
-        which does <i>not</i> otherwise collect or share any user data.
-    </p>
 
     <script src="options.js"></script>
 </body>

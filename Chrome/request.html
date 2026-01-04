@@ -1,61 +1,89 @@
+<!--
+    request.html - Archive Page Extension
+    Permission bridge for optional_host_permissions
+    © 2026 John Navas, All Rights Reserved
+-->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Permission Required - Archive Page</title>
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
-            background: #f9f9f9; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start; 
-            height: 100vh; 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
             margin: 0;
-            padding-top: 50px; 
-            font-size: 16px; /* Explicit base size */
+            padding-top: 50px;
+            font-size: 16px;
+            /* Explicit base size */
         }
-        .box { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 12px; 
-            border: 2px solid #e6d96a; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-            text-align: center; 
-            max-width: 380px; 
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #e6d96a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 380px;
         }
-        h2 { margin-top: 0; color: #333; font-size: 22px; } /* Forced heading size */
-        p { 
-            color: #555; 
-            line-height: 1.5; 
-            margin-bottom: 25px; 
-            font-size: 18px !important; /* Forced larger body text */
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 22px;
         }
-        button { 
-            background: #4caf50; 
-            color: white; 
-            border: 2px solid #000; 
-            border-radius: 6px; 
-            padding: 12px 24px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 18px; /* Forced button text size */
+
+        /* Forced heading size */
+        p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-size: 18px !important;
+            /* Forced larger body text */
         }
-        button:hover { opacity: 0.9; }
-        #success-state { display: none; }
-        .success-text { 
-            color: #2e7d32; 
-            font-weight: bold; 
-            font-size: 20px; /* Forced success text size */
+
+        button {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #000;
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            /* Forced button text size */
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #success-state {
+            display: none;
+        }
+
+        .success-text {
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 20px;
+            /* Forced success text size */
         }
     </style>
 </head>
+
 <body>
     <div class="box">
         <div id="request-state">
             <h2>Action Required</h2>
             <p>To Archive or Search pages, Archive Page needs permission to read the URL of your active tab.<br>
-            (This only needs to be done once.)</p>
+                (This only needs to be done once.)</p>
             <button id="bGrant">Grant Access</button>
         </div>
 
@@ -68,4 +96,5 @@
     </div>
     <script src="request.js"></script>
 </body>
+
 </html>

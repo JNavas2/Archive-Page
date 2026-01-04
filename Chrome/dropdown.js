@@ -1,7 +1,7 @@
 /*
     dropdown.js - Archive Page Extension Dropdown Logic
     Handles communication with the service worker for Desktop actions.
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 document.addEventListener('DOMContentLoaded', () => {
