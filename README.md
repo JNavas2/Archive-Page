@@ -28,7 +28,8 @@
 
 - **Secure by Design:** All communication uses HTTPS for your security and privacy.
 
-- **Cross-Platform Availability:** - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
+- **Cross-Platform Availability:**
+  - [Google Chrome™](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US)  
   - [Microsoft Edge™](https://microsoftedge.microsoft.com/addons/detail/archive-page/llldbgankiiaiobhnjpbllpijlidinaf)  
   - [Mozilla Firefox™](https://addons.mozilla.org/en-US/firefox/addon/archive-page/) (both desktop and Android)
   - [Other Chromium-based browsers](https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia?hl=en-US), e.g., Opera, Vivaldi, Brave, Yandex Browser, Ungoogled Chromium. 
