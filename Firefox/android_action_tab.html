@@ -1,7 +1,7 @@
 ﻿<!--
-    popup.html - Archive Page Extension
-    Popup menu for action on Android (only)
-    © 2025 John Navas, All Rights Reserved
+    android_action_tab.html - Archive Page Extension
+    Android action tab for Archive, Search, and Options
+    © 2026 John Navas, All Rights Reserved
 -->
 
 <!DOCTYPE html>
@@ -10,7 +10,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Archive Page Menu</title>
+  <title>Archive Page Actions</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,12 +21,11 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      /* Align near top */
       height: 100vh;
       box-sizing: border-box;
     }
 
-    .popup-container {
+    .action-container {
       border: 2px solid #444;
       border-radius: 12px;
       padding: 1em 1.3em;
@@ -52,6 +52,10 @@
       white-space: nowrap;
       text-align: center;
       user-select: none;
+
+      /* NEW: make buttons 20% narrower */
+      width: 80%;
+      align-self: center;
     }
 
     button:hover,
@@ -59,16 +63,33 @@
       background-color: #ddd;
       outline: none;
     }
+
+    /* Options button visually distinct */
+    #optionsBtn {
+      margin-top: 0.5em;
+      background-color: #e8f0ff;
+      border-color: #3367d6;
+    }
+
+    #optionsBtn:hover,
+    #optionsBtn:focus {
+      background-color: #d6e4ff;
+    }
   </style>
 </head>
 
 <body>
-  <div class="popup-container">
-    <button id="archiveBtn">Archive (share URL)</button>
+  <div class="action-container">
     <button id="searchBtn">Search (share URL)</button>
+    <button id="archiveBtn">Archive (share URL)</button>
+
+    <!-- Small visual separation -->
+    <div style="height: 0.5em;"></div>
+
+    <button id="optionsBtn">Options</button>
   </div>
 
-  <script src="popup.js"></script>
+  <script src="android_action_tab.js"></script>
 </body>
 
 </html>

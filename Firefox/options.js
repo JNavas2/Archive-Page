@@ -1,21 +1,26 @@
 /*
     options.js - Archive Page Extension Options Logic
     Handles auto-saving, default values, and tab management.
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
 
 const MAP = {
-  cb: [{ k: 'cbButtonNew', i: 'cbButtonNew' }, { k: 'cbPageNew', i: 'cbPageNew' },
-  { k: 'cbArchiveNew', i: 'cbArchiveNew' }, { k: 'cbSearchNew', i: 'cbSearchNew' },
-  { k: 'cbNotify', i: 'cbNotify' }],
-  rd: [{ k: 'archiveTld', n: 'archiveTld' }, { k: 'toolbarAction', n: 'toolbarAction' }],
+  cb: [
+    { k: 'cbButtonNew', i: 'cbButtonNew' },
+    { k: 'cbPageNew', i: 'cbPageNew' },
+    { k: 'cbArchiveNew', i: 'cbArchiveNew' },
+    { k: 'cbSearchNew', i: 'cbSearchNew' }
+  ],
+  rd: [
+    { k: 'archiveTld', n: 'archiveTld' },
+    { k: 'toolbarAction', n: 'toolbarAction' }
+  ],
   tab: { 'tabAdj': 'adjacent', 'tabEnd': 'end', 'tabAct': 'active' }
 };
 
 async function restoreOptions() {
-  // FIXED: Passing defaults directly to get() ensures first-run values
   const items = await browserAPI.storage.local.get({
     archiveTld: 'today',
     toolbarAction: 'menu',
@@ -23,8 +28,7 @@ async function restoreOptions() {
     cbButtonNew: true,
     cbPageNew: true,
     cbArchiveNew: true,
-    cbSearchNew: true,
-    cbNotify: false
+    cbSearchNew: true
   });
 
   const info = await browserAPI.runtime.getPlatformInfo();
@@ -46,7 +50,7 @@ async function restoreOptions() {
     if (e) e.checked = items[c.k];
   });
 
-  // Restore Radio Buttons (Default logic now handled by storage.get)
+  // Restore Radio Buttons
   MAP.rd.forEach(r => {
     if (isAndroid && r.k === 'toolbarAction') return;
     const e = document.querySelector(`input[name="${r.n}"][value="${items[r.k]}"]`);
@@ -71,19 +75,13 @@ async function saveOptions() {
   setTimeout(() => st.textContent = '', 750);
 }
 
-async function removeOptions() {
-  browserAPI.management.uninstallSelf({ showConfirmDialog: true });
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   await restoreOptions();
 
-  // Attach auto-save to all inputs for immediate saving
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', saveOptions);
   });
 
-  // Close tab logic with Android fallback
   document.getElementById('bClose').addEventListener('click', () => {
     browserAPI.tabs.getCurrent(tab => {
       if (tab) browserAPI.tabs.remove(tab.id);
@@ -91,8 +89,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  document.getElementById('bRemove').addEventListener('click', removeOptions);
+  document.getElementById('bRemove').addEventListener('click', () => {
+    browserAPI.management.uninstallSelf({ showConfirmDialog: true });
+  });
+
   document.getElementById('bHelp').addEventListener('click', () =>
-    browserAPI.tabs.create({ url: "https://github.com/JNavas2/Archive-Page/blob/main/README.md" })
+    browserAPI.tabs.create({ url: "https://github.com/JNavas2/Archive-Page" })
   );
 });

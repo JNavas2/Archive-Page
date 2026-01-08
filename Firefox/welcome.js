@@ -1,7 +1,7 @@
 /*
     welcome.js - Archive Page Extension Onboarding
     Logic for the Welcome page buttons
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 const browserAPI = (typeof browser !== "undefined") ? browser : chrome;

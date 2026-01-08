@@ -1,19 +1,19 @@
 /*
     dropdown.js - Archive Page Extension Dropdown Logic
     Handles Desktop-specific menu actions.
-    © 2025 John Navas, All Rights Reserved
+    © 2026 John Navas, All Rights Reserved
 */
 
 document.addEventListener('DOMContentLoaded', () => {
     // Search Action
     document.getElementById('mSearch').addEventListener('click', () => {
-        browser.runtime.sendMessage({ action: "execSearch" });
+        browser.runtime.sendMessage({ action: "search" });
         window.close();
     });
 
     // Archive Action
     document.getElementById('mArchive').addEventListener('click', () => {
-        browser.runtime.sendMessage({ action: "execArchive" });
+        browser.runtime.sendMessage({ action: "archive" });
         window.close();
     });
 

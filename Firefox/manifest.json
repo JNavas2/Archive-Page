@@ -2,16 +2,13 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.4.4",
+    "version": "1.4.7",
     "description": "Archive webpage with Archive Today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
     "permissions": [
         "activeTab",
         "contextMenus",
         "storage"
-    ],
-    "optional_permissions": [
-        "notifications"
     ],
     "background": {
         "scripts": [
@@ -60,7 +57,12 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "{5b22cb75-8e43-4f2a-bb9b-1da0655ae564}",
-            "strict_min_version": "113.0"
+            "strict_min_version": "140.0",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ]
+            }
         }
     }
 }
