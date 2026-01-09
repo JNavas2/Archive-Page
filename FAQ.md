@@ -1,8 +1,8 @@
 # FAQ (Frequently Asked Questions)
 
 ## What happened to the context menu (right click) “Search” action?
-The toolbar button has always been the primary way to use the extension, and it now supports both a dropdown menu (the default) and an optional direct Search action. The old context‑menu “Search” entry was originally a workaround for users who wanted quick access to both Archive and Search, but the improved toolbar button now covers that use case more cleanly. To reduce context‑menu clutter — something most users prefer — the context‑menu Search item has been removed by default. The direct Archive item remains, preserving the original behavior for users who rely on it.   
-**To restore the old behavior** — direct Archive on the toolbar and “Search” in the context menu — simply change the toolbar button setting to “Archive” in Options. That restores the classic split: toolbar = Archive, context menu = Search.
+The toolbar button has always been the primary way to use the extension, and it now supports a dropdown menu (the default) and a direct Search action. The old context‑menu “Search” entry was originally a workaround for users who wanted quick access to Search, but the improved toolbar button now covers that use case more cleanly. To reduce context‑menu clutter (something most users prefer) the context‑menu Search item has been removed by default, but the direct Archive item remains, preserving the original behavior for users who prefer it.   
+**To restore the old behavior** (direct Archive on the toolbar and “Search” in the context menu) simply change the toolbar button setting to “Archive” in Options. That restores the classic split: toolbar Archive, context menu Search.
 
 ## Toolbar icon does nothing
 **Why does nothing happen when I click the toolbar icon?**
