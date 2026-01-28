@@ -6,6 +6,7 @@
 
 ## What's New
 
+- **Direct Action Shortcuts (NEW):** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
 - **Customizable Toolbar Icon (NEW):** Choose between a Dropdown menu, Direct Search, or Direct Archive for the toolbar button (Desktop).
 - **Firefox** is again directly supported, both desktop and Android.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
@@ -15,6 +16,10 @@
 
 ## Features
 
+- **Direct Action Shortcuts (NEW):** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
+  - **New Option to enable Direct Action Shortcuts:** Needed in Chrome and Edge for optional tabs permission (but not for Firefox).
+  - **Optionl tabs permission:** Needed in Chrome and Edge for direct action shortcuts (but not for Firefox).
+
 - **Customizable Toolbar Button:** Choose your preferred action for the toolbar icon on Desktop:
   - **Dropdown Menu:** Quick access to Search, Archive, and Options.
   - **Direct Search:** Instantly search the current page URL.
@@ -23,8 +28,6 @@
 - **Context Menu Integration:** - Right-click any link to instantly archive or search it on Archive Today.
 
 - **Customizable Behavior:** Options to control how and where new archive tabs open (adjacent, at the end, or as the active tab). New tab activation can be customized per function.
-
-- **Keyboard Shortcuts:** Create a shortcut to archive the current page even faster.
 
 - **Secure by Design:** All communication uses HTTPS for your security and privacy.
 
@@ -44,7 +47,7 @@
 2. **Configure your Toolbar Action** in Options (Dropdown, Search, or Archive).  
 3. **Click the button** to execute your chosen action. The result opens in a new tab.  
 4. **Use right-click context menus** to archive or search links directly.  
-5. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to archive the current page even faster.  
+5. **Use a keyboard shortcut** (customizable in your browser’s extension settings) to Archive or Search current page even faster.  
 6. **Bookmark or share** the archive URL as needed.
 
 ---
