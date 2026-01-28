@@ -1,10 +1,4 @@
-﻿<!--
-    options.html - Archive Page Extension
-    Options page
-    © 2026 John Navas, All Rights Reserved
--->
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,7 +36,6 @@
             margin: 0 0 4px 0;
             font-size: 1.15em;
             font-weight: bold;
-
         }
 
         fieldset {
@@ -75,6 +68,12 @@
             background-color: var(--bg-domain);
         }
 
+        /* Signal failed shortcut highlight */
+        .signal-pulse {
+            border: 3px solid #fbc02d !important;
+            background-color: #fff9c4 !important;
+        }
+
         .responsive-flex {
             display: flex;
             align-items: center;
@@ -92,7 +91,6 @@
             flex-direction: column;
         }
 
-        /* Updated button style */
         button {
             border: 2px solid var(--border-button);
             color: #000;
@@ -100,7 +98,6 @@
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 4px;
-            /* Added rounded corners */
         }
 
         #bClose {
@@ -132,10 +129,6 @@
             fieldset {
                 padding: 0.2em 0.6em !important;
                 margin: 3px 0 !important;
-            }
-
-            .archive-domain-columns {
-                gap: 1.2em;
             }
         }
     </style>
@@ -175,12 +168,20 @@
             </div>
         </fieldset>
 
+        <fieldset id="sectionShortcuts" style="background-color: #fff9c4;">
+            <legend>Direct Shortcuts</legend>
+            <label for="cbShortcuts" style="cursor: pointer; font-size: 0.95em;">
+                <input id="cbShortcuts" type="checkbox"> Enable direct Search/Archive keyboard shortcuts
+            </label>
+            <p style="font-size: 0.8em; margin: 2px 0 0 22px; color: #555;">
+                Requires optional Tab permission (read browsing history) to work.
+            </p>
+        </fieldset>
+
         <fieldset class="section-domain">
             <legend>Archive domain</legend>
-            <label>
-                <input type="radio" name="archiveTld" value="today" id="tldToday">
-                <strong>archive.today (recommended)</strong>
-            </label>
+            <label><input type="radio" name="archiveTld" value="today" id="tldToday"> <strong>archive.today
+                    (recommended)</strong></label>
             <div class="archive-domain-columns">
                 <div class="archive-domain-col">
                     <label><input type="radio" name="archiveTld" value="is" id="tldIs"> archive.is</label>
@@ -201,14 +202,7 @@
             <span style="display: inline-block; width: 8px;"></span>
             <button id="bHelp" type="button">Help</button>
         </div>
-
-        <p style="margin-top: 8px; margin-bottom: 8px; text-align: justify;"><strong>Privacy</strong>: By using this
-            extension you consent to sharing your Archive or Search URL with <a href="https://archive.today/">Archive
-                Today</a> <i>when and only when initiated by you</i>. If you do not consent, Remove this extension,
-            which does <i>not</i> otherwise collect or share any user data.
-        </p>
     </div>
-
     <script src="options.js"></script>
 </body>
 

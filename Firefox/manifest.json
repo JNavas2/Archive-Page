@@ -2,11 +2,11 @@
     "name": "Archive Page",
     "author": "John Navas",
     "manifest_version": 2,
-    "version": "1.4.7",
+    "version": "1.5.0",
     "description": "Archive webpage with Archive Today",
     "homepage_url": "https://github.com/JNavas2/Archive-Page",
     "permissions": [
-        "activeTab",
+        "tabs",
         "contextMenus",
         "storage"
     ],
@@ -41,17 +41,20 @@
         "128": "images/icon-128.png"
     },
     "commands": {
-        "myArchive": {
-            "suggested_key": {
-                "default": "Ctrl+Alt+A"
-            },
-            "description": "Archive Page (share URL)"
+        "_execute_browser_action": {
+            "description": "Activate extension (current toolbar action)"
         },
         "mySearch": {
             "suggested_key": {
                 "default": "Ctrl+Alt+F"
             },
             "description": "Search (Find) Archive Today for current page URL"
+        },
+        "myArchive": {
+            "suggested_key": {
+                "default": "Ctrl+Alt+A"
+            },
+            "description": "Archive Page (share URL)"
         }
     },
     "browser_specific_settings": {

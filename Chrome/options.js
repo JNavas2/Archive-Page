@@ -45,6 +45,17 @@ async function restoreOptions() {
     // Restore Open In radios
     const tabId = Object.keys(MAP.tab).find(key => MAP.tab[key] === items.tabCtl);
     if (tabId) document.getElementById(tabId).checked = true;
+
+    // Sync the shortcut permission checkbox state
+    const hasTabs = await chrome.permissions.contains({ permissions: ['tabs'] });
+    const section = document.getElementById('sectionShortcuts');
+    const cbShortcuts = document.getElementById('cbShortcuts');
+    if (cbShortcuts) cbShortcuts.checked = hasTabs;
+
+    // Signal failed shortcut attempt if redirected via hash
+    if (!hasTabs && window.location.hash === "#shortcuts" && section) {
+        section.classList.add('signal-pulse');
+    }
 }
 
 async function saveOptions() {
@@ -61,7 +72,29 @@ async function saveOptions() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await restoreOptions();
-    document.querySelectorAll('input').forEach(input => input.addEventListener('change', saveOptions));
+
+    // Exclude the permission checkbox from standard saveOptions
+    document.querySelectorAll('input:not(#cbShortcuts)').forEach(input => {
+        input.addEventListener('change', saveOptions);
+    });
+
+    // Special listener for optional permission toggle
+    const cbShortcuts = document.getElementById('cbShortcuts');
+    if (cbShortcuts) {
+        cbShortcuts.addEventListener('change', (e) => {
+            const section = document.getElementById('sectionShortcuts');
+            if (e.target.checked) {
+                chrome.permissions.request({ permissions: ['tabs'] }, (granted) => {
+                    if (granted && section) section.classList.remove('signal-pulse');
+                    else e.target.checked = false; // Reset if user cancels Chrome prompt
+                });
+            } else {
+                chrome.permissions.remove({ permissions: ['tabs'] }, () => {
+                    if (section) section.classList.remove('signal-pulse');
+                });
+            }
+        });
+    }
 
     document.getElementById('bClose').addEventListener('click', () => {
         chrome.tabs.getCurrent(tab => {

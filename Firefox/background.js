@@ -1,5 +1,5 @@
 /*
-// Archive Page extension for Mozilla Firefox for use with archive.today
+// Archive Page extension for Mozilla Firefox for use with Archive Today
 // © 2026 John Navas, All Rights Reserved
 // 1. Toolbar icon to send current tab to Archive in new tab
 // 2. Page context menu to search Archive for the page URL
@@ -59,8 +59,8 @@ async function updateUI() {
   browserAPI.browserAction.setPopup({ popup: s.toolbarAction === "menu" ? "dropdown.html" : "" });
   await browserAPI.contextMenus.removeAll();
   if (s.toolbarAction === "archive") browserAPI.contextMenus.create({ id: "searchPage", title: "Search archive for page", contexts: ["page"] });
-  browserAPI.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"] });
   browserAPI.contextMenus.create({ id: "searchLink", title: "Search link", contexts: ["link"] });
+  browserAPI.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"] });
 }
 
 async function saveActiveTabUrl() {
@@ -126,13 +126,15 @@ browserAPI.runtime.onMessage.addListener((message, sender) => {
 
   if (message.action === "archive") {
     if (IS_ANDROID) {
-      browserAPI.storage.local.get("savedActiveUrl", result => {
-        if (result.savedActiveUrl) doArchivePage(result.savedActiveUrl, true);
+      browserAPI.storage.local.get(["savedActiveUrl", "cbArchiveNew"], result => {
+        const act = (result.cbArchiveNew !== undefined) ? result.cbArchiveNew : true;
+        if (result.savedActiveUrl) doArchivePage(result.savedActiveUrl, act);
       });
     } else {
-      browserAPI.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      browserAPI.tabs.query({ active: true, currentWindow: true }).then(async tabs => {
         if (tabs[0] && tabs[0].url) {
-          doArchivePage(tabs[0].url, true);
+          const s = await getSettings({ cbArchiveNew: true });
+          doArchivePage(tabs[0].url, s.cbArchiveNew);
         }
       });
     }
@@ -140,13 +142,15 @@ browserAPI.runtime.onMessage.addListener((message, sender) => {
 
   else if (message.action === "search") {
     if (IS_ANDROID) {
-      browserAPI.storage.local.get("savedActiveUrl", result => {
-        if (result.savedActiveUrl) doSearchPage(result.savedActiveUrl, true);
+      browserAPI.storage.local.get(["savedActiveUrl", "cbSearchNew"], result => {
+        const act = (result.cbSearchNew !== undefined) ? result.cbSearchNew : true;
+        if (result.savedActiveUrl) doSearchPage(result.savedActiveUrl, act);
       });
     } else {
-      browserAPI.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      browserAPI.tabs.query({ active: true, currentWindow: true }).then(async tabs => {
         if (tabs[0] && tabs[0].url) {
-          doSearchPage(tabs[0].url, true);
+          const s = await getSettings({ cbSearchNew: true });
+          doSearchPage(tabs[0].url, s.cbSearchNew);
         }
       });
     }
@@ -157,8 +161,23 @@ browserAPI.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
-browserAPI.runtime.onInstalled.addListener(() => {
+// FIXED: Only show Welcome page on fresh install OR version ending in ".0"
+// Prevents up-boarding on browser updates or minor patch releases.
+browserAPI.runtime.onInstalled.addListener((details) => {
+  const currentVersion = browserAPI.runtime.getManifest().version;
+
+  if (details.reason === "install") {
+    showWelcome();
+  } else if (details.reason === "update") {
+    // Only show for major releases (e.g., "1.5.0")
+    if (currentVersion.endsWith('.0')) {
+      showWelcome();
+    }
+  }
+});
+
+function showWelcome() {
   setTimeout(() => {
     browserAPI.tabs.create({ url: browserAPI.runtime.getURL("welcome.html") });
   }, 200);
-});
+}

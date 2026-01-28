@@ -1,12 +1,15 @@
 {
   "name": "Archive Page",
-  "version": "1.4.7",
+  "version": "1.5.0",
   "manifest_version": 3,
   "description": "Archive webpage with Archive Today",
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
   "permissions": [
     "contextMenus",
     "storage"
+  ],
+  "optional_permissions": [
+    "tabs"
   ],
   "optional_host_permissions": [
     "<all_urls>"
@@ -41,8 +44,14 @@
     "default_popup": "dropdown.html"
   },
   "commands": {
-    "search-page": {
-      "description": "Search Archive Today for the current page"
+    "_execute_action": {
+      "description": "Activate extension (current toolbar action)"
+    },
+    "mySearch": {
+      "description": "Search Archive Today for current page (OPTIONAL)"
+    },
+    "myArchive": {
+      "description": "Archive current page in Archive Today (OPTIONAL)"
     }
   }
 }

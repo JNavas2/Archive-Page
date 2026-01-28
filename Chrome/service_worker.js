@@ -1,4 +1,4 @@
-// Archive Page extension for use with archive.today and aliases
+// Archive Page extension for use with Archive Today and aliases
 // © JOHN NAVAS 2026, ALL RIGHTS RESERVED
 // 1. Toolbar icon to send current tab to archive in new tab
 // 2. Page context menu to search Archive for the page URL
@@ -19,7 +19,6 @@ async function updateUI() {
     const s = await getSet({ toolbarAction: "menu" });
     chrome.action.setPopup({ popup: s.toolbarAction === "menu" ? "dropdown.html" : "" });
 
-    // Use callback to ensure removal is complete before creation to avoid duplicate IDs
     chrome.contextMenus.removeAll(() => {
         if (s.toolbarAction === "archive") {
             chrome.contextMenus.create({
@@ -29,26 +28,23 @@ async function updateUI() {
             }, () => { if (chrome.runtime.lastError) { } });
         }
         chrome.contextMenus.create({
-            id: "archiveLink",
-            title: "Archive link",
+            id: "searchLink",
+            title: "Search link",
             contexts: ["link"]
         }, () => { if (chrome.runtime.lastError) { } });
         chrome.contextMenus.create({
-            id: "searchLink",
-            title: "Search link",
+            id: "archiveLink",
+            title: "Archive link",
             contexts: ["link"]
         }, () => { if (chrome.runtime.lastError) { } });
     });
 }
 
 async function doAction(uri, act, type) {
-    // 1. "DO NOTHING" LOGIC: Exit immediately for empty strings or system pages.
-    // Note: Chrome often returns "" for a new tab page when permissions are not yet granted.
     if (uri === "" || (uri && (uri.startsWith('chrome://') || uri.startsWith('about:')))) {
         return;
     }
 
-    // 2. PERMISSION BRIDGE: If uri is strictly undefined, it's a restricted website.
     if (typeof uri === 'undefined') {
         chrome.tabs.create({ url: chrome.runtime.getURL("request.html") });
         return;
@@ -78,19 +74,39 @@ chrome.action.onClicked.addListener(async (tab) => {
     }
 });
 
-chrome.runtime.onInstalled.addListener((d) => {
-    setTimeout(async () => {
-        chrome.tabs.create({ url: chrome.runtime.getURL("welcome.html") });
-    }, 200);
+// FIXED: Only show Welcome page on fresh install OR version ending in ".0"
+// Prevents up-boarding on browser updates or minor patch releases.
+chrome.runtime.onInstalled.addListener((details) => {
+    const currentVersion = chrome.runtime.getManifest().version;
+
+    if (details.reason === "install") {
+        showWelcome();
+    } else if (details.reason === "update") {
+        // Only show for major releases (e.g., "1.5.0")
+        if (currentVersion.endsWith('.0')) {
+            showWelcome();
+        }
+    }
     updateUI();
 });
+
+function showWelcome() {
+    setTimeout(() => {
+        chrome.tabs.create({ url: chrome.runtime.getURL("welcome.html") });
+    }, 200);
+}
 
 chrome.runtime.onMessage.addListener((m) => {
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
         if (!tabs[0]) return;
-        const s = await getSet({ cbButtonNew: true });
-        if (m.action === "execSearch") doAction(tabs[0].url, s.cbButtonNew, "search");
-        if (m.action === "execArchive") doAction(tabs[0].url, s.cbButtonNew, "archive");
+        if (m.action === "execSearch") {
+            const s = await getSet({ cbSearchNew: true });
+            doAction(tabs[0].url, s.cbSearchNew, "search");
+        }
+        if (m.action === "execArchive") {
+            const s = await getSet({ cbArchiveNew: true });
+            doAction(tabs[0].url, s.cbArchiveNew, "archive");
+        }
     });
 });
 
@@ -104,6 +120,30 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     else if (info.menuItemId === "searchLink") doAction(info.linkUrl, s.cbSearchNew, "search");
     else if (info.menuItemId === "searchPage") doAction(tab.url, s.cbPageNew, "search");
 });
+
+// Handle keyboard shortcuts
+if (chrome.commands) {
+    chrome.commands.onCommand.addListener(async (command) => {
+        const hasTabs = await chrome.permissions.contains({ permissions: ['tabs'] });
+
+        if (!hasTabs) {
+            chrome.tabs.create({ url: chrome.runtime.getURL("options.html#shortcuts") });
+            return;
+        }
+
+        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        if (!tabs[0] || !tabs[0].url) return;
+
+        if (command === "mySearch") {
+            const s = await getSet({ cbSearchNew: true });
+            doAction(tabs[0].url, s.cbSearchNew, "search");
+        }
+        else if (command === "myArchive") {
+            const s = await getSet({ cbArchiveNew: true });
+            doAction(tabs[0].url, s.cbArchiveNew, "archive");
+        }
+    });
+}
 
 // Initialize on startup
 updateUI();
