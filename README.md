@@ -16,7 +16,7 @@
 
 ## Features
 
-- **Direct Action Shortcuts (NEW):** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
+- **Direct Action Shortcuts:** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
   - **New Option to enable Direct Action Shortcuts:** Needed in Chrome and Edge for optional tabs permission (but not for Firefox).
   - **Optionl tabs permission:** Needed in Chrome and Edge for direct action shortcuts (but not for Firefox).
 
