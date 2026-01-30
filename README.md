@@ -84,7 +84,7 @@
 
 ## Support & Feedback
 
-- For bugs or feature requests, please open an **[Issue](https://github.com/JNavas2/Archive-Page/issues)**.  
+- For bugs or feature requests, please open an **[Issue](https://github.com/JNavas2/Archive-Page/issues)** or **[Discussion](https://github.com/JNavas2/Archive-Page/discussions)**.  
 - Watch a **[video tutorial](https://www.youtube.com/watch?v=YiKkt3IonZU)** for a quick overview.
 
 ---
