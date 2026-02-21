@@ -16,6 +16,10 @@
 2. If you experience DNS errors, try a different DNS service (e.g., [Quad9](https://quad9.net)) or VPN.
 
 **What's New**:
+* 1.6.0: Fix Activate Options
+* 1.5.0:
+◦ Direct Actions Shortcuts
+◦ Fix some bugs.
 * 1.4.8: Show Welcome screen only for significant extension releases.
 * 1.4.7:   
 ◦ Fix broken Android behavior.   

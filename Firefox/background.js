@@ -97,11 +97,13 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
       }
     });
 
+    // FIXED: Toolbar Button activation now uses cbButtonNew
     browserAPI.browserAction.onClicked.addListener(async t => {
-      const s = await getSettings({ toolbarAction: "menu", activateButtonNew: true });
+      const s = await getSettings({ toolbarAction: "menu", cbButtonNew: true });
       if (s.toolbarAction !== "menu") {
-        s.toolbarAction === "archive" ? doArchivePage(t.url, s.activateButtonNew)
-          : doSearchPage(t.url, s.activateButtonNew);
+        s.toolbarAction === "archive"
+          ? doArchivePage(t.url, s.cbButtonNew)
+          : doSearchPage(t.url, s.cbButtonNew);
       }
     });
 
@@ -112,11 +114,17 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
       });
     }
 
+    // FIXED: Correct activation keys for context menus
     browserAPI.contextMenus.onClicked.addListener(async (i, t) => {
-      const s = await getSettings({ activateArchiveNew: true, activateSearchNew: true, activatePageNew: true });
-      if (i.menuItemId === "archiveLink") doArchivePage(i.linkUrl, s.activateArchiveNew);
-      else if (i.menuItemId === "searchLink") doSearchPage(i.linkUrl, s.activateSearchNew);
-      else if (i.menuItemId === "searchPage") doSearchPage(t.url, s.activatePageNew);
+      const s = await getSettings({ cbArchiveNew: true, cbSearchNew: true, cbPageNew: true });
+
+      if (i.menuItemId === "archiveLink") {
+        doArchivePage(i.linkUrl, s.cbArchiveNew);
+      } else if (i.menuItemId === "searchLink") {
+        doSearchPage(i.linkUrl, s.cbSearchNew);
+      } else if (i.menuItemId === "searchPage") {
+        doSearchPage(t.url, s.cbPageNew);
+      }
     });
   }
 });
@@ -162,14 +170,12 @@ browserAPI.runtime.onMessage.addListener((message, sender) => {
 });
 
 // FIXED: Only show Welcome page on fresh install OR version ending in ".0"
-// Prevents up-boarding on browser updates or minor patch releases.
 browserAPI.runtime.onInstalled.addListener((details) => {
   const currentVersion = browserAPI.runtime.getManifest().version;
 
   if (details.reason === "install") {
     showWelcome();
   } else if (details.reason === "update") {
-    // Only show for major releases (e.g., "1.5.0")
     if (currentVersion.endsWith('.0')) {
       showWelcome();
     }
