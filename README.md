@@ -10,7 +10,7 @@
 - **Customizable Toolbar Icon (NEW):** Choose between a Dropdown menu, Direct Search, or Direct Archive for the toolbar button (Desktop).
 - **Firefox** is again directly supported, both desktop and Android.
 - **Aliases** of Archive Today can be selected in Options if needed to work-around connection issues.
-- **Permissions** in Chrome have been changed to work-aroound the update "silent kill" issue. (See [FAQ](https://github.com/JNavas2/Archive-Page/blob/main/FAQ.md)).
+- **Permissions** in Chrome have been changed to work-aroound the update "silent kill" issue. (See [FAQ](https://github.com/JNavas2/Archive-Page/blob/main/FAQ.md#chrome-action-required--permissions)).
 
 ---
 
