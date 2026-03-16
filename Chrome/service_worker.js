@@ -145,5 +145,5 @@ if (chrome.commands) {
     });
 }
 
-// Initialize on startup
-updateUI();
+// FIXED: Full browser restart coverage
+chrome.runtime.onStartup.addListener(updateUI);
