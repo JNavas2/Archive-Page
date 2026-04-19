@@ -44,12 +44,6 @@ async function doAction(uri, act, type) {
     if (uri === "" || (uri && (uri.startsWith('chrome://') || uri.startsWith('about:')))) {
         return;
     }
-
-    if (typeof uri === 'undefined') {
-        chrome.tabs.create({ url: chrome.runtime.getURL("request.html") });
-        return;
-    }
-
     try {
         const s = await getSet({ tabCtl: "adjacent", archiveTld: "today" });
         const u = getUrls(s.archiveTld)[type];

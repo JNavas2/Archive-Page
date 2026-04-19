@@ -1,18 +1,16 @@
 {
   "name": "Archive Page",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "manifest_version": 3,
   "description": "Archive webpage with Archive Today",
   "homepage_url": "https://github.com/JNavas2/Archive-Page",
   "permissions": [
+    "activeTab",
     "contextMenus",
     "storage"
   ],
   "optional_permissions": [
     "tabs"
-  ],
-  "optional_host_permissions": [
-    "<all_urls>"
   ],
   "background": {
     "service_worker": "service_worker.js"
