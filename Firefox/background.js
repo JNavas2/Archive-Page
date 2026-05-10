@@ -10,10 +10,10 @@
 // For Firefox, options saved in local, not sync!
 */
 
-const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
+const browserAPI = browser;
 let IS_ANDROID = false;
 
-function getArchiveUrls(tld = 'today') {
+function getArchiveUrls(tld = "today") {
   const base = `https://archive.${tld}`;
   return {
     archive: `${base}/?run=1&url=`,
@@ -27,65 +27,136 @@ async function getSettings(defaults) {
   });
 }
 
-async function doArchivePage(uri, activate) {
+async function doArchivePage(uri, activate, indexHint = null) {
   try {
     const settings = await getSettings({ tabCtl: "adjacent", archiveTld: "today" });
     const urls = getArchiveUrls(settings.archiveTld);
+
+    if (indexHint !== null) {
+      await browserAPI.tabs.create({
+        url: urls.archive + encodeURIComponent(uri),
+        index: indexHint + 1,
+        active: activate
+      });
+      return;
+    }
+
     const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
 
     if (settings.tabCtl === "end") {
-      await browserAPI.tabs.create({ url: urls.archive + encodeURIComponent(uri), index: 999, active: activate });
+      await browserAPI.tabs.create({
+        url: urls.archive + encodeURIComponent(uri),
+        index: 999,
+        active: activate
+      });
     } else if (settings.tabCtl === "active") {
-      await browserAPI.tabs.update(tabs[0].id, { url: urls.archive + encodeURIComponent(uri) });
+      await browserAPI.tabs.update(tabs[0].id, {
+        url: urls.archive + encodeURIComponent(uri)
+      });
     } else {
-      await browserAPI.tabs.create({ url: urls.archive + encodeURIComponent(uri), index: tabs[0].index + 1, active: activate });
+      await browserAPI.tabs.create({
+        url: urls.archive + encodeURIComponent(uri),
+        index: tabs[0].index + 1,
+        active: activate
+      });
     }
-  } catch (e) { console.error("Archive failed:", e); }
+  } catch (e) {
+    console.error("Archive failed:", e);
+  }
 }
 
-async function doSearchPage(uri, activate) {
+async function doSearchPage(uri, activate, indexHint = null) {
   try {
     const settings = await getSettings({ tabCtl: "adjacent", archiveTld: "today" });
     const urls = getArchiveUrls(settings.archiveTld);
+
+    if (indexHint !== null) {
+      await browserAPI.tabs.create({
+        url: urls.search + encodeURIComponent(uri),
+        index: indexHint + 1,
+        active: activate
+      });
+      return;
+    }
+
     const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
     const idx = settings.tabCtl === "end" ? 999 : tabs[0].index + 1;
-    await browserAPI.tabs.create({ url: urls.search + encodeURIComponent(uri), index: idx, active: activate });
-  } catch (e) { console.error("Search failed:", e); }
+
+    await browserAPI.tabs.create({
+      url: urls.search + encodeURIComponent(uri),
+      index: idx,
+      active: activate
+    });
+  } catch (e) {
+    console.error("Search failed:", e);
+  }
 }
 
 async function updateUI() {
   if (IS_ANDROID) return;
+
   const s = await getSettings({ toolbarAction: "menu" });
-  browserAPI.browserAction.setPopup({ popup: s.toolbarAction === "menu" ? "dropdown.html" : "" });
+  browserAPI.browserAction.setPopup({
+    popup: s.toolbarAction === "menu" ? "dropdown.html" : ""
+  });
+
   await browserAPI.contextMenus.removeAll();
-  if (s.toolbarAction === "archive") browserAPI.contextMenus.create({ id: "searchPage", title: "Search archive for page", contexts: ["page"] });
-  browserAPI.contextMenus.create({ id: "searchLink", title: "Search link", contexts: ["link"] });
-  browserAPI.contextMenus.create({ id: "archiveLink", title: "Archive link", contexts: ["link"] });
+
+  if (s.toolbarAction === "archive") {
+    browserAPI.contextMenus.create({
+      id: "searchPage",
+      title: "Search archive for page",
+      contexts: ["page"]
+    });
+  }
+
+  browserAPI.contextMenus.create({
+    id: "searchLink",
+    title: "Search link",
+    contexts: ["link"]
+  });
+
+  browserAPI.contextMenus.create({
+    id: "archiveLink",
+    title: "Archive link",
+    contexts: ["link"]
+  });
 }
 
 async function saveActiveTabUrl() {
   const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+
   if (tabs.length > 0) {
     let url = tabs[0].url;
+    let index = tabs[0].index;
 
-    if (url.startsWith('moz-extension://') || url.startsWith('about:')) {
+    if (url.startsWith("moz-extension://") || url.startsWith("about:")) {
       const all = await browserAPI.tabs.query({ currentWindow: true });
-      url = all.find(t => t.url && /^https?:\/\//i.test(t.url))?.url || url;
+      const real = all.find(t => t.url && /^https?:\/\//i.test(t.url));
+      if (real) {
+        url = real.url;
+        index = real.index;
+      }
     }
 
-    await browserAPI.storage.local.set({ savedActiveUrl: url });
+    await browserAPI.storage.local.set({
+      savedActiveUrl: url,
+      savedActiveIndex: index
+    });
   }
 }
 
 browserAPI.runtime.getPlatformInfo().then(async info => {
-  IS_ANDROID = (info.os === "android");
+  IS_ANDROID = info.os === "android";
 
   if (IS_ANDROID) {
     browserAPI.browserAction.setPopup({ popup: "" });
 
     browserAPI.browserAction.onClicked.addListener(async () => {
       await saveActiveTabUrl();
-      browserAPI.tabs.create({ url: browserAPI.runtime.getURL("android_action_tab.html") });
+      browserAPI.tabs.create({
+        url: browserAPI.runtime.getURL("android_action_tab.html")
+      });
     });
 
   } else {
@@ -97,7 +168,6 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
       }
     });
 
-    // FIXED: Toolbar Button activation now uses cbButtonNew
     browserAPI.browserAction.onClicked.addListener(async t => {
       const s = await getSettings({ toolbarAction: "menu", cbButtonNew: true });
       if (s.toolbarAction !== "menu") {
@@ -110,13 +180,20 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
     if (browserAPI.commands) {
       browserAPI.commands.onCommand.addListener(async c => {
         const t = (await browserAPI.tabs.query({ active: true, currentWindow: true }))[0];
-        if (t) c === "myArchive" ? doArchivePage(t.url, true) : doSearchPage(t.url, true);
+        if (t) {
+          c === "myArchive"
+            ? doArchivePage(t.url, true)
+            : doSearchPage(t.url, true);
+        }
       });
     }
 
-    // FIXED: Correct activation keys for context menus
     browserAPI.contextMenus.onClicked.addListener(async (i, t) => {
-      const s = await getSettings({ cbArchiveNew: true, cbSearchNew: true, cbPageNew: true });
+      const s = await getSettings({
+        cbArchiveNew: true,
+        cbSearchNew: true,
+        cbPageNew: true
+      });
 
       if (i.menuItemId === "archiveLink") {
         doArchivePage(i.linkUrl, s.cbArchiveNew);
@@ -129,54 +206,60 @@ browserAPI.runtime.getPlatformInfo().then(async info => {
   }
 });
 
-browserAPI.runtime.onMessage.addListener((message, sender) => {
+browserAPI.runtime.onMessage.addListener(async message => {
   if (!message || !message.action) return;
 
+  if (IS_ANDROID) {
+    const result = await browserAPI.storage.local.get([
+      "savedActiveUrl",
+      "savedActiveIndex",
+      "cbArchiveNew",
+      "cbSearchNew"
+    ]);
+
+    const url = result.savedActiveUrl;
+    const idx = result.savedActiveIndex;
+
+    if (!url || idx === undefined) return;
+
+    if (message.action === "archive") {
+      const act = result.cbArchiveNew ?? true;
+      doArchivePage(url, act, idx);
+    } else if (message.action === "search") {
+      const act = result.cbSearchNew ?? true;
+      doSearchPage(url, act, idx);
+    } else if (message.action === "options") {
+      browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") });
+    }
+
+    return;
+  }
+
+  // Desktop path unchanged
   if (message.action === "archive") {
-    if (IS_ANDROID) {
-      browserAPI.storage.local.get(["savedActiveUrl", "cbArchiveNew"], result => {
-        const act = (result.cbArchiveNew !== undefined) ? result.cbArchiveNew : true;
-        if (result.savedActiveUrl) doArchivePage(result.savedActiveUrl, act);
-      });
-    } else {
-      browserAPI.tabs.query({ active: true, currentWindow: true }).then(async tabs => {
-        if (tabs[0] && tabs[0].url) {
-          const s = await getSettings({ cbArchiveNew: true });
-          doArchivePage(tabs[0].url, s.cbArchiveNew);
-        }
-      });
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+    if (tabs[0]) {
+      const s = await getSettings({ cbArchiveNew: true });
+      doArchivePage(tabs[0].url, s.cbArchiveNew);
     }
-  }
-
-  else if (message.action === "search") {
-    if (IS_ANDROID) {
-      browserAPI.storage.local.get(["savedActiveUrl", "cbSearchNew"], result => {
-        const act = (result.cbSearchNew !== undefined) ? result.cbSearchNew : true;
-        if (result.savedActiveUrl) doSearchPage(result.savedActiveUrl, act);
-      });
-    } else {
-      browserAPI.tabs.query({ active: true, currentWindow: true }).then(async tabs => {
-        if (tabs[0] && tabs[0].url) {
-          const s = await getSettings({ cbSearchNew: true });
-          doSearchPage(tabs[0].url, s.cbSearchNew);
-        }
-      });
+  } else if (message.action === "search") {
+    const tabs = await browserAPI.tabs.query({ active: true, currentWindow: true });
+    if (tabs[0]) {
+      const s = await getSettings({ cbSearchNew: true });
+      doSearchPage(tabs[0].url, s.cbSearchNew);
     }
-  }
-
-  else if (message.action === "options") {
+  } else if (message.action === "options") {
     browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") });
   }
 });
 
-// FIXED: Only show Welcome page on fresh install OR version ending in ".0"
-browserAPI.runtime.onInstalled.addListener((details) => {
+browserAPI.runtime.onInstalled.addListener(details => {
   const currentVersion = browserAPI.runtime.getManifest().version;
 
   if (details.reason === "install") {
     showWelcome();
   } else if (details.reason === "update") {
-    if (currentVersion.endsWith('.0')) {
+    if (currentVersion.endsWith(".0")) {
       showWelcome();
     }
   }

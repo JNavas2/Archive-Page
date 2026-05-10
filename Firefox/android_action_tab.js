@@ -4,11 +4,16 @@
     © 2026 John Navas, All Rights Reserved
 */
 
-const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
+const browserAPI = browser;  // Firefox-only
 
-function sendAction(action) {
-  browserAPI.runtime.sendMessage({ action });
-  window.close();
+async function sendAction(action) {
+  try {
+    await browserAPI.runtime.sendMessage({ action });
+  } catch (e) {
+    console.error("Message failed:", e);
+  } finally {
+    window.close();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
