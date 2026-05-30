@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    document.getElementById('bReview').addEventListener('click', () => window.open('https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia/reviews', '_blank'));
+    document.getElementById('bIssue').addEventListener('click', () => window.open('https://github.com/JNavas2/Archive-Page/issues', '_blank'));
+    document.getElementById('bSuggest').addEventListener('click', () => window.open('https://github.com/JNavas2/Archive-Page/discussions', '_blank'));
+
     document.getElementById('bClose').addEventListener('click', () => {
         chrome.tabs.getCurrent(tab => {
             if (tab) chrome.tabs.remove(tab.id);

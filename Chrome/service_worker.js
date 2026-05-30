@@ -48,7 +48,9 @@ async function doAction(uri, act, type) {
         const s = await getSet({ tabCtl: "adjacent", archiveTld: "today" });
         const u = getUrls(s.archiveTld)[type];
         const url = u + encodeURIComponent(uri);
-        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+
+        // FIXED 1/3: lastFocusedWindow prevents transient popup-window failures
+        const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
 
         if (!tabs[0]) return;
 
@@ -69,14 +71,12 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 
 // FIXED: Only show Welcome page on fresh install OR version ending in ".0"
-// Prevents up-boarding on browser updates or minor patch releases.
 chrome.runtime.onInstalled.addListener((details) => {
     const currentVersion = chrome.runtime.getManifest().version;
 
     if (details.reason === "install") {
         showWelcome();
     } else if (details.reason === "update") {
-        // Only show for major releases (e.g., "1.5.0")
         if (currentVersion.endsWith('.0')) {
             showWelcome();
         }
@@ -90,18 +90,26 @@ function showWelcome() {
     }, 200);
 }
 
-chrome.runtime.onMessage.addListener((m) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
+chrome.runtime.onMessage.addListener((m, sender, sendResponse) => {
+    // FIX: satisfy popup callback immediately to avoid warning
+    sendResponse();
+
+    // FIXED 2/3: lastFocusedWindow avoids empty tab arrays during popup teardown
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, async (tabs) => {
         if (!tabs[0]) return;
+
         if (m.action === "execSearch") {
             const s = await getSet({ cbSearchNew: true });
             doAction(tabs[0].url, s.cbSearchNew, "search");
         }
+
         if (m.action === "execArchive") {
             const s = await getSet({ cbArchiveNew: true });
             doAction(tabs[0].url, s.cbArchiveNew, "archive");
         }
     });
+
+    // No return true — port already closed cleanly.
 });
 
 chrome.storage.onChanged.addListener((c, area) => {
@@ -125,7 +133,8 @@ if (chrome.commands) {
             return;
         }
 
-        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        // FIXED 3/3: lastFocusedWindow for full environment parity
+        const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
         if (!tabs[0] || !tabs[0].url) return;
 
         if (command === "mySearch") {
@@ -139,5 +148,4 @@ if (chrome.commands) {
     });
 }
 
-// FIXED: Full browser restart coverage
 chrome.runtime.onStartup.addListener(updateUI);

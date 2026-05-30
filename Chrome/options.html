@@ -15,6 +15,10 @@
             --bg-remove: #FFD6D6;
             --border-fieldset: #e6d96a;
             --border-button: #000;
+
+            --soft-green: #e6ffe6;
+            --soft-pink: #ffe6f2;
+            --soft-yellow: #fff9cc;
         }
 
         body {
@@ -121,6 +125,29 @@
             margin: 0 4px;
         }
 
+        #bReview {
+            background-color: var(--soft-green);
+        }
+
+        #bIssue {
+            background-color: var(--soft-pink);
+        }
+
+        #bSuggest {
+            background-color: var(--soft-yellow);
+        }
+
+        #bottomRow {
+            width: 342px;
+            margin: 12px auto 0;
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+
+        #feedbackRow {
+            width: 100%;
+        }
+
         @media (max-width: 600px) {
             body {
                 font-size: 0.95em;
@@ -196,11 +223,19 @@
             </div>
         </fieldset>
 
-        <div class="responsive-flex">
-            <button id="bClose" type="button">Close</button> <span id="status">&nbsp;</span>
+        <div class="responsive-flex" id="bottomRow">
+            <button id="bClose" type="button">Close</button>
+            <span id="status">&nbsp;</span>
             <button id="bRemove" type="button">Remove</button>
-            <span style="display: inline-block; width: 8px;"></span>
             <button id="bHelp" type="button">Help</button>
+        </div>
+
+        <div class="responsive-flex" id="feedbackRow">
+            <button id="bReview" type="button">Leave Review</button>
+            <span style="display: inline-block; width: 8px;"></span>
+            <button id="bIssue" type="button">Report Issue</button>
+            <span style="display: inline-block; width: 8px;"></span>
+            <button id="bSuggest" type="button">Suggestion</button>
         </div>
     </div>
     <script src="options.js"></script>
