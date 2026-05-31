@@ -6,37 +6,52 @@
 
 const browserAPI = (typeof browser !== "undefined") ? browser : chrome;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
-    // 1. Options: Opens the extension Options page
+    // Platform Detection for Buttons
+    const info = await browserAPI.runtime.getPlatformInfo();
+    const isAndroid = info.os === "android";
+
+    function openUrlFirefox(url) {
+        if (isAndroid) {
+            window.open(url, "_blank");
+        } else {
+            browserAPI.tabs.create({ url });
+        }
+    }
+
+    function closeWindowFirefox() {
+        if (isAndroid) {
+            window.close();
+        } else {
+            browserAPI.tabs.getCurrent(tab => {
+                if (tab) browserAPI.tabs.remove(tab.id);
+                else window.close();
+            });
+        }
+    }
+
+    // 1. Options
     document.getElementById('bOptions').addEventListener('click', () => {
-        try {
-            browserAPI.runtime.openOptionsPage();
-        } catch (e) {
-            browserAPI.tabs.create({ url: browserAPI.runtime.getURL("options.html") });
+        if (isAndroid) {
+            openUrlFirefox(browserAPI.runtime.getURL("options.html"));
+        } else {
+            browserAPI.runtime.openOptionsPage().catch(() => {
+                openUrlFirefox(browserAPI.runtime.getURL("options.html"));
+            });
         }
     });
 
-    // 2. Close: Closes the current Welcome tab with Android fallback
-    document.getElementById('bClose').addEventListener('click', () => {
-        browserAPI.tabs.getCurrent(tab => {
-            if (tab) {
-                browserAPI.tabs.remove(tab.id);
-            } else {
-                window.close(); // Logic fallback for mobile/Android
-            }
-        });
-    });
+    // 2. Close
+    document.getElementById('bClose').addEventListener('click', closeWindowFirefox);
 
-    // 3. Remove: Triggers native Firefox uninstallation
+    // 3. Remove
     document.getElementById('bRemove').addEventListener('click', () => {
         browserAPI.management.uninstallSelf({ showConfirmDialog: true });
     });
 
-    // 4. Help: Opens the GitHub extension home page
+    // 4. Help
     document.getElementById('bHelp').addEventListener('click', () => {
-        browserAPI.tabs.create({
-            url: "https://github.com/JNavas2/Archive-Page"
-        });
+        openUrlFirefox("https://github.com/JNavas2/Archive-Page");
     });
 });
