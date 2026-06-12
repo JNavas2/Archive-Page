@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report Extension bugs **here**. Report Archive Today service issues **there**.
+about: Report Extension bugs HERE. Report Archive Today service issues THERE.
 title: ''
 labels: ''
 assignees: ''
