@@ -1,0 +1,81 @@
+name: Blank — basic environment
+description: Use this to report a problem — collects browser, OS, and extension version.
+title: '[Bug] '
+labels: ['bug']
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Short summary
+      description: One-line summary of the problem
+      placeholder: e.g., "Extension toolbar icon disappears after update"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      description: e.g., "Firefox 120.0.1" or "Chrome 124.0.6363.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      description: e.g., "Windows 11 22H2", "macOS 14.4"
+    validations:
+      required: true
+
+  - type: input
+    id: extension_version
+    attributes:
+      label: Extension version
+      description: e.g., "v2.3.1" (from extension page or about)
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Short reproducible steps (optional)
+      placeholder: "1) Do X 2) Click Y 3) Observe Z"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen (optional)
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened (optional)
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How this impacts you
+      options:
+        - label: Blocker (cannot use)
+          value: blocker
+        - label: Major (feature broken)
+          value: major
+        - label: Minor (annoyance)
+          value: minor
+        - label: Cosmetic
+          value: cosmetic
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional information / logs / screenshots
+      description: Paste logs or provide links (optional)
