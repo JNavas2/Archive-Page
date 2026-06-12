@@ -2,4 +2,6 @@ blank_issues_enabled: true
 contact_links:
   - name: "⚠️ Report Archive Today Service Issues"
     url: "https://archive.today/"
-    about: "This extension is NOT affiliated with Archive Today. If the archive service itself is down or blocking you, contact them directly here."
+    about: |
+      This extension is NOT affiliated with Archive Today.
+      Issues with that service should be reported through the Archive Today website (email).
