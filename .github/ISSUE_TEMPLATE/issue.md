@@ -1,4 +1,6 @@
 ---
+name: Blank issue
+about: Default issue template
 title: ""
 labels: []
 assignees: ""
