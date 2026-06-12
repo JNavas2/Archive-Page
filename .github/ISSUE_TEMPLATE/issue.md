@@ -1,6 +1,6 @@
 ---
-name: Blank issue
-about: Default issue template
+name: New extension issue
+about: Report Archive Today service issues THERE, not here.
 title: ""
 labels: []
 assignees: ""
