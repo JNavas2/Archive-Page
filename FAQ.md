@@ -9,8 +9,12 @@ The toolbar icon has always been the primary way to use the extension, and it no
 * **The extension was "silently disabled" by a browser update**: When the Archive Page icon is unresponsive, click the Extensions icon in your browser toolbar or Extensions menu, and then click on Archive Page to re-enable it.
 * **You are on a blank tab or internal browser page**: If you click on Archive Page when on a blank page or internal browser page, the extension may ask for Action but will then do nothing because there is no web page to archive.
 
-## Chrome "Action Required" / Permissions
-**Why does the extension now ask for permission to access all websites?** Due to a documented regression in Chrome's update logic ([Chromium Issue 472803133](https://issues.chromium.org/issues/472803133)), extensions using the `activeTab` permission are being "silently killed" (automatically disabled) during updates, even when permissions remain static. To prevent this, the extension moved to **Optional Host Permissions**. There is currently no lower-permission option or alternative workaround that prevents this automatic disabling while still allowing the extension to access the page URL when requested by the user. This permission only needs to be granted **once** via the "Action Required" bridge page.
+## Firefox Opens New Tab With Endless Spinning Icon
+Due to a **major Firefox regression** that affects tabs in general, not just extensions, on **Android** as well as **desktop**, 
+my Archive Page extension now opens a **blank tab with an endlessly spinning icon**.
+The user **work-around** is to **click in the Location bar and press the Enter key**.
+The bug persists in Firefox Nightly, so **it won't be fixed anytime soon**.
+**Bugzilla**: [2052080 - WebExtension Tabs.Create Opens New Tab Page With Endless Spinning Icon](https://bugzilla.mozilla.org/show_bug.cgi?id=2052080)
 
 ## Connection Problems   
 When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
