@@ -10,10 +10,9 @@ The toolbar icon has always been the primary way to use the extension, and it no
 * **You are on a blank tab or internal browser page**: If you click on Archive Page when on a blank page or internal browser page, the extension may ask for Action but will then do nothing because there is no web page to archive.
 
 ## Firefox Opens New Tab With Endless Spinning Icon
-Due to a **major Firefox regression** that affects tabs in general, not just extensions, on **Android** as well as **desktop**, 
-my Archive Page extension now opens a **blank tab with an endlessly spinning icon**.
-The user **work-around** is to **click in the Location bar and press the Enter key**.
-The bug persists in Firefox Nightly, so **it won't be fixed anytime soon**.
+Firefox sends a **blank Referer** on extension‑initiated main_frame navigations to external sites. Chrome and Edge send a non‑empty Referer for the same operation. Because **archive.today recently began rejecting requests with an empty Referer**, Firefox enters an indefinite loading state while Chrome and Edge load the same URL normally.   
+A possible workaround exists to inject a fallback Referer. However, adding these permissions mid‑lifecycle causes Firefox to immediately disable the extension and require explicit user approval. This is a significant user‑experience regression and not viable for the extension’s audience.   
+Unless and until Firefox changes its Referrer rules, Firefox users will have to live with the **work-around** of **clicking the Location bar and pressing Enter**.   
 **Bugzilla**: [2052080 - WebExtension Tabs.Create Opens New Tab Page With Endless Spinning Icon](https://bugzilla.mozilla.org/show_bug.cgi?id=2052080)
 
 ## Connection Problems   
