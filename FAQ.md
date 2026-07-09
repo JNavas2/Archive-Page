@@ -9,8 +9,9 @@ The toolbar icon has always been the primary way to use the extension, and it no
 * **The extension was "silently disabled" by a browser update**: When the Archive Page icon is unresponsive, click the Extensions icon in your browser toolbar or Extensions menu, and then click on Archive Page to re-enable it.
 * **You are on a blank tab or internal browser page**: If you click on Archive Page when on a blank page or internal browser page, the extension may ask for Action but will then do nothing because there is no web page to archive.
 
-## Firefox Opens New Tab With Endless Spinning Icon
-The Firefox (desktop and Android) security conflict with the Archive Today service that caused the extension to *open a blank tab with an endlessly spinning icon* (tarpit) has been **resolved**. *(If it happens again in the future, the work-around is to click in the Location bar and press the Enter key.)*
+## CAPTCHA is annoying
+Please note that this extension has **no** control over CAPTCHA. The extension is _not_ part of the Archive Today service. Any issue with that service should be reported [there](https://archive.today) using the _email_ link after checking the _blog_.   
+The Archive Today service uses CAPTCHA to protect itself from **bots**. To preserve _Privacy_ it has no way of knowing when you've previously authenticated.
 
 ## Connection Problems   
 When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
@@ -19,3 +20,7 @@ Possible work-arounds:
 2. **Different DNS resolver**, e.g., [Google Public DNS](https://developers.google.com/speed/public-dns), [Quad9](https://quad9.net), [OpenDNS](https://www.opendns.com/).
 3. **VPN**, e.g., [Private Internet Access](https://www.privateinternetaccess.com/), [Surfshark](https://surfshark.com), [Proton VPN](https://protonvpn.com/), [NordVPN](https://nordvpn.com/).   
 4. **Alias** of Archive Today. Archive Page now supports selecting an alias (e.g., archive.is) in **Options**.
+
+## Firefox Opens New Tab With Endless Spinning Icon
+The Firefox (desktop and Android) security conflict with the Archive Today service that caused the extension to *open a blank tab with an endlessly spinning icon* (tarpit) has been **resolved**. *(If it happens again in the future, the work-around is to click in the Location bar and press the Enter key.)*   
+ 
