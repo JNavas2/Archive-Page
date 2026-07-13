@@ -11,7 +11,9 @@ The toolbar icon has always been the primary way to use the extension, and it no
 
 ## CAPTCHA is annoying
 Please note that this extension has **no** control over CAPTCHA. The extension is _not_ part of the Archive Today service. Any issue with that service should be reported [there](https://archive.today) using the _email_ link after checking the _blog_.   
-The Archive Today service uses CAPTCHA to protect itself from **bots**. To preserve _Privacy_ it has no way of knowing when you've previously authenticated.
+* You can avoid the **QR code** by clicking on the visual "eye" icon (👁️‍🗨️) at the bottom of the dialog box.
+
+The Archive Today service uses CAPTCHA to protect itself from **bots**. To preserve _Privacy_ it has no way of knowing when you've previously authenticated.   
 
 ## Connection Problems   
 When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
