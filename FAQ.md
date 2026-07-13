@@ -16,10 +16,10 @@ The Archive Today service uses CAPTCHA to protect itself from **bots**. To prese
 ## Connection Problems   
 When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
 Possible work-arounds:
-1. **Different Internet service**.
+1. **Alias** of Archive Today. Archive Page now supports selecting an alias (e.g., archive.md) in **Options**.
 2. **Different DNS resolver**, e.g., [Google Public DNS](https://developers.google.com/speed/public-dns), [Quad9](https://quad9.net), [OpenDNS](https://www.opendns.com/).
-3. **VPN**, e.g., [Private Internet Access](https://www.privateinternetaccess.com/), [Surfshark](https://surfshark.com), [Proton VPN](https://protonvpn.com/), [NordVPN](https://nordvpn.com/).   
-4. **Alias** of Archive Today. Archive Page now supports selecting an alias (e.g., archive.is) in **Options**.
+3. **VPN**, e.g., [Private Internet Access](https://www.privateinternetaccess.com/), [Surfshark](https://surfshark.com), [Proton VPN](https://protonvpn.com/), [NordVPN](https://nordvpn.com/).
+4. **Different Internet service**.   
 
 ## Firefox Opens New Tab With Endless Spinning Icon
 The Firefox (desktop and Android) security conflict with the Archive Today service that caused the extension to *open a blank tab with an endlessly spinning icon* (tarpit) has been **resolved**. *(If it happens again in the future, the work-around is to click in the Location bar and press the Enter key.)*   
