@@ -6,19 +6,10 @@
 
 ## Alert
 
-- **[Privacy Badger](https://privacybadger.org/) extension interferes with access to archive.today sites.**  
+**[Privacy Badger](https://privacybadger.org/) extension interferes with access to archive.today sites.**  
 The best solution is to use **[uBlock Origin](https://github.com/gorhill/ublock)** instead.   
-If you must use Privacy Badger, *disable at least the following sites*:
-```
-archive.today
-archive.is
-archive.ph
-archive.fo
-archive.li
-archive.md
-archive.vn
-```
----
+If you must use Privacy Badger, *disable at least the following sites*:   
+archive.today, archive.is, archive.ph, archive.fo, archive.li, archive.md, archive.vn
 
 ## What's New
 
