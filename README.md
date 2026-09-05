@@ -11,6 +11,8 @@ The best solution is to use **[uBlock Origin](https://github.com/gorhill/ublock)
 If you must use Privacy Badger, *disable at least the following sites*:   
 archive.today, archive.is, archive.ph, archive.fo, archive.li, archive.md, archive.vn
 
+---
+
 ## What's New
 
 - **Direct Action Shortcuts:** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
