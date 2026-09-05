@@ -1,5 +1,17 @@
 # FAQ (Frequently Asked Questions)
 
+## Why can't I access archive.today?
+**[Privacy Badger extension](https://privacybadger.org/) interferes with access to archive.today sites.**  
+The solution is to *disable Privacy Badger* for at least the following sites:
+```
+archive.today
+archive.is
+archive.ph
+archive.fo
+archive.li
+archive.md
+archive.vn
+```
 ## What happened to the context menu (right click) “Search” action?
 The toolbar icon has always been the primary way to use the extension, and it now supports an option for dropdown menu (the default) and direct Search action in addition to the original Archive action. The old context menu “Search” entry was originally a workaround for users who wanted quick access to Search, but the improved toolbar icon now covers that use case more cleanly. To reduce context menu clutter (something most users prefer) the context menu Search item has been removed by default, but the direct Archive item remains, preserving the original behavior for users who prefer it.   
 **To restore the old behavior** (direct Archive on the toolbar and “Search” in the context menu) simply change the Toolbar icon setting to “Archive (only)” in extension Options (easily accessed in the toolbar icon dropdown menu).
