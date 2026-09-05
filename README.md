@@ -4,6 +4,21 @@
 
 ---
 
+## Alert
+
+- **[Privacy Badger extension](https://privacybadger.org/) interferes with access to archive.today sites.**  
+The solution is to *disable Privacy Badger* for at least the following sites:
+```
+archive.today
+archive.is
+archive.ph
+archive.fo
+archive.li
+archive.md
+archive.vn
+```
+---
+
 ## What's New
 
 - **Direct Action Shortcuts:** Invoke Archive and Search as well as Toolbar icon with keyboard shortcuts.
