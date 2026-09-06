@@ -1,7 +1,10 @@
 # FAQ (Frequently Asked Questions)
 
 ## Why can't I access archive.today?
-**[Privacy Badger](https://privacybadger.org/) extension interferes with access to archive.today sites.**  
+**Browser extensions can interfere with access to archive.today!**   
+_Try access with all browser extensions disabled._
+   
+* **[Privacy Badger](https://privacybadger.org/) extension interferes with access to archive.today sites.**  
 The best solution is to use **[uBlock Origin](https://github.com/gorhill/ublock)** instead.   
 If you must use Privacy Badger, *disable at least the following sites*:   
 archive.today, archive.is, archive.ph, archive.fo, archive.li, archive.md, archive.vn
