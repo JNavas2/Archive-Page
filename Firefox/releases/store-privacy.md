@@ -15,7 +15,7 @@
 *   storage
 *   (history permission is _not_ needed or requested. If you remove and reinstall the extension, this permission is not granted.)
 
-**URL Tracking:** Tracking parameters can be removed from URLs with the **[ClearURLs extension](https://addons.mozilla.org/en-US/firefox/addon/clearurls/)** (effective but not perfect) and its use is **strongly recommended**.
+**URL Tracking:** Tracking parameters can be removed from URLs with the **[uBlock Origin extension](https://github.com/gorhill/ublock)** and its use is **strongly recommended**.
 
 **User Control:**
 
