@@ -67,10 +67,7 @@ archive.today, archive.is, archive.ph, archive.fo, archive.li, archive.md, archi
 - **[Privacy Policy](https://JNavas2.github.io/Archive-Page/privacy.html)**
 - **No Cookies**: Cookies are *not* used.
 - **Minimum Permissions:** Only the *minimum necessary* permissions are specified.
-- **URL Tracking**: Tracking can be removed from URLs with the **[ClearURLs extension](https://github.com/ClearURLs)** (good but not perfect) and is **strongly recommended**:
-  - [Chrome](https://chromewebstore.google.com/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk)
-  - [Edge](https://microsoftedge.microsoft.com/addons/detail/clearurls/mdkdmaickkfdekbjdoojfalpbkgaddei)
-  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/)
+- **URL Tracking**: Tracking can be removed from URLs with the **[uBlock Origin extension](https://github.com/gorhill/ublock)** and is **strongly recommended**:
 - **No data collection:** The extension does *not* collect, store, or transmit any personal or browsing data, except for sending the current tab’s URL to Archive Today when you request it.
 - **User control:** You can remove or disable the extension at any time. No data is retained by the extension after removal.
 - **Open Source:** The extension is open source—[review the code here](https://github.com/JNavas2/Archive-Page) for full transparency.
