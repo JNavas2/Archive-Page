@@ -5,9 +5,17 @@
 _Try access with all browser extensions disabled._
    
 * **[Privacy Badger](https://privacybadger.org/) extension interferes with access to archive.today sites.**  
-The best solution is to use **[uBlock Origin](https://github.com/gorhill/ublock)** instead.   
+The best solution is to use **[uBlock Origin](https://github.com/gorhill/ublock)** (Firefox) or **[uBlock Origin Lite](https://github.com/uBlockOrigin/uBOL-home)** (Chrome/Edge) instead.   
 If you must use Privacy Badger, *disable at least the following sites*:   
 archive.today, archive.is, archive.ph, archive.fo, archive.li, archive.md, archive.vn
+
+## Other Connection Problems   
+When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
+Possible work-arounds:
+1. **Alias** of Archive Today. Archive Page now supports selecting an alias (e.g., archive.md) in **Options**.
+2. **Different DNS resolver**, e.g., [Google Public DNS](https://developers.google.com/speed/public-dns), [Quad9](https://quad9.net), [OpenDNS](https://www.opendns.com/).
+3. **VPN**, e.g., [Private Internet Access](https://www.privateinternetaccess.com/), [Surfshark](https://surfshark.com), [Proton VPN](https://protonvpn.com/), [NordVPN](https://nordvpn.com/).
+4. **Different Internet service**.   
 
 ## What happened to the context menu (right click) “Search” action?
 The toolbar icon has always been the primary way to use the extension, and it now supports an option for dropdown menu (the default) and direct Search action in addition to the original Archive action. The old context menu “Search” entry was originally a workaround for users who wanted quick access to Search, but the improved toolbar icon now covers that use case more cleanly. To reduce context menu clutter (something most users prefer) the context menu Search item has been removed by default, but the direct Archive item remains, preserving the original behavior for users who prefer it.   
@@ -23,14 +31,6 @@ Please note that this extension has **no** control over CAPTCHA. The extension i
 * You can avoid the **QR code** by clicking on the visual "eye" icon (👁️‍🗨️) at the bottom of the dialog box.
 * The Archive Today service uses CAPTCHA to protect itself from **bots**.
 * To preserve **Privacy** it has no way of knowing when you've previously authenticated.   
-
-## Connection Problems   
-When you have trouble connecting to Archive Today, the likely cause is **blocking** by your Internet service.   
-Possible work-arounds:
-1. **Alias** of Archive Today. Archive Page now supports selecting an alias (e.g., archive.md) in **Options**.
-2. **Different DNS resolver**, e.g., [Google Public DNS](https://developers.google.com/speed/public-dns), [Quad9](https://quad9.net), [OpenDNS](https://www.opendns.com/).
-3. **VPN**, e.g., [Private Internet Access](https://www.privateinternetaccess.com/), [Surfshark](https://surfshark.com), [Proton VPN](https://protonvpn.com/), [NordVPN](https://nordvpn.com/).
-4. **Different Internet service**.   
 
 ## Firefox Opens New Tab With Endless Spinning Icon
 The Firefox (desktop and Android) security conflict with the Archive Today service that caused the extension to *open a blank tab with an endlessly spinning icon* (tarpit) has been **resolved**. *(If it happens again in the future, the work-around is to click in the Location bar and press the Enter key.)*   
