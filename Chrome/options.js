@@ -27,8 +27,13 @@ async function restoreOptions() {
         toolbarAction: "menu"
     });
 
-    const info = await chrome.runtime.getPlatformInfo();
-    const isAndroid = info.os === "android";
+    const isAndroid = /\bAndroid\b/i.test(navigator.userAgent);
+    if (isAndroid) {
+        ['sectionToolbarAction', 'sectionOpenIn', 'sectionActivate', 'sectionShortcuts'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.disabled = true;
+        });
+    }
 
     // Restore checkboxes
     MAP.cb.forEach(c => {

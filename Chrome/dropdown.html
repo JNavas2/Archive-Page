@@ -9,6 +9,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             width: 85px;
@@ -34,6 +35,61 @@
             border: 0;
             border-top: 1px solid #cccccc;
             margin: 2px 0;
+        }
+
+        /* --- Mobile Android only (Zero effect on Desktop) --- */
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                width: 240px;
+                max-width: 88vw;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1.5px solid #333333;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                box-sizing: border-box;
+            }
+
+            .item {
+                display: block;
+                text-align: center;
+                font-weight: bold;
+                font-size: 15px;
+                padding: 12px 16px;
+                border: 1.5px solid #222222;
+                border-radius: 6px;
+                background-color: #ededed;
+                margin-bottom: 12px;
+                cursor: pointer;
+            }
+
+            .item:active {
+                background-color: #dcdcdc;
+            }
+
+            hr {
+                display: none;
+            }
+
+            #mArchive {
+                margin-bottom: 20px;
+            }
+
+            #mOptions {
+                border-color: #1a73e8;
+                background-color: #eef4ff;
+                margin-bottom: 0;
+            }
+
+            #mOptions:active {
+                background-color: #d6e6ff;
+            }
+
+            /* Appends "(share URL)" to match Firefox mobile without changing desktop HTML */
+            #mSearch::after,
+            #mArchive::after {
+                content: " (share URL)";
+            }
         }
     </style>
 </head>
