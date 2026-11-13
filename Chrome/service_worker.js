@@ -108,8 +108,6 @@ chrome.runtime.onMessage.addListener((m, sender, sendResponse) => {
             doAction(tabs[0].url, s.cbArchiveNew, "archive");
         }
     });
-
-    // No return true — port already closed cleanly.
 });
 
 chrome.storage.onChanged.addListener((c, area) => {
@@ -126,13 +124,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 // Handle keyboard shortcuts
 if (chrome.commands) {
     chrome.commands.onCommand.addListener(async (command) => {
-        const hasTabs = await chrome.permissions.contains({ permissions: ['tabs'] });
-
-        if (!hasTabs) {
-            chrome.tabs.create({ url: chrome.runtime.getURL("options.html#shortcuts") });
-            return;
-        }
-
         // FIXED 3/3: lastFocusedWindow for full environment parity
         const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
         if (!tabs[0] || !tabs[0].url) return;

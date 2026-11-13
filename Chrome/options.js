@@ -29,7 +29,7 @@ async function restoreOptions() {
 
     const isAndroid = /\bAndroid\b/i.test(navigator.userAgent);
     if (isAndroid) {
-        ['sectionToolbarAction', 'sectionOpenIn', 'sectionActivate', 'sectionShortcuts'].forEach(id => {
+        ['sectionToolbarAction', 'sectionOpenIn', 'sectionActivate'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.disabled = true;
         });
@@ -50,17 +50,6 @@ async function restoreOptions() {
     // Restore Open In radios
     const tabId = Object.keys(MAP.tab).find(key => MAP.tab[key] === items.tabCtl);
     if (tabId) document.getElementById(tabId).checked = true;
-
-    // Sync the shortcut permission checkbox state
-    const hasTabs = await chrome.permissions.contains({ permissions: ['tabs'] });
-    const section = document.getElementById('sectionShortcuts');
-    const cbShortcuts = document.getElementById('cbShortcuts');
-    if (cbShortcuts) cbShortcuts.checked = hasTabs;
-
-    // Signal failed shortcut attempt if redirected via hash
-    if (!hasTabs && window.location.hash === "#shortcuts" && section) {
-        section.classList.add('signal-pulse');
-    }
 }
 
 async function saveOptions() {
@@ -78,28 +67,9 @@ async function saveOptions() {
 document.addEventListener('DOMContentLoaded', async () => {
     await restoreOptions();
 
-    // Exclude the permission checkbox from standard saveOptions
-    document.querySelectorAll('input:not(#cbShortcuts)').forEach(input => {
+    document.querySelectorAll('input').forEach(input => {
         input.addEventListener('change', saveOptions);
     });
-
-    // Special listener for optional permission toggle
-    const cbShortcuts = document.getElementById('cbShortcuts');
-    if (cbShortcuts) {
-        cbShortcuts.addEventListener('change', (e) => {
-            const section = document.getElementById('sectionShortcuts');
-            if (e.target.checked) {
-                chrome.permissions.request({ permissions: ['tabs'] }, (granted) => {
-                    if (granted && section) section.classList.remove('signal-pulse');
-                    else e.target.checked = false; // Reset if user cancels Chrome prompt
-                });
-            } else {
-                chrome.permissions.remove({ permissions: ['tabs'] }, () => {
-                    if (section) section.classList.remove('signal-pulse');
-                });
-            }
-        });
-    }
 
     document.getElementById('bReview').addEventListener('click', () => window.open('https://chromewebstore.google.com/detail/archive-page/gcaimhkfmliahedmeklebabdgagipbia/reviews', '_blank'));
     document.getElementById('bIssue').addEventListener('click', () => window.open('https://github.com/JNavas2/Archive-Page/issues', '_blank'));
